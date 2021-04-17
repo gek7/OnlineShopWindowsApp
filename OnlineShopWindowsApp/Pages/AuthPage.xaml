@@ -1,0 +1,30 @@
+﻿<Page x:Class="OnlineShopWindowsApp.Pages.AuthPage"
+	  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+	  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	  xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+	  xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+	  xmlns:local="clr-namespace:OnlineShopWindowsApp.Pages"
+	  xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:usercontrols="clr-namespace:OnlineShopWindowsApp.UserControls"
+      mc:Ignorable="d" 
+	  d:DesignHeight="450" d:DesignWidth="800"
+	  Title="AuthPage">
+
+    <Grid Background="AliceBlue">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <!--Заголовок -->
+            <RowDefinition />
+            <!--Эдитбоксы -->
+            <RowDefinition  Height="auto"/>
+            <!--Кнопки -->
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        
+        <usercontrols:SignInControl Grid.Row="1" Grid.Column="1" x:Name="SignControl"/>
+        <usercontrols:SignUpControl Grid.Row="1" Grid.Column="1" Visibility="Collapsed" x:Name="RegControl"/>
+    </Grid>
+</Page>
