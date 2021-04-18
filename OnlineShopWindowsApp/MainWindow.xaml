@@ -31,7 +31,7 @@
                 </materialDesign:Card>
             </StackPanel>
         </Grid>
-        <Frame Grid.Row="1" Background="LightCoral" Source="Pages/AuthPage.xaml"/>
+        <Frame Grid.Row="1" Background="AliceBlue" Source="Pages/CartPage.xaml"/>
         <materialDesign:DrawerHost
             IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}" Grid.RowSpan="3">
             <materialDesign:DrawerHost.LeftDrawerContent>
