@@ -14,7 +14,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <!--Первая строка -->
-        <Grid Background="LightBlue">
+        <Grid Background="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
@@ -26,9 +26,23 @@
                         DockPanel.Dock="Top"
                         HorizontalAlignment="Right" 
                         Margin="16" />
-                <materialDesign:Card Padding="32" Margin="16">
-                    <TextBlock Style="{DynamicResource MaterialDesignHeadline6TextBlock}">Онлайн-магазин geka</TextBlock>
-                </materialDesign:Card>
+
+                <TextBox
+                    Margin="10,0,0,0"
+                   Background="White"
+                    materialDesign:HintAssist.Hint="Поиск"
+                    materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
+                    BorderThickness="1"
+                    FontSize="20"
+                    Width="300"
+                    MaxWidth="400"
+                    VerticalAlignment="Center" />
+                <Button
+            Style="{DynamicResource MaterialDesignToolButton}">
+                    <materialDesign:PackIcon
+              Kind="Search"
+              Opacity=".56" />
+                </Button>
             </StackPanel>
         </Grid>
         <!--Фрейм для страниц-->
