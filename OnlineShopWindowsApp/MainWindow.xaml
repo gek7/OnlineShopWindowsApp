@@ -31,9 +31,12 @@
                 </materialDesign:Card>
             </StackPanel>
         </Grid>
+        <!--Фрейм для страниц-->
         <Frame Grid.Row="1" Background="AliceBlue" Source="Pages/CartPage.xaml"/>
+        
         <materialDesign:DrawerHost
             IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}" Grid.RowSpan="3">
+            <!--Выезжающее меню слева-->
             <materialDesign:DrawerHost.LeftDrawerContent>
                 <Grid>
                     <Grid.RowDefinitions>
