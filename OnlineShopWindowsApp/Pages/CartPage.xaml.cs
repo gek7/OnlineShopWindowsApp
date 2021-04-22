@@ -24,7 +24,7 @@ namespace OnlineShopWindowsApp.Pages
         //Для scrollviewer во 2-й строке
         public double Row1Height { get; set; }
         public CartPage()
-        {
+        { 
             InitializeComponent();
             this.DataContext = this;
         }
@@ -33,7 +33,7 @@ namespace OnlineShopWindowsApp.Pages
 
         private void PageSizeChanged(object sender, SizeChangedEventArgs e)
         {
-            Row1Height = this.ActualHeight-150;
+            Row1Height = this.ActualHeight-100;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Row1Height"));
         }
     }

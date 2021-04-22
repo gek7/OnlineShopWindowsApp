@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OnlineShopWindowsApp"
-        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:usercontrols="clr-namespace:OnlineShopWindowsApp.UserControls"
         mc:Ignorable="d"
         
         Title="MainWindow" Height="500" Width="800" MinHeight="500" >
@@ -19,31 +19,38 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <StackPanel Orientation="Horizontal">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
                 <ToggleButton 
+                        Grid.Column="0"
                         x:Name="MenuToggleButton"
                         Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
                         DockPanel.Dock="Top"
                         HorizontalAlignment="Right" 
                         Margin="16" />
+                <usercontrols:SearchBox Width="200" Margin="20,0,0,0" Height="30" Grid.Column="1"/>
+                <Grid Grid.Column="2" HorizontalAlignment="Right">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                        <ColumnDefinition />
+                    </Grid.ColumnDefinitions>
+                    <Button Style="{StaticResource MaterialDesignIconButton}" Grid.Column="2" Margin="10" Background="Transparent">
+                        Я
+                    </Button>
+                    <Button Style="{StaticResource MaterialDesignIconButton}" Grid.Column="1" Margin="10" Background="Transparent">
+                        <materialDesign:PackIcon Kind="Cart" Foreground="Black"/>
+                    </Button>
 
-                <TextBox
-                    Margin="10,0,0,0"
-                   Background="White"
-                    materialDesign:HintAssist.Hint="Поиск"
-                    materialDesign:TextFieldAssist.TextFieldCornerRadius="5"
-                    BorderThickness="1"
-                    FontSize="20"
-                    Width="300"
-                    MaxWidth="400"
-                    VerticalAlignment="Center" />
-                <Button
-            Style="{DynamicResource MaterialDesignToolButton}">
-                    <materialDesign:PackIcon
-              Kind="Search"
-              Opacity=".56" />
-                </Button>
-            </StackPanel>
+                    <Button x:Name="wishBtn" Style="{StaticResource MaterialDesignIconButton}" Grid.Column="0" Margin="10" Background="Transparent">
+                        <materialDesign:PackIcon Kind="Heart" Foreground="Red"/>
+                    </Button>
+                </Grid>
+            </Grid>
         </Grid>
         <!--Фрейм для страниц-->
         <Frame Grid.Row="1" Background="AliceBlue" Source="Pages/CartPage.xaml"/>
@@ -63,7 +70,22 @@
                         HorizontalAlignment="Right" 
                         Margin="16"
                         IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>
-                    
+                    <TreeView Grid.Row="1" Margin="20">
+                        <TreeViewItem Header="Category1">
+                            <TreeViewItem Header="item1"/>
+                            <TreeViewItem Header="item2"/>
+                            <TreeViewItem Header="item3"/>
+                            <TreeViewItem Header="item4"/>
+                        </TreeViewItem>
+                        <TreeViewItem Header="Category2">
+                            <TreeViewItem Header="item5"/>
+                            <TreeViewItem Header="item6"/>
+                        </TreeViewItem>
+                        <TreeViewItem Header="Category3">
+                            <TreeViewItem Header="item7"/>
+                            <TreeViewItem Header="item8"/>
+                        </TreeViewItem>
+                    </TreeView>
                 </Grid>
             </materialDesign:DrawerHost.LeftDrawerContent>
         </materialDesign:DrawerHost>

@@ -71,6 +71,9 @@
     <Compile Include="UserControls\ItemCartControl.xaml.cs">
       <DependentUpon>ItemCartControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\SearchBox.xaml.cs">
+      <DependentUpon>SearchBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\SignInControl.xaml.cs">
       <DependentUpon>SignInControl.xaml</DependentUpon>
     </Compile>
@@ -98,6 +101,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\ItemCartControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\SearchBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
