@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="OnlineShopWindowsApp.UserControls.EnumControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:OnlineShopWindowsApp.UserControls"
+             mc:Ignorable="d" 
+             d:DesignHeight="350" d:DesignWidth="300">
+    <Grid>
+        <GroupBox Header="{Binding Header}" FontSize="12">
+            <StackPanel>
+                <CheckBox Content="Пункт 1"/>
+                <CheckBox Content="Пункт 2"/>
+                <CheckBox Content="Пункт 3"/>
+                <CheckBox Content="Пункт 4"/>
+                <CheckBox Content="Пункт 5"/>
+                <CheckBox Content="Пункт 6"/>
+                <CheckBox Content="Пункт 7"/>
+            </StackPanel>
+        </GroupBox>
+    </Grid>
+</UserControl>

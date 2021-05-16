@@ -33,5 +33,10 @@ namespace OnlineShopWindowsApp.Pages
                 SignControl.Visibility = Visibility.Visible;
             };
         }
+
+        public AuthPage(Action callback) : this()
+        {
+            SignControl.CallBack = callback;
+        }
     }
 }

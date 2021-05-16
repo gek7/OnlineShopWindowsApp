@@ -19,42 +19,44 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <Grid>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="auto"/>
-                    <ColumnDefinition Width="*"/>
-                </Grid.ColumnDefinitions>
-                <ToggleButton 
+            <materialDesign:ColorZone Mode="PrimaryLight">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <ToggleButton 
                         Grid.Column="0"
                         x:Name="MenuToggleButton"
                         Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
                         DockPanel.Dock="Top"
                         HorizontalAlignment="Right" 
                         Margin="16" />
-                <usercontrols:SearchBox Width="200" Margin="20,0,0,0" Height="30" Grid.Column="1"/>
-                <Grid Grid.Column="2" HorizontalAlignment="Right">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                        <ColumnDefinition />
-                    </Grid.ColumnDefinitions>
-                    <Button Style="{StaticResource MaterialDesignIconButton}" Grid.Column="2" Margin="10" Background="Transparent">
-                        Я
-                    </Button>
-                    <Button Style="{StaticResource MaterialDesignIconButton}" Grid.Column="1" Margin="10" Background="Transparent">
-                        <materialDesign:PackIcon Kind="Cart" Foreground="Black"/>
-                    </Button>
+                    <usercontrols:SearchBox Width="400" Margin="20,0,0,0" Height="30" Grid.Column="1" HorizontalAlignment="Center"/>
+                    <Grid Grid.Column="2" HorizontalAlignment="Right">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+                        <usercontrols:AccountButton x:Name="accountBtn" Grid.Column="2"/>
+                        <materialDesign:Badged x:Name="cartBadge" Badge="3" Grid.Column="1" BadgeBackground="Black" BadgePlacementMode="Left" Margin="45,15,0,0" Panel.ZIndex="1" BadgeForeground="White"/>
+                        <Button x:Name="cartBtn" Style="{StaticResource MaterialDesignIconButton}" Margin="10" Background="Transparent" Grid.Column="1">
+                            <materialDesign:PackIcon Kind="Cart" Foreground="Black"/>
+                        </Button>
 
-                    <Button x:Name="wishBtn" Style="{StaticResource MaterialDesignIconButton}" Grid.Column="0" Margin="10" Background="Transparent">
-                        <materialDesign:PackIcon Kind="Heart" Foreground="Red"/>
-                    </Button>
+                        <materialDesign:Badged x:Name="wishBadge" Badge="3" Grid.Column="0" BadgeBackground="Red" BadgePlacementMode="Left" Margin="45,15,0,0" Panel.ZIndex="1" BadgeForeground="White"/>
+                        <Button x:Name="wishBtn" Style="{StaticResource MaterialDesignIconButton}" Grid.Column="0" Margin="10" Background="Transparent">
+                            <materialDesign:PackIcon Kind="Heart" Foreground="Red"/>
+                        </Button>
+                    </Grid>
                 </Grid>
-            </Grid>
+            </materialDesign:ColorZone>
         </Grid>
         <!--Фрейм для страниц-->
-        <Frame Grid.Row="1" Background="AliceBlue" Source="Pages/CartPage.xaml"/>
-        
+        <Frame Grid.Row="1" Background="AliceBlue" Source="Pages/ItemsPage.xaml" x:Name="mainFrame" NavigationUIVisibility="Hidden"/>
+
         <materialDesign:DrawerHost
             IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}" Grid.RowSpan="3">
             <!--Выезжающее меню слева-->

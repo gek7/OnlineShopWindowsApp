@@ -1,0 +1,145 @@
+﻿<Page x:Class="OnlineShopWindowsApp.Pages.ItemsPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:OnlineShopWindowsApp.Pages"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:usercontrols="clr-namespace:OnlineShopWindowsApp.UserControls"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="ItemsPage" Background="White">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="8*"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="10,5,0,0">
+            <TextBlock Text="Сортировка: " Margin="0,0,10,0"/>
+            <ComboBox Width="150" materialDesign:ComboBoxAssist.ClassicMode="True">
+                <ComboBoxItem>
+                    a
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    b
+                </ComboBoxItem>
+                <ComboBoxItem>
+                    c
+                </ComboBoxItem>
+            </ComboBox>
+        </StackPanel>
+
+        <materialDesign:Card materialDesign:ShadowAssist.ShadowEdges="Right,Top" Grid.RowSpan="2">
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <StackPanel Margin="4,10,4,0">
+                    <usercontrols:RangeControl Header="Цена" Suffix="₽" Margin="3"/>
+                    <usercontrols:EnumControl Header="Выбор" Margin="3"/>
+                    <usercontrols:BoolControl Header="Условие1"/>
+                </StackPanel>
+                <Button Grid.Row="1" Margin="10" Width="120" Content="Применить"/>
+            </Grid>
+        </materialDesign:Card>
+        <WrapPanel Grid.Row="1" Grid.Column="1" HorizontalAlignment="Center">
+            <materialDesign:Card Margin="10">
+                <Grid>
+                    <Image Source="../CategoryPhoto.jpg" Width="200"/>
+                    <Rectangle Fill="Black" Opacity="0.5"/>
+                    <TextBlock Text="Видеокарты" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="27" />
+                </Grid>
+            </materialDesign:Card>
+
+            <materialDesign:Card Margin="10">
+                <Grid>
+                    <Image Source="../CategoryPhoto.jpg" Width="200" />
+                    <Rectangle Fill="Black" Opacity="0.5"/>
+                    <TextBlock Text="Процессоры" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="27" />
+                </Grid>
+            </materialDesign:Card>
+
+            <materialDesign:Card Margin="10">
+                <Grid>
+                    <Image Source="../CategoryPhoto.jpg" Width="200" />
+                    <Rectangle Fill="Black" Opacity="0.5"/>
+                    <TextBlock Text="ОЗУ" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="27" TextWrapping="WrapWithOverflow"/>
+                </Grid>
+            </materialDesign:Card>
+            <materialDesign:Card Margin="10">
+                <Grid>
+                    <Image Source="../CategoryPhoto.jpg" Width="200"/>
+                    <Rectangle Fill="Black" Opacity="0.5"/>
+                    <TextBlock Text="Видеокарты" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="27" />
+                </Grid>
+            </materialDesign:Card>
+
+            <materialDesign:Card Margin="10">
+                <Grid>
+                    <Image Source="../CategoryPhoto.jpg" Width="200" />
+                    <Rectangle Fill="Black" Opacity="0.5"/>
+                    <TextBlock Text="Процессоры" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="27" />
+                </Grid>
+            </materialDesign:Card>
+
+            <materialDesign:Card Margin="10">
+                <Grid>
+                    <Image Source="../CategoryPhoto.jpg" Width="200" />
+                    <Rectangle Fill="Black" Opacity="0.5"/>
+                    <TextBlock Text="ОЗУ" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="27" TextWrapping="WrapWithOverflow"/>
+                </Grid>
+            </materialDesign:Card>
+            <materialDesign:Card Margin="10">
+                <Grid>
+                    <Image Source="../CategoryPhoto.jpg" Width="200"/>
+                    <Rectangle Fill="Black" Opacity="0.5"/>
+                    <TextBlock Text="Видеокарты" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="27" />
+                </Grid>
+            </materialDesign:Card>
+
+            <materialDesign:Card Margin="10">
+                <Grid>
+                    <Image Source="../CategoryPhoto.jpg" Width="200" />
+                    <Rectangle Fill="Black" Opacity="0.5"/>
+                    <TextBlock Text="Процессоры" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="27" />
+                </Grid>
+            </materialDesign:Card>
+
+            <materialDesign:Card Margin="10">
+                <Grid>
+                    <Image Source="../CategoryPhoto.jpg" Width="200" />
+                    <Rectangle Fill="Black" Opacity="0.5"/>
+                    <TextBlock Text="ОЗУ" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="27" TextWrapping="WrapWithOverflow"/>
+                </Grid>
+            </materialDesign:Card>
+            <materialDesign:Card Margin="10">
+                <Grid>
+                    <Image Source="../CategoryPhoto.jpg" Width="200"/>
+                    <Rectangle Fill="Black" Opacity="0.5"/>
+                    <TextBlock Text="Видеокарты" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="27" />
+                </Grid>
+            </materialDesign:Card>
+
+            <materialDesign:Card Margin="10">
+                <Grid>
+                    <Image Source="../CategoryPhoto.jpg" Width="200" />
+                    <Rectangle Fill="Black" Opacity="0.5"/>
+                    <TextBlock Text="Процессоры" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="27" />
+                </Grid>
+            </materialDesign:Card>
+
+            <materialDesign:Card Margin="10">
+                <Grid>
+                    <Image Source="../CategoryPhoto.jpg" Width="200" />
+                    <Rectangle Fill="Black" Opacity="0.5"/>
+                    <TextBlock Text="ОЗУ" HorizontalAlignment="Center" VerticalAlignment="Center" Foreground="White" FontSize="27" TextWrapping="WrapWithOverflow"/>
+                </Grid>
+            </materialDesign:Card>
+        </WrapPanel>
+    </Grid>
+</Page>

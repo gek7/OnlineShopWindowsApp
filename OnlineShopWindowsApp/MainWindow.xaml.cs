@@ -20,9 +20,24 @@ namespace OnlineShopWindowsApp
     /// </summary>
     public partial class MainWindow : Window
     {
+        private static User _loginedUser;
+        public static User LogginedUser
+        {
+            get
+            {
+                return _loginedUser;
+            }
+            set
+            {
+                _loginedUser = value;
+                mainWindow.accountBtn.ChangeImage();
+            }
+        }
+        public static MainWindow mainWindow { get; set; }
         public MainWindow()
         {
             InitializeComponent();
+            mainWindow = this;
         }
     }
 }
