@@ -38,7 +38,7 @@
             </StackPanel>
 
             <WrapPanel Grid.Row="2" Orientation="Horizontal" Margin="0,20" HorizontalAlignment="Center">
-                <Button Width="{Binding ElementName=regButton, Path=ActualWidth}" Style="{StaticResource MaterialDesignRaisedLightButton}" Content="Вход" Margin="5" HorizontalAlignment="Center" Click="loginClick"/>
+                <Button x:Name="logButton" Width="{Binding ElementName=regButton, Path=ActualWidth}" Style="{StaticResource MaterialDesignRaisedLightButton}" Content="Вход" Margin="5" HorizontalAlignment="Center" Click="loginClick"/>
                 <Button x:Name="regButton" Style="{StaticResource MaterialDesignRaisedLightButton}" Content="Регистрация" Margin="5" Click="RegClick"/>
             </WrapPanel>
         </Grid>

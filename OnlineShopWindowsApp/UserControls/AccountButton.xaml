@@ -8,7 +8,7 @@
              mc:Ignorable="d">
     <Button x:Name="loginBtn" Style="{StaticResource MaterialDesignIconButton}" Grid.Column="2" Margin="10" Background="Transparent" Foreground="White" Click="loginBtn_Click">
         <Grid>
-            <materialDesign:PackIcon Kind="Login"/>
+            <materialDesign:PackIcon x:Name="icon" Kind="Login"/>
             <Image x:Name="UserImg"/>
         </Grid>
     </Button>

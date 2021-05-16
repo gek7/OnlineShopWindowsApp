@@ -28,12 +28,12 @@ namespace OnlineShopWindowsApp.UserControls
 
         private void loginBtn_Click(object sender, RoutedEventArgs e)
         {
-            ChangeState();
+            OpenPage();
         }
 
-        public void ChangeState()
+        public void OpenPage()
         {
-            if (MainWindow.LogginedUser != null)
+            if (MainWindow.UserToken != null)
             {
                 MainWindow.mainWindow.mainFrame.Content = new CabinetPage();
             }
@@ -45,7 +45,14 @@ namespace OnlineShopWindowsApp.UserControls
 
         public void ChangeImage()
         {
-            //Смена картинки
+            if (MainWindow.UserToken != null)
+            {
+                icon.Kind = MaterialDesignThemes.Wpf.PackIconKind.Account;
+            }
+            else
+            {
+                icon.Kind = MaterialDesignThemes.Wpf.PackIconKind.Login;
+            }
         }
     }
 }

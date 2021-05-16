@@ -13,6 +13,9 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <materialDesign:Snackbar
+                        x:Name="MainSnackbar"
+                        MessageQueue="{materialDesign:MessageQueue}" Grid.RowSpan="2" Grid.ColumnSpan="2" Panel.ZIndex="5"/>
         <!--Первая строка -->
         <Grid Background="White">
             <Grid.ColumnDefinitions>

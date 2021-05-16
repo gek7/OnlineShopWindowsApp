@@ -3,12 +3,41 @@
       xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
       xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
       xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       xmlns:local="clr-namespace:OnlineShopWindowsApp.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="CabinetPage">
-
+      Title="CabinetPage" >
+    <Page.Background>
+        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+            <GradientStop Color="#83eaf1" Offset="0.3" />
+            <GradientStop Color="#b6ebee" Offset="1" />
+        </LinearGradientBrush>
+    </Page.Background>
     <Grid>
-        
+        <Grid Width="300" Height="400" VerticalAlignment="Center" HorizontalAlignment="Center"> 
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Ellipse Grid.Row="0" Height="200" Width="200">
+                <Ellipse.Fill>
+                    <ImageBrush x:Name="Img" ImageSource="/accountImg.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                </Ellipse.Fill>
+            </Ellipse>
+            <Button Background="Transparent" Height="60" Width="60" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderThickness="0">
+                <materialDesign:PackIcon Kind="ImagePlus" Width="30" Height="30" HorizontalAlignment="Center"/>
+            </Button>
+            <Button Background="Transparent" Height="60" Width="60" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderThickness="0">
+                <materialDesign:PackIcon Kind="Cog" Width="30" Height="30" HorizontalAlignment="Center"/>
+            </Button>
+            <TextBlock Text="Имя Фамилия" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30"/>
+            <Button Grid.Row="2" Content="Кабинет администратора"/>
+            <Button Grid.Row="3" Content="Мои заказы"/>
+            <Button Grid.Row="4" Content="Выход"/>
+        </Grid>
     </Grid>
 </Page>

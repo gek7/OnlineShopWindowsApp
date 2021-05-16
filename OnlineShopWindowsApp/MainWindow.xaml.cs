@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnlineShopWindowsApp.Pages;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,17 +21,18 @@ namespace OnlineShopWindowsApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static User _loginedUser;
-        public static User LogginedUser
+        private static string _userToken;
+        public static string UserToken
         {
             get
             {
-                return _loginedUser;
+                return _userToken;
             }
             set
             {
-                _loginedUser = value;
+                _userToken = value;
                 mainWindow.accountBtn.ChangeImage();
+                mainWindow.mainFrame.Content = new CabinetPage();
             }
         }
         public static MainWindow mainWindow { get; set; }
