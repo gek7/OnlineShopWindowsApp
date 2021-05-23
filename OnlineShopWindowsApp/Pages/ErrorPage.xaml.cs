@@ -16,22 +16,14 @@ using System.Windows.Shapes;
 namespace OnlineShopWindowsApp.Pages
 {
     /// <summary>
-    /// Логика взаимодействия для AuthPage.xaml
+    /// Логика взаимодействия для ErrorPage.xaml
     /// </summary>
-    public partial class AuthPage : Page
+    public partial class ErrorPage : Page
     {
-        public AuthPage()
+        public ErrorPage(string err)
         {
             InitializeComponent();
-            SignControl.regClick = () => {
-                SignControl.Visibility = Visibility.Collapsed;
-                RegControl.Visibility = Visibility.Visible;
-                };
-
-            RegControl.backClick = () => {
-                RegControl.Visibility = Visibility.Collapsed;
-                SignControl.Visibility = Visibility.Visible;
-            };
+            ErrorText.Text = err;
         }
     }
 }

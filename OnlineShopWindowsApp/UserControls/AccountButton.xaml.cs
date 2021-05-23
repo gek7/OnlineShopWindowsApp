@@ -33,7 +33,7 @@ namespace OnlineShopWindowsApp.UserControls
 
         public void OpenPage()
         {
-            if (MainWindow.UserToken != null)
+            if (MainWindow.User != null)
             {
                 MainWindow.mainWindow.mainFrame.Content = new CabinetPage();
             }
@@ -45,7 +45,7 @@ namespace OnlineShopWindowsApp.UserControls
 
         public void ChangeImage()
         {
-            if (MainWindow.UserToken != null)
+            if (MainWindow.User != null)
             {
                 icon.Kind = MaterialDesignThemes.Wpf.PackIconKind.Account;
             }

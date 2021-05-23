@@ -21,21 +21,22 @@ namespace OnlineShopWindowsApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static string _userToken;
-        public static string UserToken
+        private static User _user;
+        public static User User
         {
             get
             {
-                return _userToken;
+                return _user;
             }
             set
             {
-                _userToken = value;
+                _user = value;
                 mainWindow.accountBtn.ChangeImage();
                 mainWindow.mainFrame.Content = new CabinetPage();
             }
         }
         public static MainWindow mainWindow { get; set; }
+        public const string BaseAddress = "http://localhost:5000";
         public MainWindow()
         {
             InitializeComponent();

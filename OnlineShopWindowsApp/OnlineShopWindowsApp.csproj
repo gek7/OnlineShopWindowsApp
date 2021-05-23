@@ -46,6 +46,7 @@
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Memory, Version=4.0.1.1, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51" />
     <Reference Include="System.Text.Json, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
@@ -66,6 +67,7 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="HelperClass.cs" />
+    <Compile Include="Models\AuthData.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Pages\CabinetPage.xaml.cs">
       <DependentUpon>CabinetPage.xaml</DependentUpon>
@@ -76,10 +78,17 @@
     <Compile Include="Pages\CategoriesPage.xaml.cs">
       <DependentUpon>CategoriesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\ErrorPage.xaml.cs">
+      <DependentUpon>ErrorPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\ItemsPage.xaml.cs">
       <DependentUpon>ItemsPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\TestItem.cs" />
+    <Compile Include="ServerActions\AdvanceResponse.cs" />
+    <Compile Include="RequestsType.cs" />
+    <Compile Include="ServerActions\RequestHeader.cs" />
+    <Compile Include="ServerActions\RequestsHelper.cs" />
     <Compile Include="UserControls\AccountButton.xaml.cs">
       <DependentUpon>AccountButton.xaml</DependentUpon>
     </Compile>
@@ -129,6 +138,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\CategoriesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\ErrorPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

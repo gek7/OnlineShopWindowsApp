@@ -10,8 +10,8 @@
       Title="CabinetPage" >
     <Page.Background>
         <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#83eaf1" Offset="0.3" />
-            <GradientStop Color="#b6ebee" Offset="1" />
+            <GradientStop Color="#83eaf1" Offset="0.6" />
+            <GradientStop Color="#b6ebee" Offset="0.3" />
         </LinearGradientBrush>
     </Page.Background>
     <Grid>
@@ -25,17 +25,17 @@
             </Grid.RowDefinitions>
             <Ellipse Grid.Row="0" Height="200" Width="200">
                 <Ellipse.Fill>
-                    <ImageBrush x:Name="Img" ImageSource="/accountImg.png" RenderOptions.BitmapScalingMode="HighQuality"/>
+                    <ImageBrush x:Name="Img" ImageSource="/accountImg.png" RenderOptions.BitmapScalingMode="HighQuality" />
                 </Ellipse.Fill>
             </Ellipse>
-            <Button Background="Transparent" Height="60" Width="60" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderThickness="0">
+            <Button Background="Transparent" Height="60" Width="60" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderThickness="0" ToolTip="Изменить изображение" Click="ChangeImage">
                 <materialDesign:PackIcon Kind="ImagePlus" Width="30" Height="30" HorizontalAlignment="Center"/>
             </Button>
-            <Button Background="Transparent" Height="60" Width="60" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderThickness="0">
+            <Button Background="Transparent" Height="60" Width="60" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderThickness="0" ToolTip="Настройки">
                 <materialDesign:PackIcon Kind="Cog" Width="30" Height="30" HorizontalAlignment="Center"/>
             </Button>
-            <TextBlock Text="Имя Фамилия" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30"/>
-            <Button Grid.Row="2" Content="Кабинет администратора"/>
+            <TextBlock Text="" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" x:Name="TextblockName"/>
+            <Button Grid.Row="2" Content="Кабинет администратора" Visibility="Collapsed"/>
             <Button Grid.Row="3" Content="Мои заказы"/>
             <Button Grid.Row="4" Content="Выход"/>
         </Grid>

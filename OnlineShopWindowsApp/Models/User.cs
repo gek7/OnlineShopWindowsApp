@@ -8,26 +8,15 @@ namespace OnlineShopWindowsApp
 {
     public class User
     {
-
-        public User(string token)
+        public User()
         {
-            Token = token;
-        }
-        public User(string token, string firstName, string lastName, string image, string role, DateTime? registerDate)
-        {
-            Token = token;
-            FirstName = firstName;
-            LastName = lastName;
-            Image = image;
-            Role = role;
-            RegisterDate = registerDate;
-        }
 
-        public string Token { get; set; }
-        public string FirstName { get; set; }
-        public string LastName { get; set; }
-        public string Image { get; set; }
-        public string Role { get; set; }
-        public Nullable<System.DateTime> RegisterDate { get; set; }
+        }
+        public string token { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string image { get; set; }
+        public string roleName { get; set; }
+        public Nullable<System.DateTime> registerDate { get; set; }
     }
 }

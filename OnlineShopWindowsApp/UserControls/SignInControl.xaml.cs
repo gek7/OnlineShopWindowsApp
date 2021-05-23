@@ -1,4 +1,6 @@
-﻿using OnlineShopWindowsApp.Pages;
+﻿using OnlineShopWindowsApp.Models;
+using OnlineShopWindowsApp.Pages;
+using OnlineShopWindowsApp.ServerActions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +25,6 @@ namespace OnlineShopWindowsApp.UserControls
     public partial class SignInControl : UserControl
     {
         public Action regClick { get; set; }
-        public Action CallBack { get; set; }
         public SignInControl()
         {
             InitializeComponent();
@@ -37,31 +38,28 @@ namespace OnlineShopWindowsApp.UserControls
 
             //Проверка
             HttpClient client = new HttpClient();
-            string token = await GetToken(LoginTextBox.Text, PwdBox.Password);
-            if (token != null)
+            User user = await GetUser(LoginTextBox.Text, PwdBox.Password);
+            if (user != null)
             {
-                MainWindow.UserToken = token;
+                MainWindow.User = user;
             }
-            else
+        }
+
+        private async Task<User> GetUser(string login, string pwd)
+        {
+            HttpClient client = new HttpClient();
+            AdvanceResponse<User> Resp = await RequestsHelper.PostRequest<User>(MainWindow.BaseAddress + $"/api/account/auth?username={login}&password={pwd}");
+
+            if (Resp.SourceResponse.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {
                 MainWindow.mainWindow.MainSnackbar
                     .MessageQueue?.Enqueue("Неверный логин или пароль");
             }
-            CallBack?.Invoke();
-        }
-
-        private async Task<string> GetToken(string login, string pwd)
-        {
-            HttpClient client = new HttpClient();
-            HttpResponseMessage response = await client.PostAsync($"http://localhost:45065/api/account/auth?username={login}&password={pwd}", new StringContent(""));
-            if (response.IsSuccessStatusCode)
+            else if(Resp.SourceResponse.StatusCode == System.Net.HttpStatusCode.OK)
             {
-                return await response.Content.ReadAsStringAsync();
+                return Resp.Obj;
             }
-            else
-            {
-                return null;
-            }
+            return null;
         }
     }
 }
