@@ -10,6 +10,10 @@
                 <materialDesign:CustomColorTheme BaseTheme="Light" PrimaryColor="#0099FF" SecondaryColor="#3399CC" />
                 <ResourceDictionary Source="pack://application:,,,/MaterialDesignThemes.Wpf;component/Themes/MaterialDesignTheme.Defaults.xaml" />
             </ResourceDictionary.MergedDictionaries>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1" x:Key="BackBrush">
+                <GradientStop Color="#83eaf1" Offset="0.6" />
+                <GradientStop Color="#b6ebee" Offset="0.3" />
+            </LinearGradientBrush>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

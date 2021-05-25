@@ -1,0 +1,51 @@
+﻿<Page x:Class="OnlineShopWindowsApp.Pages.AdministratorSubPages.UsersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:OnlineShopWindowsApp.Pages.AdministratorSubPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="UsersPage">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <WrapPanel>
+            <Button Width="50" Height="50" Margin="5">
+                <materialDesign:PackIcon Kind="PlusBold" Width="40" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+            <Button Width="50" Height="50" Margin="5">
+                <materialDesign:PackIcon Kind="Pencil" Width="50" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+            <Button Width="50" Height="50" Margin="5">
+                <materialDesign:PackIcon Kind="MinusThick" Width="40" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+            <Button Width="50" Height="50" Margin="5" Background="LightGreen" BorderThickness="0" IsEnabled="False">
+                <materialDesign:PackIcon Kind="CheckBold" Width="24" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+            <Button Width="50" Height="50" Margin="5" Background="Coral" BorderThickness="0" IsEnabled="False">
+                <materialDesign:PackIcon Kind="CloseThick" Width="25" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+        </WrapPanel>
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="Имя"/>
+                <DataGridTextColumn Header="Фамилия"/>
+                <DataGridTextColumn Header="Роль"/>
+                <DataGridTextColumn Header="Логин"/>
+                <DataGridTemplateColumn Header="Аватарка">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Image Source="/accountImg.png"/>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                <DataGridTextColumn Header="Дата регистрации" IsReadOnly="True"/>
+                <DataGridTextColumn Header="Последний вход" IsReadOnly="True"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Page>

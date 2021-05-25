@@ -43,14 +43,27 @@ namespace OnlineShopWindowsApp.UserControls
             }
         }
 
+        public void SetImage(BitmapImage img)
+        {
+            if (!String.IsNullOrEmpty(MainWindow.User.image))
+            {
+                icon.Visibility = Visibility.Collapsed;
+                UserImg.Source = img;
+            }
+        }
+            
         public void ChangeImage()
         {
             if (MainWindow.User != null)
             {
+
+                icon.Visibility = Visibility.Visible;
                 icon.Kind = MaterialDesignThemes.Wpf.PackIconKind.Account;
+
             }
             else
             {
+                icon.Visibility = Visibility.Visible;
                 icon.Kind = MaterialDesignThemes.Wpf.PackIconKind.Login;
             }
         }

@@ -36,6 +36,7 @@ namespace OnlineShopWindowsApp.Pages
                 return;
             }
             FillInfo();
+            MainWindow.mainWindow.accountBtn.ChangeImage();
         }
 
         public async void FillInfo()
@@ -50,9 +51,15 @@ namespace OnlineShopWindowsApp.Pages
                     BitmapImage newImage = new BitmapImage();
                     newImage.BeginInit();
                     newImage.CreateOptions = BitmapCreateOptions.IgnoreImageCache;
+                    newImage.CacheOption = BitmapCacheOption.OnLoad;
                     newImage.UriSource = new Uri($"{MainWindow.BaseAddress}/api/account/ProfileImage/{u.image}");
                     newImage.EndInit();
                     Img.ImageSource = newImage;
+                    MainWindow.mainWindow.accountBtn.SetImage(newImage);
+                }
+                if (u.roleName == "Administrator")
+                {
+                    AdminButton.Visibility = Visibility.Visible;
                 }
             }
             else
@@ -71,13 +78,9 @@ namespace OnlineShopWindowsApp.Pages
             FillInfo();
         }
 
-        private byte[] ImageFileToByteArray(string fullFilePath)
+        private void OpenAdministratorPage(object sender, RoutedEventArgs e)
         {
-            FileStream fs = File.OpenRead(fullFilePath);
-            byte[] bytes = new byte[fs.Length];
-            fs.Read(bytes, 0, Convert.ToInt32(fs.Length));
-            fs.Close();
-            return bytes;
+            NavigationService.Navigate(new AdministratorPage());
         }
     }
 }

@@ -7,13 +7,7 @@
       xmlns:local="clr-namespace:OnlineShopWindowsApp.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="CabinetPage" >
-    <Page.Background>
-        <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Color="#83eaf1" Offset="0.6" />
-            <GradientStop Color="#b6ebee" Offset="0.3" />
-        </LinearGradientBrush>
-    </Page.Background>
+      Title="CabinetPage"  Background="{StaticResource BackBrush}">
     <Grid>
         <Grid Width="300" Height="400" VerticalAlignment="Center" HorizontalAlignment="Center"> 
             <Grid.RowDefinitions>
@@ -35,7 +29,7 @@
                 <materialDesign:PackIcon Kind="Cog" Width="30" Height="30" HorizontalAlignment="Center"/>
             </Button>
             <TextBlock Text="" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" x:Name="TextblockName"/>
-            <Button Grid.Row="2" Content="Кабинет администратора" Visibility="Collapsed"/>
+            <Button Grid.Row="2" Content="Кабинет администратора" Visibility="Collapsed" x:Name="AdminButton" Click="OpenAdministratorPage"/>
             <Button Grid.Row="3" Content="Мои заказы"/>
             <Button Grid.Row="4" Content="Выход"/>
         </Grid>
