@@ -14,14 +14,17 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <WrapPanel>
-            <Button Width="50" Height="50" Margin="5">
+            <Button Width="50" Height="50" Margin="5" Click="Add">
                 <materialDesign:PackIcon Kind="PlusBold" Width="40" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
-            <Button Width="50" Height="50" Margin="5">
+            <Button Width="50" Height="50" Margin="5" Click="Edit">
                 <materialDesign:PackIcon Kind="Pencil" Width="50" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
-            <Button Width="50" Height="50" Margin="5">
+            <Button Width="50" Height="50" Margin="5" Click="Delete">
                 <materialDesign:PackIcon Kind="MinusThick" Width="40" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+            <Button Width="50" Height="50" Margin="5">
+                <materialDesign:PackIcon Kind="Refresh" Width="25" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
             <Button Width="50" Height="50" Margin="5" Background="LightGreen" BorderThickness="0" IsEnabled="False">
                 <materialDesign:PackIcon Kind="CheckBold" Width="24" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center"/>
@@ -30,16 +33,17 @@
                 <materialDesign:PackIcon Kind="CloseThick" Width="25" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
         </WrapPanel>
-        <DataGrid Grid.Row="1" AutoGenerateColumns="False">
+        <DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding DataSource}" CanUserAddRows="False" CanUserDeleteRows="False"
+                  materialDesign:DataGridAssist.EnableEditBoxAssist="False" x:Name="dataGrid">
             <DataGrid.Columns>
-                <DataGridTextColumn Header="Имя"/>
-                <DataGridTextColumn Header="Фамилия"/>
-                <DataGridTextColumn Header="Роль"/>
-                <DataGridTextColumn Header="Логин"/>
-                <DataGridTemplateColumn Header="Аватарка">
+                <DataGridTextColumn Header="Имя" Binding="{Binding firstName}"/>
+                <DataGridTextColumn Header="Фамилия" Binding="{Binding lastName}"/>
+                <DataGridTextColumn Header="Роль" Binding="{Binding role.name}"/>
+                <DataGridTextColumn Header="Логин" Binding="{Binding login}"/>
+                <DataGridTemplateColumn Header="Аватарка" Width="300">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="/accountImg.png"/>
+                            <Image Source="{Binding LoadImageString}" Width="300" Height="100"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

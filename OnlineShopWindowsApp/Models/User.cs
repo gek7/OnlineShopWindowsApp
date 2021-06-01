@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnlineShopWindowsApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,13 +13,16 @@ namespace OnlineShopWindowsApp
     {
         public User()
         {
-
+            role = new Role();
         }
         public string token { get; set; }
+        public long id  { get; set; }
+        public string login { get; set; }
+        public string password { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string image { get; set; }
-        public string roleName { get; set; }
+        public Role role { get; set; }
         public string LoadImageString
         { 
             get 

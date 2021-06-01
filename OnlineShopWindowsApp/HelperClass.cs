@@ -17,5 +17,10 @@ namespace OnlineShopWindowsApp
             MaterialDesignThemes.Wpf.ButtonProgressAssist.SetIsIndeterminate(btn, value);
             MaterialDesignThemes.Wpf.ButtonProgressAssist.SetIsIndicatorVisible(btn, value);
         }
+
+        public static void ShowWaiting()
+        {
+            //MainWindow.mainWindow.
+        }
     }
 }

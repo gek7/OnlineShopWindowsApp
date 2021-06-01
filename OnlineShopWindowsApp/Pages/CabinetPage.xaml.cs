@@ -57,7 +57,7 @@ namespace OnlineShopWindowsApp.Pages
                     Img.ImageSource = newImage;
                     MainWindow.mainWindow.accountBtn.SetImage(newImage);
                 }
-                if (u.roleName == "Administrator")
+                if (u.role.name == "Administrator")
                 {
                     AdminButton.Visibility = Visibility.Visible;
                 }

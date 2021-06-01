@@ -1,0 +1,43 @@
+﻿<Window x:Class="OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows.UserDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Изменение данных о пользователе" Height="470" Width="350" ResizeMode="NoResize">
+    <Grid>
+        <StackPanel Margin="20">
+            <TextBlock Text="Имя"/>
+            <TextBox Text="{Binding SelectedObj.firstName}"/>
+            <TextBlock Text="Фамилия"/>
+            <TextBox Text="{Binding SelectedObj.lastName}"/>
+            <TextBlock Text="Логин"/>
+            <TextBox Text="{Binding SelectedObj.login}"/>
+            <TextBlock Text="Пароль"/>
+            <TextBox Text="{Binding SelectedObj.password}"/>
+            <TextBlock Text="Роль"/>
+            <ComboBox x:Name="rolesCmb"  SelectedValue="{Binding SelectedObj.role.id}" />
+            <StackPanel Orientation="Horizontal">
+                <Button Margin="10,0,0,0" ToolTip="Загрузить картинку">
+                    <materialDesign:PackIcon Kind="Download"/>
+                </Button>
+                <Border Margin="10,20,0,0" BorderBrush="Black" BorderThickness="1">
+                    <Image Width="150" Height="100" Source="{Binding SelectedObj.LoadImageString}"/>
+                </Border>
+                <Button Margin="10,0,0,0" ToolTip="Удалить картинку">
+                    <materialDesign:PackIcon Kind="Delete"/>
+                </Button>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" Margin="0,20,0,0" HorizontalAlignment="Center">
+                <Button Margin="0,0,0,0" Content="Применить" Click="Confirm"/>
+                <Button Margin="50,0,0,0" Content="Отмена" Click="Cancel"/>
+            </StackPanel>
+        </StackPanel>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+    </Grid>
+</Window>

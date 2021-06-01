@@ -67,10 +67,15 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="HelperClass.cs" />
+    <Compile Include="Models\ActionType.cs" />
     <Compile Include="Models\AuthData.cs" />
+    <Compile Include="Models\Role.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Pages\AdministratorPage.xaml.cs">
       <DependentUpon>AdministratorPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AdministratorSubPages\DialogWindows\UserDialog.xaml.cs">
+      <DependentUpon>UserDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AdministratorSubPages\UsersPage.xaml.cs">
       <DependentUpon>UsersPage.xaml</DependentUpon>
@@ -132,6 +137,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\AdministratorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdministratorSubPages\DialogWindows\UserDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

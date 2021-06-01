@@ -1,6 +1,10 @@
-﻿using System;
+﻿using OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows;
+using OnlineShopWindowsApp.ServerActions;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -18,11 +22,61 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
     /// <summary>
     /// Логика взаимодействия для UsersPage.xaml
     /// </summary>
-    public partial class UsersPage : Page
+    public partial class UsersPage : Page, INotifyPropertyChanged
     {
+        private List<User> _dataSource;
+        public List<User> DataSource
+        {
+            get
+            {
+                return _dataSource;
+            }
+            set
+            {
+                _dataSource = value;
+                OnPropertyChanged();
+            }
+        }
+
         public UsersPage()
         {
             InitializeComponent();
+            this.DataContext = this;
+            RefreshGrid();
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
+
+        public async void RefreshGrid()
+        {
+            var task =  RequestsHelper.GetRequest<List<User>>($"{MainWindow.BaseAddress}/api/users/getAllUsers", true);
+            await task.ContinueWith((previous) =>
+            {
+                List<User> response = previous.Result.Obj.ToList();
+                DataSource = response.ToList();
+                this.DataContext = this;
+            }, TaskScheduler.FromCurrentSynchronizationContext());
+        }
+
+        private void Add(object sender, RoutedEventArgs e)
+        {
+            new UserDialog(ActionType.Add).ShowDialog();
+        }
+
+        private async void Delete(object sender, RoutedEventArgs e)
+        {
+            var response = await RequestsHelper.DeleteRequest<User>($"{MainWindow.BaseAddress}/api/users", true);
+        }
+
+        private void Edit(object sender, RoutedEventArgs e)
+        {
+            if(dataGrid.SelectedItem != null)
+            new UserDialog(ActionType.Edit,((User) dataGrid.SelectedItem).id).ShowDialog();
         }
     }
 }

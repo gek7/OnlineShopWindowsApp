@@ -14,7 +14,7 @@ namespace OnlineShopWindowsApp.ServerActions
     {
         private static HttpClient Client = new HttpClient();
         //Универсальный метод для отправления запросов на сервер
-        private async static Task<AdvanceResponse<T>> SendRequest<T>(string url, HttpMethod type, bool isAuthHeader = false, string data = "") where T : class
+        private async static Task<AdvanceResponse<T>> SendRequest<T>(string url, HttpMethod type, bool isAuthHeader = true, string data = "") where T : class
         {
             data = data == null ? "" : data;
             HttpResponseMessage Resp = null;
@@ -23,8 +23,12 @@ namespace OnlineShopWindowsApp.ServerActions
 
             if (isAuthHeader) addAuthHeader(request);
 
-            if (type == HttpMethod.Post)
+            if (type == HttpMethod.Post || type == HttpMethod.Put)
+            {
                 request.Content = new StringContent(data);
+                request.Content.Headers.ContentType.MediaType = "application/json";
+//                request.Content.Headers.Add("Content-Type", "application/json");
+            }
             Resp = await Client.SendAsync(request);
             if (Resp.IsSuccessStatusCode)
             {
@@ -39,15 +43,27 @@ namespace OnlineShopWindowsApp.ServerActions
 
             return new AdvanceResponse<T>(Resp, Obj);
         }
-        public async static Task<AdvanceResponse<T>> PostRequest<T>(string url, bool isAuthHeader = false, string data = "") where T : class
+        public async static Task<AdvanceResponse<T>> PostRequest<T>(string url, T data = null, bool isAuthHeader = true) where T : class
         {
-            return await SendRequest<T>(url, HttpMethod.Post, isAuthHeader, data);
+            string json = null;
+            if (data != null) json = JsonSerializer.Serialize(data, typeof(T));
+            return await SendRequest<T>(url, HttpMethod.Post, isAuthHeader, json);
         }
-        public async static Task<AdvanceResponse<T>> GetRequest<T>(string url, bool isAuthHeader = false) where T : class
+        public async static Task<AdvanceResponse<T>> PutRequest<T>(string url, T data = null, bool isAuthHeader = true) where T : class
+        {
+            string json = null;
+            if (data != null) json = JsonSerializer.Serialize(data, typeof(T));
+            return await SendRequest<T>(url, HttpMethod.Put, isAuthHeader, json);
+        }
+        public async static Task<AdvanceResponse<T>> DeleteRequest<T>(string url, bool isAuthHeader = true, string data = "") where T : class
+        {
+            return await SendRequest<T>(url, HttpMethod.Delete, isAuthHeader, data);
+        }
+        public async static Task<AdvanceResponse<T>> GetRequest<T>(string url, bool isAuthHeader = true) where T : class
         {
             return await SendRequest<T>(url, HttpMethod.Get, isAuthHeader);
         }
-        public async static Task<HttpResponseMessage> SendFile(string url, string fileName, bool isAuthHeader = false)
+        public async static Task<HttpResponseMessage> SendFile(string url, string fileName, bool isAuthHeader = true)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, url);
             if (isAuthHeader) addAuthHeader(request);
