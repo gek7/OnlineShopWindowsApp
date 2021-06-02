@@ -15,6 +15,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Text.Json;
+using Microsoft.Win32;
+using System.Net.Http;
 
 namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
 {
@@ -24,6 +26,7 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
     public partial class UserDialog : Window, INotifyPropertyChanged
     {
         private User _selectedObj = new User();
+        private string NewImagePath { get; set; }
         public User SelectedObj
         {
             get
@@ -41,6 +44,7 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
         {
             InitializeComponent();
             DataContext = this;
+            NewImagePath = null;
             ActionKind = type;
             FillFields(id);
         }
@@ -76,7 +80,7 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
         private async void Confirm(object sender, RoutedEventArgs e)
         {
             string errors = "";
-            if(String.IsNullOrWhiteSpace(SelectedObj.firstName)) 
+            if (String.IsNullOrWhiteSpace(SelectedObj.firstName))
             {
                 errors += "Заполните имя\n";
             }
@@ -84,12 +88,12 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
             {
                 errors += "Заполните фамилию\n";
             }
-            if(rolesCmb.SelectedItem == null)
+            if (rolesCmb.SelectedItem == null)
             {
                 errors += "Укажите роль\n";
             }
 
-            if(ActionKind == ActionType.Add)
+            if (ActionKind == ActionType.Add)
             {
                 if (String.IsNullOrWhiteSpace(SelectedObj.login))
                 {
@@ -101,35 +105,67 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
                 }
             }
 
-            if(errors != "")
+            if (errors != "")
             {
                 MessageBox.Show(errors);
                 return;
             }
             else
             {
-                //отправка запрос на сервер
-                if(ActionKind == ActionType.Add)
+                AdvanceResponse<User> response;
+                //отправка запроса на сервер
+                if(NewImagePath != null)
                 {
-                    var response = await RequestsHelper.PutRequest<User>($"{MainWindow.BaseAddress}/api/users", SelectedObj);
-                    if (!response.SourceResponse.IsSuccessStatusCode)
-                    {
-                        MessageBox.Show(response.SourceResponse.ReasonPhrase);
-                    }
+                    //Отправка картинки на сервер 
+                    //http://localhost:5000/api/users/setImage?id=10
                 }
-                else 
+
+                if (ActionKind == ActionType.Add)
                 {
-                    var response = await RequestsHelper.PostRequest<User>($"{MainWindow.BaseAddress}/api/users", SelectedObj);
-                    if (!response.SourceResponse.IsSuccessStatusCode)
+                    response = await RequestsHelper.PutRequest<User>($"{MainWindow.BaseAddress}/api/users", SelectedObj);
+                    if (NewImagePath != null)
+                        await RequestsHelper.SendFile($"{MainWindow.BaseAddress}/api/users/setImage?id={response.Obj.id}", NewImagePath);
+
+                }
+                else
+                {
+                    if (NewImagePath != null)
+                        await RequestsHelper.SendFile($"{MainWindow.BaseAddress}/api/users/setImage?id={SelectedObj.id}", NewImagePath);
+                    response = await RequestsHelper.PostRequest<User>($"{MainWindow.BaseAddress}/api/users", SelectedObj);
+                }
+
+                if (!response.SourceResponse.IsSuccessStatusCode)
+                {
+                    MessageBox.Show(response.SourceResponse.ReasonPhrase);
+                }
+                else
+                {
+                    var FrameContent = MainWindow.mainWindow.mainFrame.Content as UsersPage;
+                    if (FrameContent != null)
                     {
-                        MessageBox.Show(response.SourceResponse.ReasonPhrase);
+                        FrameContent.RefreshGrid();
                     }
-                    else
-                    {
-                        Close();
-                    }
+                    Close();
                 }
             }
+        }
+
+        private void ChooseImage(object sender, RoutedEventArgs e)
+        {
+            //Выбор новой картинки
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() == true)
+            {
+                NewImagePath = ofd.FileName;
+            }
+            curImg.Source = new BitmapImage(new Uri(NewImagePath));
+        }
+
+        private void DeleteImage(object sender, RoutedEventArgs e)
+        {
+            _selectedObj.image = null;
+            NewImagePath = null;
+            curImg.Source =(ImageSource) new ImageSourceConverter().ConvertFrom("/accountImg.png");
         }
     }
 }

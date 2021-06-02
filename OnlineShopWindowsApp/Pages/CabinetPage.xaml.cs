@@ -73,7 +73,7 @@ namespace OnlineShopWindowsApp.Pages
              OpenFileDialog ofd = new OpenFileDialog();
             if (ofd.ShowDialog() == true)
             {
-               await RequestsHelper.SendFile(MainWindow.BaseAddress + "/api/account/setImage", ofd.FileName, true);
+               await RequestsHelper.SendFile(MainWindow.BaseAddress + "/api/account/setImage", ofd.FileName);
             }
             FillInfo();
         }

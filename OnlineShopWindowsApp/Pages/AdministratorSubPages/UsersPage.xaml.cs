@@ -54,7 +54,7 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
 
         public async void RefreshGrid()
         {
-            var task =  RequestsHelper.GetRequest<List<User>>($"{MainWindow.BaseAddress}/api/users/getAllUsers", true);
+            var task = RequestsHelper.GetRequest<List<User>>($"{MainWindow.BaseAddress}/api/users/getAllUsers", true);
             await task.ContinueWith((previous) =>
             {
                 List<User> response = previous.Result.Obj.ToList();
@@ -70,13 +70,19 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
 
         private async void Delete(object sender, RoutedEventArgs e)
         {
-            var response = await RequestsHelper.DeleteRequest<User>($"{MainWindow.BaseAddress}/api/users", true);
+            if (dataGrid.SelectedItem != null)
+                 await RequestsHelper.DeleteRequest<User>($"{MainWindow.BaseAddress}/api/users?id={((User)dataGrid.SelectedItem).id}", true);
         }
 
         private void Edit(object sender, RoutedEventArgs e)
         {
-            if(dataGrid.SelectedItem != null)
-            new UserDialog(ActionType.Edit,((User) dataGrid.SelectedItem).id).ShowDialog();
+            if (dataGrid.SelectedItem != null)
+                new UserDialog(ActionType.Edit, ((User)dataGrid.SelectedItem).id).ShowDialog();
+        }
+
+        private void Refresh(object sender, RoutedEventArgs e)
+        {
+            RefreshGrid();
         }
     }
 }

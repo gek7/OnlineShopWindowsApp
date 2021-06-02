@@ -33,6 +33,7 @@ namespace OnlineShopWindowsApp.ServerActions
             if (Resp.IsSuccessStatusCode)
             {
                 string jsonObj = await Resp.Content.ReadAsStringAsync();
+                if(!String.IsNullOrEmpty(jsonObj))
                 Obj = (T)JsonSerializer.Deserialize(jsonObj, typeof(T));
             }
             if (Resp.StatusCode == System.Net.HttpStatusCode.NotFound ||
@@ -63,13 +64,17 @@ namespace OnlineShopWindowsApp.ServerActions
         {
             return await SendRequest<T>(url, HttpMethod.Get, isAuthHeader);
         }
-        public async static Task<HttpResponseMessage> SendFile(string url, string fileName, bool isAuthHeader = true)
+        public async static Task<HttpResponseMessage> SendFile(string url, string fileName, List<Tuple<string, HttpContent>> additionalContents = null, bool isAuthHeader = true)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, url);
             if (isAuthHeader) addAuthHeader(request);
             MultipartFormDataContent form = new MultipartFormDataContent();
             var bytes = File.ReadAllBytes(fileName);
             form.Add(new ByteArrayContent(bytes, 0, bytes.Length), "file", Path.GetFileName(fileName));
+            if(additionalContents != null)
+            {
+                additionalContents.ForEach(c => form.Add(c.Item2, c.Item1));
+            }
             request.Content = form;
             HttpResponseMessage response = await Client.SendAsync(request);
             return response;

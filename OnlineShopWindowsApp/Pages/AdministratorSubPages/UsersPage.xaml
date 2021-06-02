@@ -23,7 +23,7 @@
             <Button Width="50" Height="50" Margin="5" Click="Delete">
                 <materialDesign:PackIcon Kind="MinusThick" Width="40" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
-            <Button Width="50" Height="50" Margin="5">
+            <Button Width="50" Height="50" Margin="5" Click="Refresh">
                 <materialDesign:PackIcon Kind="Refresh" Width="25" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
             <Button Width="50" Height="50" Margin="5" Background="LightGreen" BorderThickness="0" IsEnabled="False">
