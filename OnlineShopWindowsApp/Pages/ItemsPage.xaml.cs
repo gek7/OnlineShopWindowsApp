@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OnlineShopWindowsApp.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,8 @@ namespace OnlineShopWindowsApp.Pages
     /// </summary>
     public partial class ItemsPage : Page
     {
-        public ItemsPage()
+       public Category ItemsCategory { get; set; }
+        public ItemsPage(Category c)
         {
             InitializeComponent();
         }

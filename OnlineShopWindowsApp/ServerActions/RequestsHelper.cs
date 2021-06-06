@@ -27,14 +27,14 @@ namespace OnlineShopWindowsApp.ServerActions
             {
                 request.Content = new StringContent(data);
                 request.Content.Headers.ContentType.MediaType = "application/json";
-//                request.Content.Headers.Add("Content-Type", "application/json");
+                //                request.Content.Headers.Add("Content-Type", "application/json");
             }
             Resp = await Client.SendAsync(request);
             if (Resp.IsSuccessStatusCode)
             {
                 string jsonObj = await Resp.Content.ReadAsStringAsync();
-                if(!String.IsNullOrEmpty(jsonObj))
-                Obj = (T)JsonSerializer.Deserialize(jsonObj, typeof(T));
+                if (!String.IsNullOrEmpty(jsonObj))
+                    Obj = (T)JsonSerializer.Deserialize(jsonObj, typeof(T));
             }
             if (Resp.StatusCode == System.Net.HttpStatusCode.NotFound ||
                 Resp.StatusCode == System.Net.HttpStatusCode.MethodNotAllowed)
@@ -69,9 +69,17 @@ namespace OnlineShopWindowsApp.ServerActions
             var request = new HttpRequestMessage(HttpMethod.Post, url);
             if (isAuthHeader) addAuthHeader(request);
             MultipartFormDataContent form = new MultipartFormDataContent();
-            var bytes = File.ReadAllBytes(fileName);
-            form.Add(new ByteArrayContent(bytes, 0, bytes.Length), "file", Path.GetFileName(fileName));
-            if(additionalContents != null)
+            if (fileName != null)
+            {
+                var bytes = File.ReadAllBytes(fileName);
+                form.Add(new ByteArrayContent(bytes, 0, bytes.Length), "file", Path.GetFileName(fileName));
+            }
+            else
+            {
+                form.Add(null, "file");
+            }
+
+            if (additionalContents != null)
             {
                 additionalContents.ForEach(c => form.Add(c.Item2, c.Item1));
             }

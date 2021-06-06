@@ -15,7 +15,7 @@
         <Grid Grid.Row="0">
             <WrapPanel>
                 <Button Width="150" Margin="10" Content="Пользователи" Click="OpenUserFrame"/>
-                <Button Width="100" Margin="10" Content="Категории"/>
+                <Button Width="100" Margin="10" Content="Категории" Click="OpenCategoryFrame"/>
                 <Button Width="80" Margin="10" Content="Товары"/>
                 <Button Width="80" Margin="10" Content="Заказы"/>
             </WrapPanel>

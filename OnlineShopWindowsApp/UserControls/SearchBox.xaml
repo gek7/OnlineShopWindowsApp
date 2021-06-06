@@ -6,14 +6,14 @@
              xmlns:local="clr-namespace:OnlineShopWindowsApp.UserControls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
+             d:DesignHeight="30" d:DesignWidth="200">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
             <ColumnDefinition Width="auto"/>
         </Grid.ColumnDefinitions>
-        <TextBox x:Name="tbSearch" Panel.ZIndex="1" materialDesign:HintAssist.Hint="Поиск" TextChanged="tbSearch_TextChanged" Background="White" BorderThickness="1" materialDesign:TextFieldAssist.TextFieldCornerRadius="5" />
-        <ComboBox x:Name="cbSearch" Height="{Binding ElementName=tbSearch, Path=ActualHeight}" SelectionChanged="cbSearch_SelectionChanged" DropDownOpened="cbSearch_DropDownOpened"/>
+        <TextBox x:Name="tbSearch" Panel.ZIndex="1" materialDesign:HintAssist.Hint="Поиск" TextChanged="tbSearch_TextChanged" Background="White" BorderThickness="1" materialDesign:TextFieldAssist.TextFieldCornerRadius="5"/>
+        <ComboBox x:Name="cbSearch" Height="{Binding ElementName=tbSearch, Path=ActualHeight}" SelectionChanged="cbSearch_SelectionChanged" DropDownOpened="cbSearch_DropDownOpened" IsEditable="True" PreviewKeyDown="cbSearch_PreviewKeyDown"/>
         <Button Grid.Column="1" Panel.ZIndex="2" Margin="-25,0,0,0"
             Style="{DynamicResource MaterialDesignToolButton}">
             <materialDesign:PackIcon

@@ -7,16 +7,15 @@ using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace OnlineShopWindowsApp
+namespace OnlineShopWindowsApp.Models
 {
-    public class User
+    public class User : RootModel
     {
         public User()
         {
             role = new Role();
         }
         public string token { get; set; }
-        public long id  { get; set; }
         public string login { get; set; }
         public string password { get; set; }
         public string firstName { get; set; }

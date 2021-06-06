@@ -1,4 +1,6 @@
-﻿using OnlineShopWindowsApp.ServerActions;
+﻿using Microsoft.Win32;
+using OnlineShopWindowsApp.Models;
+using OnlineShopWindowsApp.ServerActions;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -14,21 +16,17 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using System.Text.Json;
-using Microsoft.Win32;
-using System.Net.Http;
-using OnlineShopWindowsApp.Models;
 
 namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
 {
     /// <summary>
-    /// Логика взаимодействия для UserDialog.xaml
+    /// Логика взаимодействия для CategoryDialog.xaml
     /// </summary>
-    public partial class UserDialog : Window, INotifyPropertyChanged
+    public partial class CategoryDialog : Window, INotifyPropertyChanged
     {
-        private User _selectedObj = new User();
+        private Category _selectedObj = new Category() {owner = new Category() };
         private string NewImagePath { get; set; }
-        public User SelectedObj
+        public Category SelectedObj
         {
             get
             {
@@ -41,7 +39,7 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
             }
         }
         public ActionType ActionKind { get; set; }
-        public UserDialog(ActionType type, long id = -1)
+        public CategoryDialog(ActionType type, long id = -1)
         {
             InitializeComponent();
             DataContext = this;
@@ -58,17 +56,16 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
         }
         public async void FillFields(long id)
         {
-            await RequestsHelper.GetRequest<List<Role>>($"{MainWindow.BaseAddress}/api/users/roles", true)
+            await RequestsHelper.GetRequest<List<Category>>($"{MainWindow.BaseAddress}/api/categories/getAllCategories")
                   .ContinueWith(async (response) =>
                   {
                       rolesCmb.ItemsSource = response.Result.Obj;
                       rolesCmb.DisplayMemberPath = "name";
-                      rolesCmb.SelectedValuePath = "id";
                       
                       if (ActionKind == ActionType.Edit)
                       {
-                          var user = await RequestsHelper.GetRequest<User>($"{MainWindow.BaseAddress}/api/users?id={id}", true);
-                          SelectedObj = user.Obj;
+                          var Category = await RequestsHelper.GetRequest<Category>($"{MainWindow.BaseAddress}/api/Categories?id={id}", true);
+                          SelectedObj = Category.Obj;
                       }
                   }, TaskScheduler.FromCurrentSynchronizationContext());
         }
@@ -81,29 +78,9 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
         private async void Confirm(object sender, RoutedEventArgs e)
         {
             string errors = "";
-            if (String.IsNullOrWhiteSpace(SelectedObj.firstName))
+            if (String.IsNullOrWhiteSpace(SelectedObj.name))
             {
-                errors += "Заполните имя\n";
-            }
-            if (String.IsNullOrWhiteSpace(SelectedObj.lastName))
-            {
-                errors += "Заполните фамилию\n";
-            }
-            if (rolesCmb.SelectedItem == null)
-            {
-                errors += "Укажите роль\n";
-            }
-
-            if (ActionKind == ActionType.Add)
-            {
-                if (String.IsNullOrWhiteSpace(SelectedObj.login))
-                {
-                    errors += "Заполните логин\n";
-                }
-                if (String.IsNullOrWhiteSpace(SelectedObj.login))
-                {
-                    errors += "Заполните пароль\n";
-                }
+                errors += "Заполните наименование\n";
             }
 
             if (errors != "")
@@ -113,20 +90,20 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
             }
             else
             {
-                AdvanceResponse<User> response;
+                AdvanceResponse<Category> response;
 
                 if (ActionKind == ActionType.Add)
                 {
-                    response = await RequestsHelper.PutRequest<User>($"{MainWindow.BaseAddress}/api/users", SelectedObj);
-                    if (NewImagePath != null)
-                        await RequestsHelper.SendFile($"{MainWindow.BaseAddress}/api/users/setImage?id={response.Obj.id}", NewImagePath);
+                    response = await RequestsHelper.PutRequest<Category>($"{MainWindow.BaseAddress}/api/Categories", SelectedObj);
+                    if (NewImagePath != null && response.SourceResponse.IsSuccessStatusCode)
+                        await RequestsHelper.SendFile($"{MainWindow.BaseAddress}/api/Categories/setImage?id={response.Obj.id}", NewImagePath);
 
                 }
                 else
                 {
-                    if (NewImagePath != null)
-                        await RequestsHelper.SendFile($"{MainWindow.BaseAddress}/api/users/setImage?id={SelectedObj.id}", NewImagePath);
-                    response = await RequestsHelper.PostRequest<User>($"{MainWindow.BaseAddress}/api/users", SelectedObj);
+                    response = await RequestsHelper.PostRequest<Category>($"{MainWindow.BaseAddress}/api/Categories", SelectedObj);
+                    if (NewImagePath != null && response.SourceResponse.IsSuccessStatusCode)
+                        await RequestsHelper.SendFile($"{MainWindow.BaseAddress}/api/Categories/setImage?id={response.Obj.id}", NewImagePath);
                 }
 
                 if (!response.SourceResponse.IsSuccessStatusCode)
@@ -135,11 +112,12 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
                 }
                 else
                 {
-                    var FrameContent = MainWindow.mainWindow.mainFrame.Content as UsersPage;
+                    var FrameContent = MainWindow.mainWindow.mainFrame.Content as CategoriesPage;
                     if (FrameContent != null)
                     {
                         FrameContent.RefreshGrid();
                     }
+                    MainWindow.mainWindow.FillCategories();
                     Close();
                 }
             }

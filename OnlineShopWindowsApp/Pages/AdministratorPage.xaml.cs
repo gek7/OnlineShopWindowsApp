@@ -30,5 +30,10 @@ namespace OnlineShopWindowsApp.Pages
         {
             NavigationService.Navigate(new UsersPage());
         }
+
+        private void OpenCategoryFrame(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new AdministratorSubPages.CategoriesPage());
+        }
     }
 }

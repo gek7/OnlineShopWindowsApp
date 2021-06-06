@@ -17,6 +17,9 @@
                         x:Name="MainSnackbar"
                         MessageQueue="{materialDesign:MessageQueue}" Grid.RowSpan="2" Grid.ColumnSpan="2" Panel.ZIndex="5"/>
         <!--Первая строка -->
+        <Grid x:Name="PopupGrid">
+
+        </Grid>
         <Grid Background="White">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -75,7 +78,9 @@
                         HorizontalAlignment="Right" 
                         Margin="16"
                         IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>
-                    <TreeView Grid.Row="1" Margin="20">
+                    <!--<usercontrols:DropdownButton Grid.Row="1"/>-->
+                    <usercontrols:LeftBarMenu Grid.Row="1" x:Name="CategoriesControl"/>
+                    <!--<TreeView Grid.Row="1" Margin="20">
                         <TreeViewItem Header="Category1">
                             <TreeViewItem Header="item1"/>
                             <TreeViewItem Header="item2"/>
@@ -90,7 +95,7 @@
                             <TreeViewItem Header="item7"/>
                             <TreeViewItem Header="item8"/>
                         </TreeViewItem>
-                    </TreeView>
+                    </TreeView>-->
                 </Grid>
             </materialDesign:DrawerHost.LeftDrawerContent>
         </materialDesign:DrawerHost>

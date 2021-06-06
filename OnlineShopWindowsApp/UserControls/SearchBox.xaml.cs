@@ -42,7 +42,12 @@ namespace OnlineShopWindowsApp.UserControls
 
         private void cbSearch_DropDownOpened(object sender, EventArgs e)
         {
-            tbSearch.Focus();
+           tbSearch.Focus();
+        }
+
+        private void cbSearch_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            cbSearch.IsDropDownOpen = true;
         }
     }
 }

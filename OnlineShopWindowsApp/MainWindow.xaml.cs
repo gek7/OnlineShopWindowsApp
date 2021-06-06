@@ -1,4 +1,6 @@
-﻿using OnlineShopWindowsApp.Pages;
+﻿using OnlineShopWindowsApp.Models;
+using OnlineShopWindowsApp.Pages;
+using OnlineShopWindowsApp.ServerActions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +23,9 @@ namespace OnlineShopWindowsApp
     /// </summary>
     public partial class MainWindow : Window
     {
-        private static User _user;
+        private static User _user = new User() {token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6IjEwMDA2Iiwicm9sZSI6IkFkbWluaXN0cmF0b3IiLCJuYmYiOjE2MjI4MDg4NDAsImV4cCI6MTYyNTQwMDg0MCwiaWF0IjoxNjIyODA4ODQwfQ.aDy-yCitPcbDucmZgKXMuxtimLqT0T2kMKilKNdekwA",
+                                                id = 10006, 
+                                                role = new Role() {id=1, name="Administrator" } };
         public static User User
         {
             get
@@ -37,10 +41,22 @@ namespace OnlineShopWindowsApp
         }
         public static MainWindow mainWindow { get; set; }
         public const string BaseAddress = "http://localhost:5000";
+        public List<Category> CategoriesList { get; set; }
         public MainWindow()
         {
             InitializeComponent();
             mainWindow = this;
+            DataContext = this;
+            FillCategories();
+        }
+
+        public async void FillCategories()
+        {
+            var response = await RequestsHelper.GetRequest<List<Category>>($"{MainWindow.BaseAddress}/api/categories/GetTreeViewCategories", false);
+            if (response.SourceResponse.IsSuccessStatusCode)
+            {
+               CategoriesControl.Categories = response.Obj;
+            }
         }
     }
 }

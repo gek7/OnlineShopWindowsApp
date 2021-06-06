@@ -69,14 +69,23 @@
     <Compile Include="HelperClass.cs" />
     <Compile Include="Models\ActionType.cs" />
     <Compile Include="Models\AuthData.cs" />
+    <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Role.cs" />
+    <Compile Include="Models\RootModel.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Pages\AdministratorPage.xaml.cs">
       <DependentUpon>AdministratorPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AdministratorSubPages\CategoriesPage.xaml.cs">
+      <DependentUpon>CategoriesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AdministratorSubPages\DialogWindows\CategoryDialog.xaml.cs">
+      <DependentUpon>CategoryDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AdministratorSubPages\DialogWindows\UserDialog.xaml.cs">
       <DependentUpon>UserDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AdministratorSubPages\IPage.cs" />
     <Compile Include="Pages\AdministratorSubPages\UsersPage.xaml.cs">
       <DependentUpon>UsersPage.xaml</DependentUpon>
     </Compile>
@@ -112,6 +121,9 @@
     <Compile Include="UserControls\ItemCartControl.xaml.cs">
       <DependentUpon>ItemCartControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\LeftBarMenu.xaml.cs">
+      <DependentUpon>LeftBarMenu.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\RangeControl.xaml.cs">
       <DependentUpon>RangeControl.xaml</DependentUpon>
     </Compile>
@@ -137,6 +149,14 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Pages\AdministratorPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdministratorSubPages\CategoriesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdministratorSubPages\DialogWindows\CategoryDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -185,6 +205,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\ItemCartControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\LeftBarMenu.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

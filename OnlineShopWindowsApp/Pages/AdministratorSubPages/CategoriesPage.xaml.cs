@@ -21,31 +21,11 @@ using System.Windows.Shapes;
 namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
 {
     /// <summary>
-    /// Логика взаимодействия для UsersPage.xaml
+    /// Логика взаимодействия для CategoriesPage.xaml
     /// </summary>
-    public partial class UsersPage : Page, IPage<User>
+    public partial class CategoriesPage : Page, IPage<Category>
     {
-        private List<User> _dataSource;
-        public List<User> DataSource
-        {
-            get
-            {
-                return _dataSource;
-            }
-            set
-            {
-                _dataSource = value;
-                OnPropertyChanged();
-            }
-        }
-
-        public UsersPage()
-        {
-            InitializeComponent();
-            this.DataContext = this;
-            RefreshGrid();
-        }
-
+        
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
@@ -53,12 +33,32 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
         }
 
+        public CategoriesPage()
+        {
+            InitializeComponent();
+            this.DataContext = this;
+            RefreshGrid();
+        }
+
+        private List<Category> _dataSource;
+        public List<Category> DataSource
+        {
+            get
+            {
+                return _dataSource;
+            }
+            set {
+                _dataSource = value;
+                OnPropertyChanged();
+            }
+        }
+
         public async void RefreshGrid()
         {
-            var task = RequestsHelper.GetRequest<List<User>>($"{MainWindow.BaseAddress}/api/users/getAllUsers", true);
+            var task = RequestsHelper.GetRequest<List<Category>>($"{MainWindow.BaseAddress}/api/categories/getAllCategories", true);
             await task.ContinueWith((previous) =>
             {
-                List<User> response = previous.Result.Obj.ToList();
+                List<Category> response = previous.Result.Obj.ToList();
                 DataSource = response.ToList();
                 this.DataContext = this;
             }, TaskScheduler.FromCurrentSynchronizationContext());
@@ -66,14 +66,18 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
 
         private void Add(object sender, RoutedEventArgs e)
         {
-            new UserDialog(ActionType.Add).ShowDialog();
+            new CategoryDialog(ActionType.Add).ShowDialog();
         }
 
         private async void Delete(object sender, RoutedEventArgs e)
         {
             if (dataGrid.SelectedItem != null)
             {
-                await RequestsHelper.DeleteRequest<User>($"{MainWindow.BaseAddress}/api/users?id={((User)dataGrid.SelectedItem).id}", true);
+                var response = await RequestsHelper.DeleteRequest<Category>($"{MainWindow.BaseAddress}/api/categories?id={((Category)dataGrid.SelectedItem).id}", true);
+                if (!response.SourceResponse.IsSuccessStatusCode)
+                {
+                    MessageBox.Show(await response.SourceResponse.Content.ReadAsStringAsync());
+                }
                 RefreshGrid();
             }
         }
@@ -81,7 +85,7 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
         private void Edit(object sender, RoutedEventArgs e)
         {
             if (dataGrid.SelectedItem != null)
-                new UserDialog(ActionType.Edit, ((User)dataGrid.SelectedItem).id).ShowDialog();
+                new CategoryDialog(ActionType.Edit, ((Category)dataGrid.SelectedItem).id).ShowDialog();
         }
 
         private void Refresh(object sender, RoutedEventArgs e)
