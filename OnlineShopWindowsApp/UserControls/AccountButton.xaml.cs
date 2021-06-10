@@ -33,7 +33,7 @@ namespace OnlineShopWindowsApp.UserControls
 
         public void OpenPage()
         {
-            if (MainWindow.User != null)
+            if (MainWindow.User != null && !string.IsNullOrEmpty(MainWindow.User.token))
             {
                 MainWindow.mainWindow.mainFrame.Content = new CabinetPage();
             }

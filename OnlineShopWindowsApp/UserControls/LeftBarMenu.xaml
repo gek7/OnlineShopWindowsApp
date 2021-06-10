@@ -7,7 +7,7 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="300">
-    <Grid x:Name="PopupGrid" Margin="0,0,0,0">
+    <Grid x:Name="PopupGrid">
         <StackPanel x:Name="rootPanel" ButtonBase.Click="CategorySelect">
         </StackPanel>
     </Grid>

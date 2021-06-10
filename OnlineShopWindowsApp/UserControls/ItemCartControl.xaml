@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
              xmlns:local="clr-namespace:OnlineShopWindowsApp.UserControls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
@@ -13,25 +14,30 @@
                 <ColumnDefinition Width="auto"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
-            <Image Width="150" Source="/NoPhoto.jpeg" Margin="10"/>
+            <Image Width="250" Source="{Binding LoadImageString}" Margin="10"/>
             <Grid Grid.Column="1">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="5*"/>
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock TextWrapping="WrapWithOverflow" Text="Стадо слонов | Венедиктова Юлия Александровна" FontSize="10pt" VerticalAlignment="Center"/>
-                <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center">
-                    <StackPanel Orientation="Horizontal">
-                        <Button  Content="-" />
-                        <TextBlock Text="1" FontSize="20pt" Margin="5,0,5,0"/>
-                        <Button  Content="+"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding name}" FontSize="10pt" VerticalAlignment="Center"/>
+                <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
+                    <StackPanel Orientation="Horizontal" x:Name="counter">
+                        <Button  Content="-" Click="SubCount"/>
+                        <TextBlock Text="{Binding Count}" FontSize="20pt" Margin="5,0,5,0"/>
+                        <Button  Content="+" Click="AddCount"/>
                     </StackPanel>
-                    <TextBlock Margin="0,10,0,0" Text="1999 Р" Style="{StaticResource MaterialDesignHeadline5TextBlock}" HorizontalAlignment="Center"/>
+                    <TextBlock Margin="0,10,0,0"  Text="{Binding Price, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}, StringFormat={}{0:C}}" Style="{StaticResource MaterialDesignHeadline5TextBlock}" HorizontalAlignment="Center"/>
                 </StackPanel>
-                <Button x:Name="deleteBtn" Grid.Column="3" Width="50" Height="50"  Style="{StaticResource MaterialDesignIconButton}">
-                    <materialDesign:PackIcon Kind="Close" Width="30" Height="30"/>
-                </Button>
+                <StackPanel Grid.Column="3" VerticalAlignment="Center" Orientation="Vertical">
+                    <Button x:Name="deleteBtn" Width="50" Height="50"  Style="{StaticResource MaterialDesignIconButton}" Click="DeleteCartItem">
+                        <materialDesign:PackIcon Kind="Close" Width="30" Height="30" Foreground="Black"/>
+                    </Button>
+                    <Button x:Name="AddToCart" Width="50" Height="50"  Style="{StaticResource MaterialDesignIconButton}" Visibility="Collapsed">
+                        <materialDesign:PackIcon Kind="Cart" Width="30" Height="30" Foreground="Black"/>
+                    </Button>
+                </StackPanel>
             </Grid>
         </Grid>
     </materialDesign:Card>

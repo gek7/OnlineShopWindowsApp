@@ -1,0 +1,151 @@
+﻿<Window x:Class="OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows.ItemDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        mc:Ignorable="d"
+        Title="Изменение товара" Height="450" Width="800" MinWidth="400">
+    <Grid>
+        <Grid.Resources>
+            <ResourceDictionary>
+                <ResourceDictionary.MergedDictionaries>
+                    <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml"/>
+                    <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
+                </ResourceDictionary.MergedDictionaries>
+            </ResourceDictionary>
+        </Grid.Resources>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <!--Грид картинок-->
+        <Grid Margin="0,5,0,5">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+            <Button Margin="20,0,0,0" Style="{StaticResource ButtonDanger}" HorizontalAlignment="Right" VerticalAlignment="Top" Panel.ZIndex="5" Click="DeleteImage">
+                <materialDesign:PackIcon Kind="CloseThick"/>
+            </Button>
+            <Button  Margin="20,0,0,0" Style="{StaticResource ButtonPrimary}" HorizontalAlignment="Right" VerticalAlignment="Bottom" Click="ChooseImage" Panel.ZIndex="5">
+                <materialDesign:PackIcon Kind="AddThick"/>
+            </Button>
+            <Border x:Name="CarouselBorder">
+                <Border.Resources>
+                    <Style TargetType="Image">
+                        <Setter Property="Width" Value="{Binding ElementName=CarouselBorder, Path=ActualWidth}"/>
+                    </Style>
+                </Border.Resources>
+                <hc:Carousel x:Name="ImagesControl" Width="{Binding ElementName=CarouselBorder, Path=ActualWidth}" ButtonBase.Click="ChangeImage" Height="200" ItemsSource="{Binding ImagesSources}"/>
+            </Border>
+            <CheckBox HorizontalAlignment="Center" Margin="5,5,0,0" Grid.Row="1" x:Name="isMainCb" IsChecked="{Binding CurrentItemImage.isMain}">
+                <TextBlock Text="Основная картинка" TextWrapping="WrapWithOverflow"/>
+            </CheckBox>
+        </Grid>
+
+
+        <Grid HorizontalAlignment="Left" VerticalAlignment="Top" Grid.Column="1" Margin="15,0,0,0" Grid.RowSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <WrapPanel Orientation="Vertical">
+                <TextBlock Text="Название" FontSize="20" TextWrapping="Wrap" Margin="0,20,10,5" Height="25"/>
+                <TextBlock Text="Цена" FontSize="20" Margin="0,5,10,5" Grid.Column="0"/>
+                <TextBlock Text="На складе:" FontSize="20" Foreground="Green" Margin="0,5,10,5"/>
+                <TextBlock Text="Категория:" FontSize="20"  Margin="0,5,10,5"/>
+                <TextBlock Text="Товар-предок:" FontSize="20"  Margin="0,0,0,0"/>
+            </WrapPanel>
+            <WrapPanel Orientation="Vertical" Grid.Column="1">
+                <TextBox Height="50" Margin="5,0,0,5" Text="{Binding SelectedObj.name}" x:Name="tbName" TextWrapping="Wrap"/>
+                <hc:NumericUpDown Width="150" Height="25" Margin="5,0,0,5" Value="{Binding SelectedObj.price}" HorizontalAlignment="Left"/>
+                <hc:NumericUpDown Width="150" Height="25" Margin="5,0,0,5" Value="{Binding SelectedObj.count}" HorizontalAlignment="Left"/>
+                <ComboBox x:Name="CategoriesCmb" Width="150" Height="25" Margin="5,0,0,5" SelectedValue="{Binding SelectedObj.category}" HorizontalAlignment="Left"/>
+                <ComboBox x:Name="OwnerCmb" Width="150" Height="25" Margin="5,0,0,5" SelectedValue="{Binding SelectedObj.owner}" HorizontalAlignment="Left"/>
+            </WrapPanel>
+        </Grid>
+        <Grid Grid.Row="1" Grid.ColumnSpan="2">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="auto"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <TextBlock Text="Описание" FontSize="20"/>
+            <ToolBar>
+                <ToolBar.Resources>
+                    <Style TargetType="ButtonBase" x:Key="formatImageStyle">
+                        <Setter Property="CommandTarget" Value="{Binding ElementName=tbDescription}"/>
+                    </Style>
+                </ToolBar.Resources>
+                <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Cut" ToolTip="Cut">
+                    <materialDesign:PackIcon Kind="ContentCut"/>
+                </Button>
+                <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Copy" ToolTip="Copy">
+                    <materialDesign:PackIcon Kind="ContentCopy"/>
+                </Button>
+                <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Paste" ToolTip="Paste">
+                    <materialDesign:PackIcon Kind="ContentPaste"/>
+                </Button>
+                <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Undo" ToolTip="Undo">
+                    <materialDesign:PackIcon Kind="Undo"/>
+                </Button>
+                <Button Style="{StaticResource formatImageStyle}" Command="ApplicationCommands.Redo" ToolTip="Redo">
+                    <materialDesign:PackIcon Kind="Redo"/>
+                </Button>
+
+                <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.ToggleBold" ToolTip="Bold">
+                    <materialDesign:PackIcon Kind="FormatBold"/>
+                </Button>
+                <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.ToggleItalic" ToolTip="Italic">
+                    <materialDesign:PackIcon Kind="FormatItalic"/>
+                </Button>
+                <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.ToggleUnderline" ToolTip="Underline">
+                    <materialDesign:PackIcon Kind="FormatUnderline"/>
+                </Button>
+                <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.IncreaseFontSize" ToolTip="Grow Font">
+                    <materialDesign:PackIcon Kind="FormatFontSizeIncrease"/>
+                </Button>
+                <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.DecreaseFontSize" ToolTip="Shrink Font">
+                    <materialDesign:PackIcon Kind="FormatFontSizeDecrease"/>
+                </Button>
+
+                <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.ToggleBullets" ToolTip="Bullets">
+                    <materialDesign:PackIcon Kind="FormatListBulleted"/>
+                </Button>
+                <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.ToggleNumbering" ToolTip="Numbering">
+                    <materialDesign:PackIcon Kind="FormatListNumbered"/>
+                </Button>
+                <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.AlignLeft" ToolTip="Align Left">
+                    <materialDesign:PackIcon Kind="FormatAlignLeft"/>
+                </Button>
+                <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.AlignCenter" ToolTip="Align Center">
+                    <materialDesign:PackIcon Kind="FormatAlignCenter"/>
+                </Button>
+                <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.AlignRight" ToolTip="Align Right">
+                    <materialDesign:PackIcon Kind="FormatAlignRight"/>
+                </Button>
+                <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.AlignJustify" ToolTip="Align Justify">
+                    <materialDesign:PackIcon Kind="FormatAlignJustify"/>
+                </Button>
+                <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.IncreaseIndentation" ToolTip="Increase Indent">
+                    <materialDesign:PackIcon Kind="FormatIndentIncrease"/>
+                </Button>
+                <Button Style="{StaticResource formatImageStyle}" Command="EditingCommands.DecreaseIndentation" ToolTip="Decrease Indent">
+                    <materialDesign:PackIcon Kind="FormatIndentDecrease"/>
+                </Button>
+            </ToolBar>
+            <RichTextBox Grid.Row="2" x:Name="tbDescription" Foreground="Black">
+            </RichTextBox>
+        </Grid>
+        <Button Grid.Row="2" Content="OK" HorizontalAlignment="Right" Margin="0,5,10,5" Style="{StaticResource ButtonPrimary}" Click="Confirm"/>
+        <Button Grid.Row="2" Grid.Column="1" Content="Отмена" HorizontalAlignment="Left" Margin="10,5,0,5" Style="{StaticResource ButtonDanger}" Click="Cancel"/>
+    </Grid>
+</Window>

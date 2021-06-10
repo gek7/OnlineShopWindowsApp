@@ -35,7 +35,6 @@ namespace OnlineShopWindowsApp.UserControls
         }
         private async void loginClick(object sender, RoutedEventArgs e)
         {
-
             //Проверка
             HttpClient client = new HttpClient();
             User user = await GetUser(LoginTextBox.Text, PwdBox.Password);

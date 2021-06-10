@@ -1,4 +1,5 @@
 ﻿using OnlineShopWindowsApp.Models;
+using OnlineShopWindowsApp.Pages;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -58,6 +59,7 @@ namespace OnlineShopWindowsApp.UserControls
         {
             if (e.PropertyName == "Categories" && Categories != null && Categories.Count > 0)
             {
+                Button btnSender = (sender as Button);
                 rootPanel.Children.Clear();
                 Categories.ForEach(c =>
                 {
@@ -86,7 +88,7 @@ namespace OnlineShopWindowsApp.UserControls
                 Category selectCategory = btn.DataContext as Category;
                 if (DataContext != null && selectCategory != null)
                 {
-                    //Переход к кликнутой категории по ID
+                    MainWindow.mainWindow.mainFrame.Navigate(new ItemsPage(selectCategory.id));
                 }
             }
         }

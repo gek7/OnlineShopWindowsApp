@@ -5,9 +5,11 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:OnlineShopWindowsApp"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" xmlns:usercontrols="clr-namespace:OnlineShopWindowsApp.UserControls"
+        xmlns:mde="clr-namespace:MaterialDesignExtensions.Controls;assembly=MaterialDesignExtensions"
+        xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
         
-        Title="MainWindow" Height="500" Width="800" MinHeight="500" >
+        Title="MainWindow" Height="500" Width="800" MinHeight="500" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -39,7 +41,10 @@
                         DockPanel.Dock="Top"
                         HorizontalAlignment="Right" 
                         Margin="16" />
-                    <usercontrols:SearchBox Width="400" Margin="20,0,0,0" Height="30" Grid.Column="1" HorizontalAlignment="Center"/>
+                    <!--<usercontrols:SearchBox Width="400" Margin="20,0,0,0" Height="30" Grid.Column="1" HorizontalAlignment="Center"/>-->
+                    <mde:PersistentSearch Grid.Column="1" SearchIcon="{x:Static materialDesign:PackIconKind.Search}"
+                                          ClearIcon="{x:Static materialDesign:PackIconKind.None}"
+                                          CancelIcon="{x:Static materialDesign:PackIconKind.Close}" Margin="30,0,30,0"/>
                     <Grid Grid.Column="2" HorizontalAlignment="Right">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -47,13 +52,13 @@
                             <ColumnDefinition />
                         </Grid.ColumnDefinitions>
                         <usercontrols:AccountButton x:Name="accountBtn" Grid.Column="2"/>
-                        <materialDesign:Badged x:Name="cartBadge" Badge="3" Grid.Column="1" BadgeBackground="Black" BadgePlacementMode="Left" Margin="45,15,0,0" Panel.ZIndex="1" BadgeForeground="White"/>
-                        <Button x:Name="cartBtn" Style="{StaticResource MaterialDesignIconButton}" Margin="10" Background="Transparent" Grid.Column="1">
+                        <materialDesign:Badged x:Name="cartBadge" Badge="{Binding CartIds.Count}" Grid.Column="1" BadgeBackground="Black" BadgePlacementMode="Left" Margin="45,15,0,0" Panel.ZIndex="1" BadgeForeground="White"/>
+                        <Button x:Name="cartBtn" Style="{StaticResource MaterialDesignIconButton}" Margin="10" Background="Transparent" Grid.Column="1" Click="ClickCart">
                             <materialDesign:PackIcon Kind="Cart" Foreground="Black"/>
                         </Button>
 
-                        <materialDesign:Badged x:Name="wishBadge" Badge="3" Grid.Column="0" BadgeBackground="Red" BadgePlacementMode="Left" Margin="45,15,0,0" Panel.ZIndex="1" BadgeForeground="White"/>
-                        <Button x:Name="wishBtn" Style="{StaticResource MaterialDesignIconButton}" Grid.Column="0" Margin="10" Background="Transparent">
+                        <materialDesign:Badged x:Name="wishBadge" Badge="{Binding WishListIds.Count}" Grid.Column="0" BadgeBackground="Red" BadgePlacementMode="Left" Margin="45,15,0,0" Panel.ZIndex="1" BadgeForeground="White"/>
+                        <Button x:Name="wishBtn" Style="{StaticResource MaterialDesignIconButton}" Grid.Column="0" Margin="10" Background="Transparent" Click="ClickWishList">
                             <materialDesign:PackIcon Kind="Heart" Foreground="Red"/>
                         </Button>
                     </Grid>
@@ -78,8 +83,13 @@
                         HorizontalAlignment="Right" 
                         Margin="16"
                         IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>
-                    <!--<usercontrols:DropdownButton Grid.Row="1"/>-->
-                    <usercontrols:LeftBarMenu Grid.Row="1" x:Name="CategoriesControl"/>
+                    <usercontrols:LeftBarMenu Grid.Row="1" x:Name="CategoriesControl">
+                        <usercontrols:LeftBarMenu.Resources>
+                            <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                                <Setter Property="Margin" Value="10,5,0,5"/>
+                            </Style>
+                        </usercontrols:LeftBarMenu.Resources>
+                    </usercontrols:LeftBarMenu>
                     <!--<TreeView Grid.Row="1" Margin="20">
                         <TreeViewItem Header="Category1">
                             <TreeViewItem Header="item1"/>

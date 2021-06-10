@@ -1,7 +1,11 @@
-﻿using System;
+﻿using OnlineShopWindowsApp.Models;
+using OnlineShopWindowsApp.ServerActions;
+using OnlineShopWindowsApp.UserControls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -23,18 +27,62 @@ namespace OnlineShopWindowsApp.Pages
     {
         //Для scrollviewer во 2-й строке
         public double Row1Height { get; set; }
+        public double SummaryPrice { get; set; }
+        public event EventHandler SourceChanged;
         public CartPage()
         { 
             InitializeComponent();
             this.DataContext = this;
+            Fill();
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName] string prop = "")
+        {
+            if (PropertyChanged != null)
+                PropertyChanged(this, new PropertyChangedEventArgs(prop));
+        }
 
         private void PageSizeChanged(object sender, SizeChangedEventArgs e)
         {
             Row1Height = this.ActualHeight-100;
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Row1Height"));
+        }
+
+        public async void Fill()
+        {
+           var result = await RequestsHelper.PostRequest<List<Item>, List<long>>($"{MainWindow.BaseAddress}/api/Items/getItemsByIds", MainWindow.mainWindow.CartIds, false);
+            if(result.SourceResponse.IsSuccessStatusCode && result.Obj != null)
+            {
+                List<ItemCart> items = ItemCart.ConvertToItemCart(result.Obj);
+                items.ForEach(i =>
+                {
+                    ItemCartControl icc = new ItemCartControl();
+                    icc.SourceChanged += Icc_SourceChanged;
+                    icc.DataContext = i;
+                    ItemsContainer.Children.Add(icc);
+                });
+                Icc_SourceChanged(this, null);
+            }
+        }
+
+        private void Icc_SourceChanged(object sender, EventArgs e)
+        {
+            double sum = 0;
+            foreach (var child in ItemsContainer.Children)
+            {
+                sum += ((child as ItemCartControl).DataContext as ItemCart).Price;
+            }
+            SummaryPrice = sum;
+            OnPropertyChanged("SummaryPrice");
+        }
+
+        private void ClearCart(object sender, RoutedEventArgs e)
+        {
+            while(ItemsContainer.Children.Count > 0)
+            {
+                (ItemsContainer.Children[0] as ItemCartControl).DeleteItem();
+            }
         }
     }
 }

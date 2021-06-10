@@ -50,6 +50,12 @@ namespace OnlineShopWindowsApp.ServerActions
             if (data != null) json = JsonSerializer.Serialize(data, typeof(T));
             return await SendRequest<T>(url, HttpMethod.Post, isAuthHeader, json);
         }
+        public async static Task<AdvanceResponse<T>> PostRequest<T,D>(string url, D data = null, bool isAuthHeader = true) where T : class where D : class
+        {
+            string json = null;
+            if (data != null) json = JsonSerializer.Serialize(data, typeof(D));
+            return await SendRequest<T>(url, HttpMethod.Post, isAuthHeader, json);
+        }
         public async static Task<AdvanceResponse<T>> PutRequest<T>(string url, T data = null, bool isAuthHeader = true) where T : class
         {
             string json = null;
@@ -87,8 +93,14 @@ namespace OnlineShopWindowsApp.ServerActions
             HttpResponseMessage response = await Client.SendAsync(request);
             return response;
         }
+        public async static Task<byte[]> getByteArray(string url)
+        {
+            var response = await Client.GetAsync(url);
+            return await response.Content.ReadAsByteArrayAsync();
+        }
         private static void addAuthHeader(HttpRequestMessage request)
         {
+            if(MainWindow.User != null && !string.IsNullOrEmpty(MainWindow.User.token))
             request.Headers.Add("Authorization", "Bearer " + MainWindow.User.token);
         }
     }

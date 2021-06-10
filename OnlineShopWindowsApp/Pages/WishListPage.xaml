@@ -1,0 +1,55 @@
+﻿<Page x:Class="OnlineShopWindowsApp.Pages.WishListPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:userControls="clr-namespace:OnlineShopWindowsApp.UserControls"
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:local="clr-namespace:OnlineShopWindowsApp.Pages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="WishListPage" Background="White" x:Name="root">
+    <Page.Resources>
+        <x:Array x:Key="testItems" Type="{x:Type local:TestItem}">
+            <local:TestItem ItemName="NVIDIA GTX 550TI" ItemPrice="2000" Count="2"/>
+            <local:TestItem ItemName="NVIDIA GTX 550TI" ItemPrice="2000" Count="2"/>
+            <local:TestItem ItemName="NVIDIA GTX 550TI" ItemPrice="2000" Count="2"/>
+            <local:TestItem ItemName="NVIDIA GTX 550TI" ItemPrice="2000" Count="2"/>
+        </x:Array>
+    </Page.Resources>
+    <Grid x:Name="mainGrid">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="80"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="7*"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <TextBlock Text="Список Желаемого" Grid.Row="0" Style="{StaticResource MaterialDesignHeadline2TextBlock}" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
+        <ScrollViewer Margin="20,20,0,0" Grid.Row="1" Height="{Binding Row1Height}">
+            <StackPanel>
+                <userControls:ItemCartControl Margin="10"/>
+                <userControls:ItemCartControl Margin="10"/>
+                <userControls:ItemCartControl Margin="10"/>
+                <userControls:ItemCartControl Margin="10"/>
+                <userControls:ItemCartControl Margin="10"/>
+            </StackPanel>
+        </ScrollViewer>
+        <materialDesign:Card Grid.Column="1" Height="200" VerticalAlignment="Top" Margin="20" Grid.Row="1">
+            <Grid VerticalAlignment="Center">
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="Итого " Style="{StaticResource MaterialDesignHeadline5TextBlock}" Margin="10,5"/>
+                <TextBlock Text="1999999999 Р " Style="{StaticResource MaterialDesignHeadline5TextBlock}" Grid.Row="1" Margin="10,5"/>
+                <Rectangle Grid.Row="2" Height="1" Fill="LightGray"  RadiusX="1" RadiusY="1" Margin="10,0"/>
+                <Button Grid.Row="4" Margin="10,10,10,0" Content="Очистить желаемое"/>
+            </Grid>
+        </materialDesign:Card>
+    </Grid>
+</Page>
