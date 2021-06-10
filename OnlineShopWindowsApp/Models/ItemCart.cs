@@ -23,14 +23,16 @@ namespace OnlineShopWindowsApp.Models
             name = itm.name;
             priceForOne = itm.price;
             LoadImageString = itm.LoadImageString;
+            images = itm.images;
         }
 
         public long id { get; set; }
         public string name { get; set; }
         public decimal? priceForOne { get; set; }
+        public List<ItemImage> images { get; set; }
 
         private long _count;
-        public long Count 
+        public long Count
         {
             get
             {
@@ -43,7 +45,7 @@ namespace OnlineShopWindowsApp.Models
                 OnPropertyChanged("Price");
             }
         }
-        
+
         public double Price
         {
             get
@@ -55,7 +57,7 @@ namespace OnlineShopWindowsApp.Models
 
         public string LoadImageString { get; set; }
 
-        public static List<ItemCart> ConvertToItemCart(List<Item> items, bool isCart = true)
+        public static List<ItemCart> ConvertToItemCart(List<Item> items, bool isCart = true, bool isOwnCount = false)
         {
             List<long> ids = MainWindow.mainWindow.CartIds;
             var distinctItems = items.Distinct().ToList();
@@ -63,7 +65,11 @@ namespace OnlineShopWindowsApp.Models
             distinctItems.ForEach(i =>
             {
                 ItemCart ic = new ItemCart(i);
-                if (isCart)
+                if (isOwnCount)
+                {
+                    ic.Count = items.Where(item => item.id == i.id).Count();
+                }
+                else if (isCart)
                 {
                     ic.Count = ids.Where(itm => itm == i.id).Count();
                 }

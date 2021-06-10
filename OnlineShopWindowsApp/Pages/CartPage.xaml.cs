@@ -28,7 +28,7 @@ namespace OnlineShopWindowsApp.Pages
         //Для scrollviewer во 2-й строке
         public double Row1Height { get; set; }
         public double SummaryPrice { get; set; }
-        public event EventHandler SourceChanged;
+
         public CartPage()
         { 
             InitializeComponent();
@@ -82,6 +82,23 @@ namespace OnlineShopWindowsApp.Pages
             while(ItemsContainer.Children.Count > 0)
             {
                 (ItemsContainer.Children[0] as ItemCartControl).DeleteItem();
+            }
+        }
+
+        private void OpenOrderPage(object sender, RoutedEventArgs e)
+        {
+            if(ItemsContainer.Children.Count > 0)
+            {
+                List<ItemCart> ics = new List<ItemCart>();
+                foreach (var child in ItemsContainer.Children)
+                {
+                    ics.Add(((child as ItemCartControl).DataContext as ItemCart));
+                }
+                MainWindow.mainWindow.mainFrame.Navigate(new OrderPage(ics));
+            }
+            else
+            {
+                MessageBox.Show("Нет товаров в корзине");
             }
         }
     }

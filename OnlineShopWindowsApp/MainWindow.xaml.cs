@@ -153,7 +153,11 @@ namespace OnlineShopWindowsApp
 
         private void ClickWishList(object sender, RoutedEventArgs e)
         {
+        }
 
+        private void OpenFindOrderPage(object sender, RoutedEventArgs e)
+        {
+            MainWindow.mainWindow.mainFrame.Navigate(new FindOrderPage());
         }
     }
 }

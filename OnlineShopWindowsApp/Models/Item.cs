@@ -17,6 +17,19 @@ namespace OnlineShopWindowsApp.Models
         public List<ItemImage> images { get; set; }
         public List<Item> items { get; set; }
 
+        public Item()
+        {
+
+        }
+        public Item(ItemCart ic)
+        {
+            id = ic.id;
+            name = ic.name;
+            price = ic.priceForOne;
+            images = ic.images;
+
+        }
+
         public string LoadImageString
         {
             get

@@ -50,16 +50,20 @@
                             <ColumnDefinition />
                             <ColumnDefinition />
                             <ColumnDefinition />
+                            <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <usercontrols:AccountButton x:Name="accountBtn" Grid.Column="2"/>
-                        <materialDesign:Badged x:Name="cartBadge" Badge="{Binding CartIds.Count}" Grid.Column="1" BadgeBackground="Black" BadgePlacementMode="Left" Margin="45,15,0,0" Panel.ZIndex="1" BadgeForeground="White"/>
-                        <Button x:Name="cartBtn" Style="{StaticResource MaterialDesignIconButton}" Margin="10" Background="Transparent" Grid.Column="1" Click="ClickCart">
+                        <usercontrols:AccountButton x:Name="accountBtn" Grid.Column="3"/>
+                        <materialDesign:Badged x:Name="cartBadge" Badge="{Binding CartIds.Count}" Grid.Column="2" BadgeBackground="Black" BadgePlacementMode="Left" Margin="45,15,0,0" Panel.ZIndex="1" BadgeForeground="White"/>
+                        <Button x:Name="cartBtn" Style="{StaticResource MaterialDesignIconButton}" Margin="10" Background="Transparent" Grid.Column="2" Click="ClickCart" ToolTip="Корзина">
                             <materialDesign:PackIcon Kind="Cart" Foreground="Black"/>
                         </Button>
 
-                        <materialDesign:Badged x:Name="wishBadge" Badge="{Binding WishListIds.Count}" Grid.Column="0" BadgeBackground="Red" BadgePlacementMode="Left" Margin="45,15,0,0" Panel.ZIndex="1" BadgeForeground="White"/>
-                        <Button x:Name="wishBtn" Style="{StaticResource MaterialDesignIconButton}" Grid.Column="0" Margin="10" Background="Transparent" Click="ClickWishList">
+                        <materialDesign:Badged x:Name="wishBadge" Badge="{Binding WishListIds.Count}" Grid.Column="1" BadgeBackground="Red" BadgePlacementMode="Left" Margin="45,15,0,0" Panel.ZIndex="1" BadgeForeground="White"/>
+                        <Button x:Name="wishBtn" Style="{StaticResource MaterialDesignIconButton}" Grid.Column="1" Margin="10" Background="Transparent" Click="ClickWishList" ToolTip="Список желаемого">
                             <materialDesign:PackIcon Kind="Heart" Foreground="Red"/>
+                        </Button>
+                        <Button x:Name="searchOrderBtn" Style="{StaticResource MaterialDesignIconButton}" Margin="10" Background="Transparent" Grid.Column="0" Click="OpenFindOrderPage" ToolTip="Поиск заказа по номеру">
+                            <materialDesign:PackIcon Kind="FileFind" Foreground="Black"/>
                         </Button>
                     </Grid>
                 </Grid>

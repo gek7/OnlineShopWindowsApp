@@ -54,15 +54,40 @@ namespace OnlineShopWindowsApp.UserControls
                 OnPropertyChanged();
             }
         }
-        CartPage owner = null;
+        private bool _isOnlyInfo;
+        public bool IsOnlyInfo
+        {
+            get
+            {
+                return _isOnlyInfo;
+            }
+            set
+            {
+                _isOnlyInfo = value;
+                if (value)
+                {
+                    deleteBtn.Visibility = Visibility.Collapsed;
+                    counter.Visibility = Visibility.Collapsed;
+                    infoCount.Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    deleteBtn.Visibility = Visibility.Visible;
+                    counter.Visibility = Visibility.Visible;
+                    infoCount.Visibility = Visibility.Collapsed;
+                }
+                OnPropertyChanged();
+            }
+        }
         public ItemCartControl()
         {
             InitializeComponent();
         }
 
-        public ItemCartControl(CartPage p)
+        public ItemCartControl(bool isWish, bool isOnlyInfo) : this()
         {
-            this.owner = p;
+            this.isWishItem = isWish;
+            this.IsOnlyInfo = isOnlyInfo;
         }
 
         private void AddCount(object sender, RoutedEventArgs e)

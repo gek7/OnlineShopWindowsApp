@@ -14,7 +14,7 @@
             <TextBlock Text="Имя"/>
             <TextBox Text="{Binding SelectedObj.firstName}"/>
             <TextBlock Text="Фамилия"/>
-            <TextBox Text="{Binding SelectedObj.lastName}"/>
+            <TextBox Text="{Binding SelectedObj.lastName}" />
             <TextBlock Text="Логин"/>
             <TextBox Text="{Binding SelectedObj.login}"/>
             <TextBlock Text="Пароль"/>
