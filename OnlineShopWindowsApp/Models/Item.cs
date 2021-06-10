@@ -53,5 +53,11 @@ namespace OnlineShopWindowsApp.Models
             }
             return obj == this;
         }
+
+        //Используется для быстрого сравнения в разных методах, например в методе distinct у List<Item>
+        public override int GetHashCode()
+        {
+            return 1877310944 + id.GetHashCode();
+        }
     }
 }

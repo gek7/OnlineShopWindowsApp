@@ -31,7 +31,7 @@
                     <TextBlock Margin="0,10,0,0"  Text="{Binding Price, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}, StringFormat={}{0:C}}" Style="{StaticResource MaterialDesignHeadline5TextBlock}" HorizontalAlignment="Center"/>
                 </StackPanel>
                 <StackPanel Grid.Column="2" VerticalAlignment="Center" Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal" Margin="40,10,5,0" x:Name="infoCount">
+                    <StackPanel Orientation="Horizontal" Margin="40,10,5,0" x:Name="infoCount" Visibility="Collapsed">
                         <Rectangle Height="50" Width="1" Fill="Black"/>
                         <TextBlock Text="{Binding Count,StringFormat={}Кол-во: {0}}" FontSize="20" Margin="40,10,5,0"/>
                     </StackPanel>

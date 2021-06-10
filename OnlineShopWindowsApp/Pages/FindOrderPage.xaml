@@ -48,8 +48,8 @@
             </Grid.Resources>
             <hc:Divider Content="Товары заказа" FontSize="20" Visibility="{Binding isVisibility}" x:Name="divider"/>
         </Grid>
-        <StackPanel x:Name="itemPanel" Grid.Row="3">
-            
-        </StackPanel>
+        <ScrollViewer Grid.Row="3">
+            <StackPanel x:Name="itemPanel" />
+        </ScrollViewer>
     </Grid>
 </Page>
