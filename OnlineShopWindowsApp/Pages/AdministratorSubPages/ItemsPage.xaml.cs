@@ -36,7 +36,17 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
         {
             InitializeComponent();
             this.DataContext = this;
+            MainWindow.mainWindow.mainFrame.Navigating += Navigating;
             RefreshGrid();
+        }
+
+        private void Navigating(object sender, NavigatingCancelEventArgs e)
+        {
+            if (MainWindow.mainWindow.additionalFrame.Visibility == Visibility.Visible &&
+                MainWindow.mainWindow.additionalFrame.Content is CategoryAttributesPage)
+            {
+                MainWindow.mainWindow.additionalFrame.Visibility = Visibility.Collapsed;
+            }
         }
 
         private List<Item> _dataSource;
@@ -74,11 +84,10 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
             if (dataGrid.SelectedItem != null)
             {
                 var response = await RequestsHelper.DeleteRequest<Item>($"{MainWindow.BaseAddress}/api/Items?id={((Item)dataGrid.SelectedItem).id}", true);
-                if (!response.SourceResponse.IsSuccessStatusCode)
+                if (response.SourceResponse.IsSuccessStatusCode)
                 {
-                    MessageBox.Show(await response.SourceResponse.Content.ReadAsStringAsync());
+                    RefreshGrid();
                 }
-                RefreshGrid();
             }
         }
 
@@ -98,6 +107,19 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
             RichTextBox rt = (sender as RichTextBox);
             Item i = rt.DataContext as Item;
             HelperClass.SetXaml(rt, i.description);
+        }
+
+        private void ShowCategoryAttribute(object sender, RoutedEventArgs e)
+        {
+            if (MainWindow.mainWindow.additionalFrame.Visibility == Visibility.Collapsed)
+            {
+                MainWindow.mainWindow.additionalFrame.Content = new CategoryAttributesPage(this);
+                MainWindow.mainWindow.additionalFrame.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MainWindow.mainWindow.additionalFrame.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

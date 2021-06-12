@@ -77,10 +77,13 @@
     </ApplicationDefinition>
     <Compile Include="HelperClass.cs" />
     <Compile Include="Models\ActionType.cs" />
+    <Compile Include="Models\AuthData.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\ItemCart.cs" />
     <Compile Include="Models\ItemImage.cs" />
+    <Compile Include="Models\CategoryAttributeModel.cs" />
+    <Compile Include="Models\CategoryAttributeType.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderStatus.cs" />
     <Compile Include="Models\Review.cs" />
@@ -93,6 +96,12 @@
     <Compile Include="Pages\AdministratorSubPages\CategoriesPage.xaml.cs">
       <DependentUpon>CategoriesPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AdministratorSubPages\CategoryAttributesPage.xaml.cs">
+      <DependentUpon>CategoryAttributesPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AdministratorSubPages\DialogWindows\CategoryAttributeDialog.xaml.cs">
+      <DependentUpon>CategoryAttributeDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AdministratorSubPages\DialogWindows\CategoryDialog.xaml.cs">
       <DependentUpon>CategoryDialog.xaml</DependentUpon>
     </Compile>
@@ -103,6 +112,9 @@
       <DependentUpon>UserDialog.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AdministratorSubPages\IPage.cs" />
+    <Compile Include="Pages\AdministratorSubPages\ItemAttrubutesPage.xaml.cs">
+      <DependentUpon>ItemAttrubutesPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AdministratorSubPages\ItemsPage.xaml.cs">
       <DependentUpon>ItemsPage.xaml</DependentUpon>
     </Compile>
@@ -200,6 +212,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\AdministratorSubPages\CategoryAttributesPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdministratorSubPages\DialogWindows\CategoryAttributeDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AdministratorSubPages\DialogWindows\CategoryDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -209,6 +229,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AdministratorSubPages\DialogWindows\UserDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdministratorSubPages\ItemAttrubutesPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

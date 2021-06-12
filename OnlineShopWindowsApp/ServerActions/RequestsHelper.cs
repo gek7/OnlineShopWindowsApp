@@ -69,6 +69,7 @@ namespace OnlineShopWindowsApp.ServerActions
             }
             return null;
         }
+        //Методы, которые обращаются к SendRequest
         public async static Task<AdvanceResponse<T>> PostRequest<T>(string url, T data = null, bool isAuthHeader = true) where T : class
         {
             string json = null;
@@ -95,6 +96,7 @@ namespace OnlineShopWindowsApp.ServerActions
         {
             return await SendRequest<T>(url, HttpMethod.Get, isAuthHeader);
         }
+        //Метод для отправки файлов на сервер
         public async static Task<HttpResponseMessage> SendFile(string url, string fileName, List<Tuple<string, HttpContent>> additionalContents = null, bool isAuthHeader = true)
         {
             var request = new HttpRequestMessage(HttpMethod.Post, url);
@@ -118,6 +120,7 @@ namespace OnlineShopWindowsApp.ServerActions
             HttpResponseMessage response = await Client.SendAsync(request);
             return response;
         }
+        //Вспомогательные методы
         public async static Task<byte[]> getByteArray(string url)
         {
             var response = await Client.GetAsync(url);

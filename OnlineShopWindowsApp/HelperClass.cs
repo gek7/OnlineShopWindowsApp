@@ -56,5 +56,11 @@ namespace OnlineShopWindowsApp
         }
 
         public static bool isAuth() => MainWindow.User != null && !string.IsNullOrEmpty(MainWindow.User.token);
+
+        public static void message(string m)
+        {
+            MainWindow.mainWindow.MainSnackbar
+                        .MessageQueue?.Enqueue(m);
+        }
     }
 }

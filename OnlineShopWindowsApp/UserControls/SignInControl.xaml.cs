@@ -46,7 +46,10 @@ namespace OnlineShopWindowsApp.UserControls
 
         private async Task<User> GetUser(string login, string pwd)
         {
-            AdvanceResponse<User> Resp = await RequestsHelper.PostRequest<User>(MainWindow.BaseAddress + $"/api/account/auth?username={login}&password={pwd}", null, false); ;
+            AuthData data = new AuthData();
+            data.username = login;
+            data.password = pwd;
+            AdvanceResponse<User> Resp = await RequestsHelper.PostRequest<User, AuthData>(MainWindow.BaseAddress + $"/api/account/auth", data, false); ;
 
             if (Resp.SourceResponse.StatusCode == System.Net.HttpStatusCode.Unauthorized)
             {

@@ -108,7 +108,7 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
 
             if (errors != "")
             {
-                MessageBox.Show(errors);
+                HelperClass.message(errors);
                 return;
             }
             else
@@ -130,10 +130,6 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
                 }
 
                 if (!response.SourceResponse.IsSuccessStatusCode)
-                {
-                    MessageBox.Show(response.SourceResponse.ReasonPhrase);
-                }
-                else
                 {
                     var FrameContent = MainWindow.mainWindow.mainFrame.Content as UsersPage;
                     if (FrameContent != null)

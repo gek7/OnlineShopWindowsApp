@@ -98,7 +98,7 @@ namespace OnlineShopWindowsApp.Pages
             }
             else
             {
-                MessageBox.Show("Нет товаров в корзине");
+                HelperClass.message("Нет товаров в корзине");
             }
         }
     }

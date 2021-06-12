@@ -41,22 +41,22 @@ namespace OnlineShopWindowsApp.UserControls
         {
             if (string.IsNullOrWhiteSpace(user.login))
             {
-                MessageBox.Show("Логин должен быть заполнен");
+                HelperClass.message("Логин должен быть заполнен");
                 return;
             }
             if (string.IsNullOrWhiteSpace(PwdRegBox.Password))
             {
-                MessageBox.Show("Пароль должен быть заполнен");
+                HelperClass.message("Пароль должен быть заполнен");
                 return;
             }
             if(PwdRegBox.Password != PwdAgainBox.Password)
             {
-                MessageBox.Show("Пароли должны совпадать");
+                HelperClass.message("Пароли должны совпадать");
                 return;
             }
             if (string.IsNullOrEmpty(user.firstName) || string.IsNullOrEmpty(user.lastName))
             {
-                MessageBox.Show("Должны быть быть заполнены имя и фамилия");
+                HelperClass.message("Должны быть быть заполнены имя и фамилия");
                 return;
             }
             user.password = PwdAgainBox.Password;

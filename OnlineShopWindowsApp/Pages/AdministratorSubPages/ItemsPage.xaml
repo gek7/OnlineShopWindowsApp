@@ -30,6 +30,9 @@
             <Button Width="50" Height="50" Margin="5" Click="Refresh" ToolTip="Обновить">
                 <materialDesign:PackIcon Kind="Refresh" Width="25" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
+            <Button Width="50" Height="50" Margin="5" Click="ShowCategoryAttribute" ToolTip="Аттрибуты категории">
+                <materialDesign:PackIcon Kind="ViewList" Width="25" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
         </WrapPanel>
         <DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding DataSource}" CanUserAddRows="False" CanUserDeleteRows="False"
                   materialDesign:DataGridAssist.EnableEditBoxAssist="False" x:Name="dataGrid" IsReadOnly="True">

@@ -25,7 +25,7 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
     /// </summary>
     public partial class CategoriesPage : Page, IPage<Category>
     {
-        
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName] string prop = "")
         {
@@ -37,7 +37,17 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
         {
             InitializeComponent();
             this.DataContext = this;
+            MainWindow.mainWindow.mainFrame.Navigating += Navigating;
             RefreshGrid();
+        }
+
+        private void Navigating(object sender, NavigatingCancelEventArgs e)
+        {
+            if (MainWindow.mainWindow.additionalFrame.Visibility == Visibility.Visible && 
+                MainWindow.mainWindow.additionalFrame.Content is CategoryAttributesPage)
+            {
+                MainWindow.mainWindow.additionalFrame.Visibility = Visibility.Collapsed;
+            }
         }
 
         private List<Category> _dataSource;
@@ -47,10 +57,24 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
             {
                 return _dataSource;
             }
-            set {
+            set
+            {
                 _dataSource = value;
                 OnPropertyChanged();
             }
+        }
+
+        public Category SelectedCategory
+        {
+            get
+            {
+                return dataGrid.SelectedItem as Category;
+            }
+        }
+
+        private void CategoryChanged(object sender, SelectionChangedEventArgs e)
+        {
+            OnPropertyChanged("SelectedCategory");
         }
 
         public async void RefreshGrid()
@@ -74,11 +98,10 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
             if (dataGrid.SelectedItem != null)
             {
                 var response = await RequestsHelper.DeleteRequest<Category>($"{MainWindow.BaseAddress}/api/categories?id={((Category)dataGrid.SelectedItem).id}", true);
-                if (!response.SourceResponse.IsSuccessStatusCode)
+                if (response.SourceResponse.IsSuccessStatusCode)
                 {
-                    MessageBox.Show(await response.SourceResponse.Content.ReadAsStringAsync());
+                    RefreshGrid();
                 }
-                RefreshGrid();
             }
         }
 
@@ -91,6 +114,19 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
         private void Refresh(object sender, RoutedEventArgs e)
         {
             RefreshGrid();
+        }
+
+        private void ShowCategoryAttribute(object sender, RoutedEventArgs e)
+        {
+            if(MainWindow.mainWindow.additionalFrame.Visibility == Visibility.Collapsed)
+            {
+                MainWindow.mainWindow.additionalFrame.Content = new CategoryAttributesPage(this);
+                MainWindow.mainWindow.additionalFrame.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                MainWindow.mainWindow.additionalFrame.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

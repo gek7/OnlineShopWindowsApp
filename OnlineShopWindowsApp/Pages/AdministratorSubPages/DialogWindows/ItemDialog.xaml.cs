@@ -162,7 +162,7 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
 
             if (errors != "")
             {
-                MessageBox.Show(errors);
+                HelperClass.message(errors);
                 return;
             }
             else
@@ -189,11 +189,7 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
                         }
                 }
 
-                if (!response.SourceResponse.IsSuccessStatusCode)
-                {
-                    MessageBox.Show(response.SourceResponse.ReasonPhrase);
-                }
-                else
+                if (response.SourceResponse.IsSuccessStatusCode)
                 {
                     var FrameContent = MainWindow.mainWindow.mainFrame.Content as ItemsPage;
                     if (FrameContent != null)

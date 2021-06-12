@@ -1,5 +1,4 @@
-﻿using Microsoft.Win32;
-using OnlineShopWindowsApp.Models;
+﻿using OnlineShopWindowsApp.Models;
 using OnlineShopWindowsApp.ServerActions;
 using System;
 using System.Collections.Generic;
@@ -20,13 +19,12 @@ using System.Windows.Shapes;
 namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
 {
     /// <summary>
-    /// Логика взаимодействия для CategoryDialog.xaml
+    /// Логика взаимодействия для CategoryAttributeAttributeDialog.xaml
     /// </summary>
-    public partial class CategoryDialog : Window, INotifyPropertyChanged
+    public partial class CategoryAttributeDialog : Window, INotifyPropertyChanged
     {
-        private Category _selectedObj = new Category() {owner = new Category() };
-        private string NewImagePath { get; set; }
-        public Category SelectedObj
+        private CategoryAttributeModel _selectedObj = new CategoryAttributeModel() { attrType = new CategoryAttributeType() };
+        public CategoryAttributeModel SelectedObj
         {
             get
             {
@@ -39,12 +37,12 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
             }
         }
         public ActionType ActionKind { get; set; }
-        public CategoryDialog(ActionType type, long id = -1)
+        public CategoryAttributeDialog(ActionType type, long id = -1, long categoryId = -1)
         {
             InitializeComponent();
             DataContext = this;
-            NewImagePath = null;
             ActionKind = type;
+            SelectedObj.category = categoryId;
             FillFields(id);
         }
 
@@ -56,16 +54,16 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
         }
         public async void FillFields(long id)
         {
-            await RequestsHelper.GetRequest<List<Category>>($"{MainWindow.BaseAddress}/api/categories/getAllCategories")
+            await RequestsHelper.GetRequest<List<CategoryAttributeType>>($"{MainWindow.BaseAddress}/api/categories/CategoryAttributes/types")  
                   .ContinueWith(async (response) =>
                   {
-                      rolesCmb.ItemsSource = response.Result.Obj;
-                      rolesCmb.DisplayMemberPath = "name";
-                      
+                      typesCmb.ItemsSource = response.Result.Obj;
+                      typesCmb.DisplayMemberPath = "name";
+
                       if (ActionKind == ActionType.Edit)
                       {
-                          var Category = await RequestsHelper.GetRequest<Category>($"{MainWindow.BaseAddress}/api/Categories?id={id}", true);
-                          SelectedObj = Category.Obj;
+                          var attr = await RequestsHelper.GetRequest<CategoryAttributeModel>($"{MainWindow.BaseAddress}/api/categories/CategoryAttribute?attrId={id}", true);
+                          SelectedObj = attr.Obj;
                       }
                   }, TaskScheduler.FromCurrentSynchronizationContext());
         }
@@ -90,51 +88,28 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
             }
             else
             {
-                AdvanceResponse<Category> response;
+                AdvanceResponse<CategoryAttributeModel> response;
 
                 if (ActionKind == ActionType.Add)
                 {
-                    response = await RequestsHelper.PutRequest<Category>($"{MainWindow.BaseAddress}/api/Categories", SelectedObj);
-                    if (NewImagePath != null && response.SourceResponse.IsSuccessStatusCode)
-                        await RequestsHelper.SendFile($"{MainWindow.BaseAddress}/api/Categories/setImage?id={response.Obj.id}", NewImagePath);
+                    response = await RequestsHelper.PutRequest<CategoryAttributeModel>($"{MainWindow.BaseAddress}/api/categories/CategoryAttribute", SelectedObj);
 
                 }
                 else
                 {
-                    response = await RequestsHelper.PostRequest<Category>($"{MainWindow.BaseAddress}/api/Categories", SelectedObj);
-                    if (NewImagePath != null && response.SourceResponse.IsSuccessStatusCode)
-                        await RequestsHelper.SendFile($"{MainWindow.BaseAddress}/api/Categories/setImage?id={response.Obj.id}", NewImagePath);
+                    response = await RequestsHelper.PostRequest<CategoryAttributeModel>($"{MainWindow.BaseAddress}/api/categories/CategoryAttribute", SelectedObj);
                 }
 
                 if (response.SourceResponse.IsSuccessStatusCode)
                 {
-                    var FrameContent = MainWindow.mainWindow.mainFrame.Content as CategoriesPage;
+                    var FrameContent = MainWindow.mainWindow.additionalFrame.Content as IPage<CategoryAttributeModel>;
                     if (FrameContent != null)
                     {
                         FrameContent.RefreshGrid();
                     }
-                    MainWindow.mainWindow.FillCategories();
                     Close();
                 }
             }
-        }
-
-        private void ChooseImage(object sender, RoutedEventArgs e)
-        {
-            //Выбор новой картинки
-            OpenFileDialog ofd = new OpenFileDialog();
-            if (ofd.ShowDialog() == true)
-            {
-                NewImagePath = ofd.FileName;
-                curImg.Source = new BitmapImage(new Uri(NewImagePath));
-            }
-        }
-
-        //TODO: Удаление картинок переделать
-        private void DeleteImage(object sender, RoutedEventArgs e)
-        {
-            _selectedObj.image = null;
-            NewImagePath = null;
         }
     }
 }

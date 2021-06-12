@@ -98,7 +98,7 @@ namespace OnlineShopWindowsApp.Pages
             }
             else
             {
-                MessageBox.Show("Номер телефона и адрес доставки\nдолжны быть заполнены");
+                HelperClass.message("Номер телефона и адрес доставки\nдолжны быть заполнены");
             }
         }
 
