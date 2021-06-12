@@ -41,7 +41,7 @@ namespace OnlineShopWindowsApp.UserControls
            var response = await  RequestsHelper.PostRequest<Order>($"{MainWindow.BaseAddress}/api/orders/createOrder", orderPage.Order, true);
             orderPage.Order.orderNum = response.Obj.orderNum;
             orderPage.OnPropertyChanged("Order");
-
+            MainWindow.mainWindow.CartIds = new List<long>();
         }
     }
 }

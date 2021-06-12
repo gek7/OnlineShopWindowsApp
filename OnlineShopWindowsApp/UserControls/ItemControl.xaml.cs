@@ -15,6 +15,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Effects;
 using OnlineShopWindowsApp.Models;
+using OnlineShopWindowsApp.Pages;
 
 namespace OnlineShopWindowsApp.UserControls
 {
@@ -48,6 +49,12 @@ namespace OnlineShopWindowsApp.UserControls
         {
             Item i = (sender as Button).DataContext as Item;
             MainWindow.mainWindow.AddItemToCart(i.id);
+        }
+
+        private void ItemClick(object sender, MouseButtonEventArgs e)
+        {
+            long id = (DataContext as Item).id;
+            MainWindow.mainWindow.mainFrame.Navigate(new ItemPage(id));
         }
     }
 }

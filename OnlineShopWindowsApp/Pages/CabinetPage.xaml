@@ -7,7 +7,7 @@
       xmlns:local="clr-namespace:OnlineShopWindowsApp.Pages"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="CabinetPage"  Background="White">
+      Title="CabinetPage">
     <Grid>
         <Grid Width="300" Height="400" VerticalAlignment="Center" HorizontalAlignment="Center"> 
             <Grid.RowDefinitions>
@@ -31,7 +31,7 @@
             <TextBlock Text="" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" x:Name="TextblockName"/>
             <Button Grid.Row="2" Content="Кабинет администратора" Visibility="Collapsed" x:Name="AdminButton" Click="OpenAdministratorPage"/>
             <Button Grid.Row="3" Content="Мои заказы"/>
-            <Button Grid.Row="4" Content="Выход"/>
+            <Button Grid.Row="4" Content="Выход" Click="Exit"/>
         </Grid>
     </Grid>
 </Page>

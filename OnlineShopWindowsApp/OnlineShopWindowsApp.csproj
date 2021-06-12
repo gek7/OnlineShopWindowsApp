@@ -77,13 +77,13 @@
     </ApplicationDefinition>
     <Compile Include="HelperClass.cs" />
     <Compile Include="Models\ActionType.cs" />
-    <Compile Include="Models\AuthData.cs" />
     <Compile Include="Models\Category.cs" />
     <Compile Include="Models\Item.cs" />
     <Compile Include="Models\ItemCart.cs" />
     <Compile Include="Models\ItemImage.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderStatus.cs" />
+    <Compile Include="Models\Review.cs" />
     <Compile Include="Models\Role.cs" />
     <Compile Include="Models\RootModel.cs" />
     <Compile Include="Models\User.cs" />
@@ -123,6 +123,9 @@
     </Compile>
     <Compile Include="Pages\FindOrderPage.xaml.cs">
       <DependentUpon>FindOrderPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ItemPage.xaml.cs">
+      <DependentUpon>ItemPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ItemsPage.xaml.cs">
       <DependentUpon>ItemsPage.xaml</DependentUpon>
@@ -164,6 +167,9 @@
     </Compile>
     <Compile Include="UserControls\RangeControl.xaml.cs">
       <DependentUpon>RangeControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\ReviewControl.xaml.cs">
+      <DependentUpon>ReviewControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\SearchBox.xaml.cs">
       <DependentUpon>SearchBox.xaml</DependentUpon>
@@ -238,6 +244,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\ItemPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\ItemsPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -283,6 +293,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="UserControls\RangeControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\ReviewControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

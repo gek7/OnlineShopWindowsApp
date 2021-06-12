@@ -1,8 +1,11 @@
-﻿using System;
+﻿using OnlineShopWindowsApp.Models;
+using OnlineShopWindowsApp.ServerActions;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
@@ -51,5 +54,7 @@ namespace OnlineShopWindowsApp
                 rt.Document = doc;
             }
         }
+
+        public static bool isAuth() => MainWindow.User != null && !string.IsNullOrEmpty(MainWindow.User.token);
     }
 }

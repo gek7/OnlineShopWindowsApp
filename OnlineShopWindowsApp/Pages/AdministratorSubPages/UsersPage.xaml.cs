@@ -59,6 +59,8 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
             await task.ContinueWith((previous) =>
             {
                 List<User> response = previous.Result.Obj.ToList();
+                DataSource = new List<User>();
+                this.DataContext = this;
                 DataSource = response.ToList();
                 this.DataContext = this;
             }, TaskScheduler.FromCurrentSynchronizationContext());

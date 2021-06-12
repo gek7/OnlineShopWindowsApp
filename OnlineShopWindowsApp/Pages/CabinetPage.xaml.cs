@@ -30,7 +30,7 @@ namespace OnlineShopWindowsApp.Pages
         public CabinetPage()
         {
             InitializeComponent();
-            if(MainWindow.User == null || string.IsNullOrEmpty(MainWindow.User.token))
+            if(!HelperClass.isAuth())
             {
                 MainWindow.mainWindow.mainFrame.GoBack();
                 return;
@@ -81,6 +81,11 @@ namespace OnlineShopWindowsApp.Pages
         private void OpenAdministratorPage(object sender, RoutedEventArgs e)
         {
             NavigationService.Navigate(new AdministratorPage());
+        }
+
+        private void Exit(object sender, RoutedEventArgs e)
+        {
+            MainWindow.User = null;
         }
     }
 }

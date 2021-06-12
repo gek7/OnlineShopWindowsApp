@@ -134,7 +134,6 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
                                       byte[] arr = await RequestsHelper.getByteArray(img.path);
                                       im.Source = (ImageSource)new ImageSourceConverter().ConvertFrom(arr);
                                       im.DataContext = img;
-                                      //imgs.Add(im);
                                       ImagesSources.Add(im);
                                   }
                               }

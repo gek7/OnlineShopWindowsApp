@@ -33,7 +33,7 @@ namespace OnlineShopWindowsApp.UserControls
 
         public void OpenPage()
         {
-            if (MainWindow.User != null && !string.IsNullOrEmpty(MainWindow.User.token))
+            if (HelperClass.isAuth())
             {
                 MainWindow.mainWindow.mainFrame.Content = new CabinetPage();
             }
@@ -45,7 +45,7 @@ namespace OnlineShopWindowsApp.UserControls
 
         public void SetImage(BitmapImage img)
         {
-            if (!String.IsNullOrEmpty(MainWindow.User.image))
+            if (img !=null)
             {
                 icon.Visibility = Visibility.Collapsed;
                 UserImg.Source = img;

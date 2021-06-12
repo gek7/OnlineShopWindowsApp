@@ -14,6 +14,9 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <WrapPanel>
+            <Button Width="50" Height="50" Margin="5" ToolTip="Назад" Style="{StaticResource MaterialDesignFlatButton}" Command="NavigationCommands.BrowseBack">
+                <materialDesign:PackIcon Kind="ArrowBack" Width="40" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
             <Button Width="50" Height="50" Margin="5" Click="Add">
                 <materialDesign:PackIcon Kind="PlusBold" Width="40" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
@@ -39,11 +42,10 @@
                 <DataGridTextColumn Header="Имя" Binding="{Binding firstName}"/>
                 <DataGridTextColumn Header="Фамилия" Binding="{Binding lastName}"/>
                 <DataGridTextColumn Header="Роль" Binding="{Binding role.name}"/>
-                <DataGridTextColumn Header="Логин" Binding="{Binding login}"/>
                 <DataGridTemplateColumn Header="Аватарка" Width="300">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
-                            <Image Source="{Binding LoadImageString}" Width="300" Height="100"/>
+                            <Image Source="{Binding LoadImage}" Width="300" Height="100"/>
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>

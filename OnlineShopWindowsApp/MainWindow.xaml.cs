@@ -41,8 +41,16 @@ namespace OnlineShopWindowsApp
             set
             {
                 _user = value;
-                mainWindow.accountBtn.ChangeImage();
-                mainWindow.mainFrame.Content = new CabinetPage();
+                if (value !=null && !string.IsNullOrEmpty(value.token))
+                {
+                    mainWindow.accountBtn.ChangeImage();
+                    mainWindow.mainFrame.Content = new CabinetPage();
+                }
+                else
+                {
+                    mainWindow.mainFrame.Content = new AuthPage();
+                    mainWindow.accountBtn.ChangeImage();
+                }
             }
         }
 
@@ -135,7 +143,7 @@ namespace OnlineShopWindowsApp
         public async void FillCategories()
         {
             var response = await RequestsHelper.GetRequest<List<Category>>($"{MainWindow.BaseAddress}/api/categories/GetTreeViewCategories", false);
-            if (response.SourceResponse.IsSuccessStatusCode)
+            if (response != null && response.SourceResponse.IsSuccessStatusCode)
             {
                 CategoriesControl.Categories = response.Obj;
             }

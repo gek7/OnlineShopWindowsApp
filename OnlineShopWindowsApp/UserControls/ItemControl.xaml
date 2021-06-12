@@ -6,9 +6,8 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes" 
              xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
              xmlns:hc="https://handyorg.github.io/handycontrol"
-             xmlns:local="clr-namespace:OnlineShopWindowsApp.UserControls"
              mc:Ignorable="d" >
-    <materialDesign:Card x:Name="CardItem" Margin="10" UniformCornerRadius="5" Background="White" Width="300" Height="400" MouseEnter="CardMouseEnter" MouseLeave="CardMouseLeave">
+    <materialDesign:Card x:Name="CardItem" Margin="10" UniformCornerRadius="5" Background="White" Width="300" Height="400" MouseEnter="CardMouseEnter" MouseLeave="CardMouseLeave" MouseDown="ItemClick">
         <Grid Margin="5">
             <Grid.RowDefinitions>
                 <RowDefinition Height="5*"/>
@@ -35,8 +34,9 @@
                                 </ResourceDictionary.MergedDictionaries>
                             </ResourceDictionary>
                         </StackPanel.Resources>
-                        <hc:Rate Value="4.7" IsReadOnly="True" Icon="{StaticResource StarGeometry}"/>
-                        <TextBlock Text="5" FontSize="15"/>
+                        <StackPanel Orientation="Vertical">
+                            <hc:Rate Value="{Binding avgRating}" IsReadOnly="True" Icon="{StaticResource StarGeometry}"/>
+                        </StackPanel>
                     </StackPanel>
                     <TextBlock Text="{Binding price, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}, StringFormat={}{0:C}}"  HorizontalAlignment="Right" FontSize="20"/>
                 </Grid>

@@ -7,6 +7,7 @@ using System.Net.Http;
 using System.Text;
 using System.Text.Json;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace OnlineShopWindowsApp.ServerActions
 {
@@ -29,20 +30,44 @@ namespace OnlineShopWindowsApp.ServerActions
                 request.Content.Headers.ContentType.MediaType = "application/json";
                 //                request.Content.Headers.Add("Content-Type", "application/json");
             }
-            Resp = await Client.SendAsync(request);
-            if (Resp.IsSuccessStatusCode)
+            try
             {
-                string jsonObj = await Resp.Content.ReadAsStringAsync();
-                if (!String.IsNullOrEmpty(jsonObj))
-                    Obj = (T)JsonSerializer.Deserialize(jsonObj, typeof(T));
-            }
-            if (Resp.StatusCode == System.Net.HttpStatusCode.NotFound ||
-                Resp.StatusCode == System.Net.HttpStatusCode.MethodNotAllowed)
-            {
-                MainWindow.mainWindow.mainFrame.Navigate(new ErrorPage(Resp.ReasonPhrase));
-            }
+                Resp = await Client.SendAsync(request);
+                if (Resp.IsSuccessStatusCode)
+                {
+                    string jsonObj = await Resp.Content.ReadAsStringAsync();
+                    if (!String.IsNullOrEmpty(jsonObj))
+                        Obj = (T)JsonSerializer.Deserialize(jsonObj, typeof(T));
+                }
+                else
+                {
+                    string content = await Resp.Content.ReadAsStringAsync();
+                    string reason = Resp.ReasonPhrase;
+                    if (string.IsNullOrWhiteSpace(content))
+                    {
+                        content = reason;
+                    }
+                    MainWindow.mainWindow.MainSnackbar
+                        .MessageQueue?.Enqueue(content);
+                }
 
-            return new AdvanceResponse<T>(Resp, Obj);
+                if (Resp.StatusCode == System.Net.HttpStatusCode.NotFound ||
+                    Resp.StatusCode == System.Net.HttpStatusCode.MethodNotAllowed)
+                {
+                    MainWindow.mainWindow.mainFrame.Navigate(new ErrorPage(Resp.ReasonPhrase));
+                }
+
+                return new AdvanceResponse<T>(Resp, Obj);
+            }
+            catch (Exception e)
+            {
+                if (e.Message == "Произошла ошибка при отправке запроса.")
+                {
+                    MessageBox.Show("Невозможно подключиться к серверу");
+                    MainWindow.mainWindow.Close();
+                }
+            }
+            return null;
         }
         public async static Task<AdvanceResponse<T>> PostRequest<T>(string url, T data = null, bool isAuthHeader = true) where T : class
         {
@@ -50,7 +75,7 @@ namespace OnlineShopWindowsApp.ServerActions
             if (data != null) json = JsonSerializer.Serialize(data, typeof(T));
             return await SendRequest<T>(url, HttpMethod.Post, isAuthHeader, json);
         }
-        public async static Task<AdvanceResponse<T>> PostRequest<T,D>(string url, D data = null, bool isAuthHeader = true) where T : class where D : class
+        public async static Task<AdvanceResponse<T>> PostRequest<T, D>(string url, D data = null, bool isAuthHeader = true) where T : class where D : class
         {
             string json = null;
             if (data != null) json = JsonSerializer.Serialize(data, typeof(D));
@@ -100,8 +125,8 @@ namespace OnlineShopWindowsApp.ServerActions
         }
         private static void addAuthHeader(HttpRequestMessage request)
         {
-            if(MainWindow.User != null && !string.IsNullOrEmpty(MainWindow.User.token))
-            request.Headers.Add("Authorization", "Bearer " + MainWindow.User.token);
+            if (HelperClass.isAuth())
+                request.Headers.Add("Authorization", "Bearer " + MainWindow.User.token);
         }
     }
 }

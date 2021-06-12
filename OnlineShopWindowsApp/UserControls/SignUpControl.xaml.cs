@@ -1,6 +1,9 @@
-﻿using System;
+﻿using OnlineShopWindowsApp.Models;
+using OnlineShopWindowsApp.ServerActions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -20,15 +23,62 @@ namespace OnlineShopWindowsApp.UserControls
     /// </summary>
     public partial class SignUpControl : UserControl
     {
+        public User user { get; set; }
         public Action backClick { get; set; }
         public SignUpControl()
         {
             InitializeComponent();
+            user = new User();
+            DataContext = this;
         }
 
         private void BackClick(object sender, RoutedEventArgs e)
         {
             backClick?.Invoke();
+        }
+
+        private async void DoSignUp(object sender, RoutedEventArgs e)
+        {
+            if (string.IsNullOrWhiteSpace(user.login))
+            {
+                MessageBox.Show("Логин должен быть заполнен");
+                return;
+            }
+            if (string.IsNullOrWhiteSpace(PwdRegBox.Password))
+            {
+                MessageBox.Show("Пароль должен быть заполнен");
+                return;
+            }
+            if(PwdRegBox.Password != PwdAgainBox.Password)
+            {
+                MessageBox.Show("Пароли должны совпадать");
+                return;
+            }
+            if (string.IsNullOrEmpty(user.firstName) || string.IsNullOrEmpty(user.lastName))
+            {
+                MessageBox.Show("Должны быть быть заполнены имя и фамилия");
+                return;
+            }
+            user.password = PwdAgainBox.Password;
+            User u = await SignUp();
+            if (u != null)
+            {
+                MainWindow.User = u;
+            }
+        }
+        private async Task<User> SignUp()
+        {
+            AdvanceResponse<User> Resp = await RequestsHelper.PostRequest<User>(MainWindow.BaseAddress + $"/api/account/SignUp", user, false); ;
+
+            if (Resp.SourceResponse.StatusCode == System.Net.HttpStatusCode.OK)
+            {
+                return Resp.Obj;
+            }
+            else
+            {
+                MessageBox.Show(await Resp.SourceResponse.Content.ReadAsStringAsync());
+            }
+            return null;
         }
     }
 }

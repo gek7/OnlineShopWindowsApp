@@ -1,0 +1,34 @@
+﻿<UserControl x:Class="OnlineShopWindowsApp.UserControls.ReviewControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:OnlineShopWindowsApp.UserControls"
+             mc:Ignorable="d" 
+               Background="White" MaxWidth="2000" MinWidth="500" d:DesignHeight="450" d:DesignWidth="800">
+    <Grid Margin="10">
+        <Grid VerticalAlignment="Top" Panel.ZIndex="5" Margin="15,0,0,0" >
+            <materialDesign:Chip Background="#e4e4e4" HorizontalAlignment="Left" VerticalAlignment="Top" x:Name="ReviewerChip"  MouseEnter="EnterForAdmin" MouseLeave="LeaveForAdmin" Cursor="Arrow">
+                <materialDesign:Chip.Effect>
+                    <DropShadowEffect ShadowDepth="1" BlurRadius="7"/>
+                </materialDesign:Chip.Effect>
+                <materialDesign:Chip.Icon>
+                    <Image Source="{Binding user.LoadImageString}" Stretch="Fill"/>
+                </materialDesign:Chip.Icon>
+                <materialDesign:Chip.Content>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding user.firstName}" FontSize="15"/>
+                        <TextBlock Text="{Binding user.lastName}" FontSize="15" Margin="10,0,0,0"/>
+                    </StackPanel>
+                </materialDesign:Chip.Content>
+            </materialDesign:Chip>
+            <Border HorizontalAlignment="Right" VerticalAlignment="Top">
+                <materialDesign:RatingBar Value="{Binding itemMark}" Margin="0,3,15,0" IsReadOnly="True"/>
+            </Border>
+        </Grid>
+        <Border CornerRadius="20" BorderBrush="#e4e4e4" BorderThickness="1" Background="White" Margin="0, 15,0,0" Panel.ZIndex="2">
+            <TextBlock Margin="10,20,5,5" TextWrapping="Wrap" FontSize="15" Text="{Binding reviewContent}"/>
+        </Border>
+    </Grid>
+</UserControl>

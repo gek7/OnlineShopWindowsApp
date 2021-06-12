@@ -1,8 +1,11 @@
-﻿using System;
+﻿using OnlineShopWindowsApp.ServerActions;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace OnlineShopWindowsApp.Models
 {
@@ -16,6 +19,7 @@ namespace OnlineShopWindowsApp.Models
         public Item owner { get; set; }
         public List<ItemImage> images { get; set; }
         public List<Item> items { get; set; }
+        public double avgRating { get; set; }
 
         public Item()
         {

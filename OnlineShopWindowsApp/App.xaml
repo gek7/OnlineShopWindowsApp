@@ -14,6 +14,9 @@
                 <GradientStop Color="#83eaf1" Offset="0.6" />
                 <GradientStop Color="#b6ebee" Offset="0.3" />
             </LinearGradientBrush>
+            <Style TargetType="Page">
+                <Setter Property="Background" Value="#f4f4f4"/>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>
