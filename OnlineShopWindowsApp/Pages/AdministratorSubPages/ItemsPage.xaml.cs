@@ -43,7 +43,7 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
         private void Navigating(object sender, NavigatingCancelEventArgs e)
         {
             if (MainWindow.mainWindow.additionalFrame.Visibility == Visibility.Visible &&
-                MainWindow.mainWindow.additionalFrame.Content is CategoryAttributesPage)
+                MainWindow.mainWindow.additionalFrame.Content is ItemAttrubutesPage)
             {
                 MainWindow.mainWindow.additionalFrame.Visibility = Visibility.Collapsed;
             }
@@ -109,11 +109,11 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
             HelperClass.SetXaml(rt, i.description);
         }
 
-        private void ShowCategoryAttribute(object sender, RoutedEventArgs e)
+        private void ShowItemAttribute(object sender, RoutedEventArgs e)
         {
             if (MainWindow.mainWindow.additionalFrame.Visibility == Visibility.Collapsed)
             {
-                MainWindow.mainWindow.additionalFrame.Content = new CategoryAttributesPage(this);
+                MainWindow.mainWindow.additionalFrame.Content = new ItemAttrubutesPage(this);
                 MainWindow.mainWindow.additionalFrame.Visibility = Visibility.Visible;
             }
             else

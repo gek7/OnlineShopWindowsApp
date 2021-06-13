@@ -87,6 +87,7 @@ namespace OnlineShopWindowsApp.Pages
                 item = Item.Obj;
                 if (item.images != null && item.images.Count > 0)
                 {
+                    ImagesSources.Clear();
                     List<Image> imgs = new List<Image>();
                     for (int i = 0; i < item.images.Count; i++)
                     {
@@ -95,7 +96,6 @@ namespace OnlineShopWindowsApp.Pages
                         byte[] arr = await RequestsHelper.getByteArray(img.path);
                         im.Source = (ImageSource)new ImageSourceConverter().ConvertFrom(arr);
                         im.DataContext = img;
-                        //imgs.Add(im);
                         ImagesSources.Add(im);
                     }
                     ImagesControl.ItemsSource = ImagesSources;
@@ -141,6 +141,7 @@ namespace OnlineShopWindowsApp.Pages
             if (result.SourceResponse.IsSuccessStatusCode)
             {
                 ClearReviewFields();
+                FillItem(item.id);
                 RefreshReviews();
             }
         }
@@ -154,6 +155,11 @@ namespace OnlineShopWindowsApp.Pages
         {
             ReviewStars.Value = 0;
             ReviewContent.Text = "";
+        }
+
+        private void AddToWishlist(object sender, RoutedEventArgs e)
+        {
+            MainWindow.mainWindow.AddItemToWishList(item.id);
         }
     }
 }

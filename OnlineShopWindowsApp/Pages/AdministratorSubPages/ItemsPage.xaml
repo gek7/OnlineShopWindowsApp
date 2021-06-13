@@ -30,7 +30,7 @@
             <Button Width="50" Height="50" Margin="5" Click="Refresh" ToolTip="Обновить">
                 <materialDesign:PackIcon Kind="Refresh" Width="25" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
-            <Button Width="50" Height="50" Margin="5" Click="ShowCategoryAttribute" ToolTip="Аттрибуты категории">
+            <Button Width="50" Height="50" Margin="5" Click="ShowItemAttribute" ToolTip="Аттрибуты товара">
                 <materialDesign:PackIcon Kind="ViewList" Width="25" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
         </WrapPanel>

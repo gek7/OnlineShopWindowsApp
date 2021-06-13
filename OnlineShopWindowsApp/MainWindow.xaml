@@ -76,7 +76,7 @@
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
             <Frame Background="AliceBlue" Source="Pages/ItemsPage.xaml" x:Name="mainFrame" NavigationUIVisibility="Hidden"/>
-            <Frame NavigationUIVisibility="Hidden" x:Name="additionalFrame"  Grid.Column="1"/>
+            <Frame NavigationUIVisibility="Hidden" x:Name="additionalFrame"  Grid.Column="1" Visibility="Collapsed"/>
             
         </Grid>
 

@@ -6,17 +6,21 @@ using System.Threading.Tasks;
 
 namespace OnlineShopWindowsApp.Models
 {
-    public class CategoryAttributeModel : RootModel
+    public class ItemAttributeValue
     {
-        public string name { get; set; }
-        public CategoryAttributeType attrType { get; set; }
-        public long? category { get; set; }
+        public ItemAttributeValue()
+        {
+        }
+        public long id { get; set; }
+        public long? itemAttributeId { get; set; }
+        public string value { get; set; }
+        public Unit unit { get; set; }
 
         public override bool Equals(object obj)
         {
-            if (obj is CategoryAttributeModel)
+            if (obj is ItemAttributeValue)
             {
-                return (obj as CategoryAttributeModel).id == this.id;
+                return (obj as ItemAttributeValue).id == this.id;
             }
             return obj == this;
         }

@@ -27,8 +27,23 @@
             </WrapPanel>
             <DataGrid Grid.Row="1" x:Name="attrGrid" AutoGenerateColumns="False" IsReadOnly="True" ItemsSource="{Binding DataSource}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn Header="Атрибут категории" Binding="{Binding name}"/>
-                    <DataGridTextColumn Header="Значение" Binding="{Binding name}"/>
+                    <DataGridTextColumn Header="Наименование атрибута" Binding="{Binding categoryAttribute.name}"/>
+                    <DataGridTemplateColumn Header="Значения">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <ListBox ItemsSource="{Binding itemAttributesValues}">
+                                    <ListBox.ItemTemplate>
+                                        <DataTemplate>
+                                            <StackPanel Orientation="Horizontal">
+                                                <TextBlock Text="{Binding value}"/>
+                                                <TextBlock Margin="10,0,0,0" Text="{Binding unit.name}"/>
+                                            </StackPanel>
+                                        </DataTemplate>
+                                    </ListBox.ItemTemplate>
+                                </ListBox>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>

@@ -81,7 +81,7 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
         {
             if (attrGrid.SelectedItem != null)
             {
-                var response = await RequestsHelper.DeleteRequest<Category>($"{MainWindow.BaseAddress}/api/categories/CategoryAttribute?id={((CategoryAttributeModel)attrGrid.SelectedItem).id}", true);
+                var response = await RequestsHelper.DeleteRequest<CategoryAttributeModel>($"{MainWindow.BaseAddress}/api/categories/CategoryAttribute?id={((CategoryAttributeModel)attrGrid.SelectedItem).id}", true);
                 if (response.SourceResponse.IsSuccessStatusCode)
                 {
                     FillAttrsByCategory();

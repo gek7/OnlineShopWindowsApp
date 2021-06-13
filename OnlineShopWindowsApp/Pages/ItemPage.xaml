@@ -54,7 +54,7 @@
                                     <WrapPanel Orientation="Horizontal">
                                         <TextBlock Text="{Binding item.price, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}, StringFormat={}{0:C}}" FontSize="50" TextWrapping="Wrap"/>
                                         <Button Content="Купить" Margin="30,0,0,0" FontSize="30" Height="50" Style="{StaticResource MaterialDesignRaisedDarkButton}" Click="AddToCart"/>
-                                        <Button  Margin="40,0,0,0" FontSize="30" Height="50" Style="{StaticResource MaterialDesignOutlinedButton}" BorderBrush="Red">
+                                        <Button  Margin="40,0,0,0" FontSize="30" Height="50" Style="{StaticResource MaterialDesignOutlinedButton}" BorderBrush="Red" Click="AddToWishlist">
                                             <materialDesign:PackIcon Kind="Heart" Foreground="Red" Width="30" Height="50" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                                         </Button>
                                     </WrapPanel>

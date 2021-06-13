@@ -1,0 +1,53 @@
+﻿<Window x:Class="OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows.ItemAttributeDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:local="clr-namespace:OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows"
+        mc:Ignorable="d"
+        Title="ItemAttributeDialog" Height="420" Width="350" ResizeMode="NoResize">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel Margin="20">
+            <TextBlock Text="Категория атрибута"/>
+            <ComboBox x:Name="itemAttributesCmb" SelectedValue="{Binding SelectedObj.categoryAttribute}"/>
+            <DataGrid Name="ValList" ItemsSource="{Binding Values}" AutoGenerateColumns="False" IsReadOnly="True" Height="130" SelectionChanged="SelectNewValue">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Binding="{Binding Path=value}" Header="Значение"/>
+                    <DataGridTextColumn Binding="{Binding Path=unit.fullName}" Header="Ед. измерения"/>
+                </DataGrid.Columns>
+            </DataGrid>
+            <StackPanel Orientation="Horizontal" Margin="0,10,0,0">
+                <StackPanel>
+                    <TextBlock Text="Значение"/>
+                    <TextBox Width="120" x:Name="tbValue"/>
+                </StackPanel>
+                <StackPanel Margin="20,0,0,0">
+                    <TextBlock Text="Единицы измерения"/>
+                    <ComboBox x:Name="UnitCmb" Width="150" ItemsSource="{Binding Units}" DisplayMemberPath="name"/>
+                </StackPanel>
+            </StackPanel>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                <Button Width="50" Style="{StaticResource MaterialDesignFlatButton}" Click="AddValue">
+                    <materialDesign:PackIcon Kind="AddThick"/>
+                </Button>
+                <Button Width="50" Style="{StaticResource MaterialDesignFlatButton}" Click="EditValue">
+                    <materialDesign:PackIcon Kind="Edit"/>
+                </Button>
+                <Button Width="50" Style="{StaticResource MaterialDesignFlatButton}" Click="deleteValue">
+                    <materialDesign:PackIcon Kind="MinusThick"/>
+                </Button>
+            </StackPanel>
+            <!--<ComboBox x:Name="lst" SelectedValue="{Binding SelectedObj.attrType}"/>-->
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal"  HorizontalAlignment="Center" Grid.Row="1" Margin="0,0,0,40">
+            <Button Margin="0,0,0,0" Content="Применить" Click="Confirm"/>
+            <Button Margin="50,0,0,0" Content="Отмена" Click="Cancel"/>
+        </StackPanel>
+    </Grid>
+</Window>
