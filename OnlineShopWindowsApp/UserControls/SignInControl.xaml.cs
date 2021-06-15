@@ -33,7 +33,7 @@ namespace OnlineShopWindowsApp.UserControls
         {
             regClick?.Invoke();
         }
-        private async void loginClick(object sender, RoutedEventArgs e)
+        private async void login(object sender, RoutedEventArgs e)
         {
             //Проверка
             HttpClient client = new HttpClient();
@@ -51,12 +51,7 @@ namespace OnlineShopWindowsApp.UserControls
             data.password = pwd;
             AdvanceResponse<User> Resp = await RequestsHelper.PostRequest<User, AuthData>(MainWindow.BaseAddress + $"/api/account/auth", data, false); ;
 
-            if (Resp.SourceResponse.StatusCode == System.Net.HttpStatusCode.Unauthorized)
-            {
-                MainWindow.mainWindow.MainSnackbar
-                    .MessageQueue?.Enqueue("Неверный логин или пароль");
-            }
-            else if(Resp.SourceResponse.StatusCode == System.Net.HttpStatusCode.OK)
+            if(Resp.SourceResponse.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 return Resp.Obj;
             }

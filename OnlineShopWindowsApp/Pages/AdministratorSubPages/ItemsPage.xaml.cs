@@ -1,6 +1,7 @@
 ﻿using OnlineShopWindowsApp.Models;
 using OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows;
 using OnlineShopWindowsApp.ServerActions;
+using OnlineShopWindowsApp.UserControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -65,13 +66,10 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
 
         public async void RefreshGrid()
         {
-            var task = RequestsHelper.GetRequest<List<Item>>($"{MainWindow.BaseAddress}/api/Items/getAllItems", true);
-            await task.ContinueWith((previous) =>
-            {
-                List<Item> response = previous.Result.Obj.ToList();
-                DataSource = response.ToList();
-                this.DataContext = this;
-            }, TaskScheduler.FromCurrentSynchronizationContext());
+            var result = await RequestsHelper.GetRequest<List<Item>>($"{MainWindow.BaseAddress}/api/Items/getAllItems", true);
+            DataSource = result.Obj;
+            this.DataContext = this;
+
         }
 
         private void Add(object sender, RoutedEventArgs e)
@@ -83,10 +81,15 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
         {
             if (dataGrid.SelectedItem != null)
             {
-                var response = await RequestsHelper.DeleteRequest<Item>($"{MainWindow.BaseAddress}/api/Items?id={((Item)dataGrid.SelectedItem).id}", true);
-                if (response.SourceResponse.IsSuccessStatusCode)
+                var result = await MainWindow.ExecuteBoolDialog(new DeleteQuestion());
+
+                if (result)
                 {
-                    RefreshGrid();
+                    var response = await RequestsHelper.DeleteRequest<Item>($"{MainWindow.BaseAddress}/api/Items?id={((Item)dataGrid.SelectedItem).id}", true);
+                    if (response.SourceResponse.IsSuccessStatusCode)
+                    {
+                        RefreshGrid();
+                    }
                 }
             }
         }

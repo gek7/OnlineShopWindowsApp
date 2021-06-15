@@ -25,8 +25,6 @@ namespace OnlineShopWindowsApp.Pages
     /// </summary>
     public partial class CartPage : Page, INotifyPropertyChanged
     {
-        //Для scrollviewer во 2-й строке
-        public double Row1Height { get; set; }
         public double SummaryPrice { get; set; }
 
         public CartPage()
@@ -41,12 +39,6 @@ namespace OnlineShopWindowsApp.Pages
         {
             if (PropertyChanged != null)
                 PropertyChanged(this, new PropertyChangedEventArgs(prop));
-        }
-
-        private void PageSizeChanged(object sender, SizeChangedEventArgs e)
-        {
-            Row1Height = this.ActualHeight-100;
-            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Row1Height"));
         }
 
         public async void Fill()

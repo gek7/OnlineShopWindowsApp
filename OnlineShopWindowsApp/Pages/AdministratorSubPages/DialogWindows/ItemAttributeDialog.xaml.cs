@@ -108,31 +108,24 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
         private async void Confirm(object sender, RoutedEventArgs e)
         {
             SelectedObj.itemAttributesValues = new List<ItemAttributeValue>(Values);
-            string errors = "";
             if (SelectedObj.categoryAttribute.id < 1)
             {
-                errors += "Аттрибут категории должен быть заполнен\n";
-            }
-
-            if (errors != "")
-            {
-                HelperClass.message(errors);
-                return;
+                HelperClass.message("Аттрибут категории должен быть заполнен\n");
             }
             else
             {
                 AdvanceResponse<ItemAttribute> response;
-
                 if (ActionKind == ActionType.Add)
                 {
-                    response = await RequestsHelper.PutRequest<ItemAttribute>($"{MainWindow.BaseAddress}/api/items/ItemAttribute", SelectedObj);
+                    response = await RequestsHelper
+                        .PutRequest<ItemAttribute>($"{MainWindow.BaseAddress}/api/items/ItemAttribute", SelectedObj);
 
                 }
                 else
                 {
-                    response = await RequestsHelper.PostRequest<ItemAttribute>($"{MainWindow.BaseAddress}/api/items/ItemAttribute", SelectedObj);
+                    response = await RequestsHelper
+                        .PostRequest<ItemAttribute>($"{MainWindow.BaseAddress}/api/items/ItemAttribute", SelectedObj);
                 }
-
                 if (response.SourceResponse.IsSuccessStatusCode)
                 {
                     var FrameContent = MainWindow.mainWindow.additionalFrame.Content as IPage<CategoryAttributeModel>;

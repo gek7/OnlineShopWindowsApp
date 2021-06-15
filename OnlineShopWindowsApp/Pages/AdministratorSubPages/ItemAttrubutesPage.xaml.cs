@@ -1,6 +1,7 @@
 ﻿using OnlineShopWindowsApp.Models;
 using OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows;
 using OnlineShopWindowsApp.ServerActions;
+using OnlineShopWindowsApp.UserControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -81,10 +82,15 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
         {
             if (attrGrid.SelectedItem != null)
             {
-                var response = await RequestsHelper.DeleteRequest<ItemAttribute>($"{MainWindow.BaseAddress}/api/items/ItemAttribute?id={((ItemAttribute)attrGrid.SelectedItem).id}", true);
-                if (response.SourceResponse.IsSuccessStatusCode)
+                var result = await MainWindow.ExecuteBoolDialog(new DeleteQuestion());
+
+                if (result)
                 {
-                    FillAttrsByItem();
+                    var response = await RequestsHelper.DeleteRequest<ItemAttribute>($"{MainWindow.BaseAddress}/api/items/ItemAttribute?id={((ItemAttribute)attrGrid.SelectedItem).id}", true);
+                    if (response.SourceResponse.IsSuccessStatusCode)
+                    {
+                        FillAttrsByItem();
+                    }
                 }
             }
         }
@@ -98,7 +104,7 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
         {
             if (ItemsGrid.SelectedItem != null)
             {
-                new ItemAttributeDialog(ActionType.Add, CurrentItem.id, CurrentItem.category.id, - 1).ShowDialog();
+                new ItemAttributeDialog(ActionType.Add, CurrentItem.id, CurrentItem.category.id, -1).ShowDialog();
             }
         }
 

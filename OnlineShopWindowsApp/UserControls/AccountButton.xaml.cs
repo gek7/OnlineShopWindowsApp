@@ -57,13 +57,15 @@ namespace OnlineShopWindowsApp.UserControls
             if (MainWindow.User != null)
             {
 
-                icon.Visibility = Visibility.Visible;
+                icon.Visibility = Visibility.Collapsed;
+                UserImg.Visibility = Visibility.Visible;
                 icon.Kind = MaterialDesignThemes.Wpf.PackIconKind.Account;
 
             }
             else
             {
                 icon.Visibility = Visibility.Visible;
+                UserImg.Visibility = Visibility.Collapsed;
                 icon.Kind = MaterialDesignThemes.Wpf.PackIconKind.Login;
             }
         }

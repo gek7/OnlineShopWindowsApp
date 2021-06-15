@@ -54,7 +54,8 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
         }
         public async void FillFields(long id)
         {
-            await RequestsHelper.GetRequest<List<CategoryAttributeType>>($"{MainWindow.BaseAddress}/api/categories/CategoryAttributes/types")  
+            await RequestsHelper
+                .GetRequest<List<CategoryAttributeType>>($"{MainWindow.BaseAddress}/api/categories/CategoryAttributes/types")  
                   .ContinueWith(async (response) =>
                   {
                       typesCmb.ItemsSource = response.Result.Obj;
@@ -62,7 +63,8 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
 
                       if (ActionKind == ActionType.Edit)
                       {
-                          var attr = await RequestsHelper.GetRequest<CategoryAttributeModel>($"{MainWindow.BaseAddress}/api/categories/CategoryAttribute?attrId={id}", true);
+                          var attr = await RequestsHelper
+                          .GetRequest<CategoryAttributeModel>($"{MainWindow.BaseAddress}/api/categories/CategoryAttribute?attrId={id}", true);
                           SelectedObj = attr.Obj;
                       }
                   }, TaskScheduler.FromCurrentSynchronizationContext());

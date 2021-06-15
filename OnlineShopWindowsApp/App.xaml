@@ -17,6 +17,39 @@
             <Style TargetType="Page">
                 <Setter Property="Background" Value="#f4f4f4"/>
             </Style>
+            <!--Кастомное окно!-->
+            <Style TargetType="Window" x:Key="customWindow">
+                <Setter Property="AllowsTransparency" Value="True"/>
+                <Setter Property="ResizeMode" Value="CanResize"/>
+                <Setter Property="WindowStyle" Value="None"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <!--- TargetType - обязателен -->
+                        <ControlTemplate TargetType="Window">
+                            <AdornerDecorator>
+                                <ContentPresenter />
+                            </AdornerDecorator>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Window}">
+                            <Grid Background="Transparent" x:Name="templateGrid" SizeChanged="templateGrid_SizeChanged">
+                                <ContentPresenter Grid.Row="1"/>
+                            </Grid>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+
+                <Setter Property="WindowChrome.WindowChrome">
+                    <Setter.Value>
+                        <WindowChrome
+                ResizeBorderThickness="7"
+                CaptionHeight="32"/>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

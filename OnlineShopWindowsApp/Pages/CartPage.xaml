@@ -9,7 +9,7 @@
       xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
       mc:Ignorable="d" 
       d:DesignHeight="450" d:DesignWidth="800"
-      Title="CartPage" Background="White" x:Name="root" SizeChanged="PageSizeChanged">
+      Title="CartPage" Background="White" x:Name="root">
     <Page.Resources>
         <x:Array x:Key="testItems" Type="{x:Type local:TestItem}">
             <local:TestItem ItemName="NVIDIA GTX 550TI" ItemPrice="2000" Count="2"/>

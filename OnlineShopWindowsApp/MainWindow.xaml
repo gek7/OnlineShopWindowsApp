@@ -9,43 +9,73 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
         
-        Title="MainWindow" Height="500" Width="800" MinHeight="500" MinWidth="800" WindowStartupLocation="CenterScreen" WindowState="Maximized">
+        Title="Онлайн-магазин" Height="500" Width="800" MinHeight="560" MinWidth="800" WindowStartupLocation="CenterScreen" WindowState="Maximized" Style="{StaticResource customWindow}">
     <Grid>
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <materialDesign:Snackbar
                         x:Name="MainSnackbar"
-                        MessageQueue="{materialDesign:MessageQueue}" Grid.RowSpan="2" Grid.ColumnSpan="2" Panel.ZIndex="5"/>
+                        MessageQueue="{materialDesign:MessageQueue}" Grid.RowSpan="3" Grid.ColumnSpan="2" Panel.ZIndex="5"/>
+
         <!--Первая строка -->
-        <Grid x:Name="PopupGrid">
+        <Grid Background="#0099FF">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <StackPanel Orientation="Horizontal">
+                <materialDesign:PackIcon Kind="store"/>
+                <TextBlock>
+                     <Run FontWeight="Bold">Онлайн магазин</Run>
+                </TextBlock>
+            </StackPanel>
+            <StackPanel HorizontalAlignment="Right" Orientation="Horizontal" Grid.Column="1" WindowChrome.IsHitTestVisibleInChrome="True">
+                <Button Style="{StaticResource MaterialDesignToolButton}" Foreground="black" Height="10" MouseEnter="btnEnter" MouseLeave="btnLeave" Click="MinimizeWindow">
+                    <materialDesign:PackIcon Kind="WindowMinimize" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Button>
+                <Button Style="{StaticResource MaterialDesignToolButton}" Foreground="black" Height="20" MouseEnter="btnEnter" MouseLeave="btnLeave" Click="MaximizeWindow">
+                    <materialDesign:PackIcon Kind="WindowMaximize" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Button>
+                <Button Style="{StaticResource MaterialDesignToolButton}" Foreground="black" Height="20" MouseEnter="btnEnter" MouseLeave="btnLeave" Click="CloseWindow">
+                    <materialDesign:PackIcon Kind="WindowClose" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                </Button>
+            </StackPanel>
+        </Grid>
+        <Grid x:Name="PopupGrid" Grid.Row="1">
 
         </Grid>
-        <Grid Background="White">
+        <Grid Background="White" Grid.Row="1">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <materialDesign:ColorZone Mode="PrimaryLight">
+            <materialDesign:ColorZone Background="#0099FF">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="*"/>
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
-                    <ToggleButton 
-                        Grid.Column="0"
+                    <StackPanel Grid.Column="0" Orientation="Horizontal">
+                        <ToggleButton 
+                        
                         x:Name="MenuToggleButton"
                         Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
                         DockPanel.Dock="Top"
                         HorizontalAlignment="Right" 
                         Margin="16" />
-                    <!--<usercontrols:SearchBox Width="400" Margin="20,0,0,0" Height="30" Grid.Column="1" HorizontalAlignment="Center"/>-->
+                        <Button Width="50" Height="50" Margin="5" ToolTip="Назад" Style="{StaticResource MaterialDesignFlatButton}" Command="NavigationCommands.BrowseBack" CommandTarget="{Binding ElementName=mainFrame}" Foreground="White">
+                            <materialDesign:PackIcon Kind="ArrowBack" Width="40" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                        </Button>
+                    </StackPanel>
                     <mde:PersistentSearch Grid.Column="1" SearchIcon="{x:Static materialDesign:PackIconKind.Search}"
                                           ClearIcon="{x:Static materialDesign:PackIconKind.None}"
-                                          CancelIcon="{x:Static materialDesign:PackIconKind.Close}" Margin="30,0,30,0"/>
-                    <Grid Grid.Column="2" HorizontalAlignment="Right">
+                                          CancelIcon="{x:Static materialDesign:PackIconKind.Close}" Margin="30,0,30,0"
+                                          x:Name="controlSearch" SearchSuggestionsSource="{Binding SearchResult}" Search="DoSearch"/>
+                    <Grid Grid.Column="2" HorizontalAlignment="Right" WindowChrome.IsHitTestVisibleInChrome="True">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
                             <ColumnDefinition />
@@ -70,56 +100,45 @@
             </materialDesign:ColorZone>
         </Grid>
         <!--Фрейм для страниц-->
-        <Grid Grid.Row="1" x:Name="gridForFrames">
+        <Grid Grid.Row="2" x:Name="gridForFrames">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="auto"/>
             </Grid.ColumnDefinitions>
-            <Frame Background="AliceBlue" Source="Pages/ItemsPage.xaml" x:Name="mainFrame" NavigationUIVisibility="Hidden"/>
+            <Frame Background="AliceBlue" Source="Pages/AuthPage.xaml" x:Name="mainFrame" NavigationUIVisibility="Hidden"/>
             <Frame NavigationUIVisibility="Hidden" x:Name="additionalFrame"  Grid.Column="1" Visibility="Collapsed"/>
-            
+
         </Grid>
 
-        <materialDesign:DrawerHost
-            IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}" Grid.RowSpan="3">
-            <!--Выезжающее меню слева-->
-            <materialDesign:DrawerHost.LeftDrawerContent>
-                <Grid>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
-                    <ToggleButton 
+        <materialDesign:DialogHost
+        Identifier="RootDialog"
+        DialogTheme="Inherit"
+        SnackbarMessageQueue="{Binding ElementName=MainSnackbar, Path=MessageQueue}" Grid.RowSpan="3">
+            <materialDesign:DrawerHost
+            IsLeftDrawerOpen="{Binding ElementName=MenuToggleButton, Path=IsChecked}">
+                <!--Выезжающее меню слева-->
+                <materialDesign:DrawerHost.LeftDrawerContent>
+                    <Grid>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                            <RowDefinition Height="*"/>
+                        </Grid.RowDefinitions>
+                        <ToggleButton 
                         Style="{StaticResource MaterialDesignHamburgerToggleButton}" 
                         DockPanel.Dock="Top"
                         HorizontalAlignment="Right" 
                         Margin="16"
                         IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>
-                    <usercontrols:LeftBarMenu Grid.Row="1" x:Name="CategoriesControl">
-                        <usercontrols:LeftBarMenu.Resources>
-                            <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
-                                <Setter Property="Margin" Value="10,5,0,5"/>
-                            </Style>
-                        </usercontrols:LeftBarMenu.Resources>
-                    </usercontrols:LeftBarMenu>
-                    <!--<TreeView Grid.Row="1" Margin="20">
-                        <TreeViewItem Header="Category1">
-                            <TreeViewItem Header="item1"/>
-                            <TreeViewItem Header="item2"/>
-                            <TreeViewItem Header="item3"/>
-                            <TreeViewItem Header="item4"/>
-                        </TreeViewItem>
-                        <TreeViewItem Header="Category2">
-                            <TreeViewItem Header="item5"/>
-                            <TreeViewItem Header="item6"/>
-                        </TreeViewItem>
-                        <TreeViewItem Header="Category3">
-                            <TreeViewItem Header="item7"/>
-                            <TreeViewItem Header="item8"/>
-                        </TreeViewItem>
-                    </TreeView>-->
-                </Grid>
-            </materialDesign:DrawerHost.LeftDrawerContent>
-        </materialDesign:DrawerHost>
+                        <usercontrols:LeftBarMenu Grid.Row="1" x:Name="CategoriesControl">
+                            <usercontrols:LeftBarMenu.Resources>
+                                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                                    <Setter Property="Margin" Value="10,5,0,5"/>
+                                </Style>
+                            </usercontrols:LeftBarMenu.Resources>
+                        </usercontrols:LeftBarMenu>
+                    </Grid>
+                </materialDesign:DrawerHost.LeftDrawerContent>
+            </materialDesign:DrawerHost>
+        </materialDesign:DialogHost>
     </Grid>
 </Window>

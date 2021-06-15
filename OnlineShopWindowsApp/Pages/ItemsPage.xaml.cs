@@ -28,6 +28,7 @@ namespace OnlineShopWindowsApp.Pages
     {
         public long ItemsCategoryId { get; set; }
         private ObservableCollection<Item> _productSource { get; set; }
+        private List<UserControl> filters = new List<UserControl>();
         public ObservableCollection<Item> ProductSource
         {
             get
@@ -37,6 +38,7 @@ namespace OnlineShopWindowsApp.Pages
             set
             {
                 _productSource = value;
+                ItemsPanel.Children.Clear();
                 for (int i = 0; i < value.Count; i++)
                 {
                     ItemControl ic = new ItemControl();
@@ -59,7 +61,7 @@ namespace OnlineShopWindowsApp.Pages
             InitializeComponent();
             DataContext = this;
         }
-        public ItemsPage(long id):this()
+        public ItemsPage(long id) : this()
         {
             ItemsCategoryId = id;
             RefreshDataSource();
@@ -67,9 +69,55 @@ namespace OnlineShopWindowsApp.Pages
 
         private async void RefreshDataSource()
         {
-            var src = await RequestsHelper.GetRequest<ObservableCollection<Item>>($"{MainWindow.BaseAddress}/api/items/getAllItemsByCategory?id={ItemsCategoryId}", true);
-            ProductSource = src.Obj;
+
+            ProductSource = await getNewDataSource();
+            FillPanelForFilter();
         }
 
+        private void FillPanelForFilter()
+        {
+            panelForFilterControls.Children.Clear();
+            var minPrice = ProductSource.Min(i => i.price);
+            var maxPrice = ProductSource.Max(i => i.price);
+            RangeControl rc = new RangeControl(minPrice, maxPrice);
+            filters.Add(rc);
+            panelForFilterControls.Children.Add(rc);
+
+        }
+
+        private async void ApplyFilter(object sender, RoutedEventArgs e)
+        {
+            if (filters.Count > 0)
+            {
+                var source = await getNewDataSource();
+
+                var priceFilter = filters[0] as RangeControl;
+                var newSrc = source.Where(item => (double)item.price >= priceFilter.Slider.ValueStart && (double)item.price <= priceFilter.Slider.ValueEnd);
+                switch (cmbSort.SelectedIndex)
+                {
+                    case 0:
+                        newSrc = newSrc.OrderBy(item => item.price);
+                        break;
+                    case 1:
+                        newSrc = newSrc.OrderByDescending(item => item.avgRating);
+                        break;
+                    case 2:
+                        newSrc = newSrc.OrderBy(item => item.name);
+                        break;
+                }
+                ProductSource = new ObservableCollection<Item>(newSrc);
+            }
+        }
+
+        private async Task<ObservableCollection<Item>> getNewDataSource()
+        {
+            var result = await RequestsHelper.GetRequest<ObservableCollection<Item>>($"{MainWindow.BaseAddress}/api/items/getAllItemsByCategory?id={ItemsCategoryId}", true);
+            return result.Obj;
+        }
+
+        private void SortChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ApplyFilter(this, null);
+        }
     }
 }

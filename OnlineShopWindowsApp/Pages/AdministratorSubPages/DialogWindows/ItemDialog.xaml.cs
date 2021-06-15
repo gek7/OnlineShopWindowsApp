@@ -218,7 +218,6 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
             }
         }
 
-        //TODO: Удаление картинок переделать
         private void DeleteImage(object sender, RoutedEventArgs e)
         {
             if(CurrentImage != null)

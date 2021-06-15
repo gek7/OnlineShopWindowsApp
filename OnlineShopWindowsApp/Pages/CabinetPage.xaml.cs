@@ -1,5 +1,6 @@
 ﻿using Microsoft.Win32;
 using OnlineShopWindowsApp.Models;
+using OnlineShopWindowsApp.Pages.AdministratorSubPages;
 using OnlineShopWindowsApp.ServerActions;
 using System;
 using System.Collections.Generic;
@@ -86,6 +87,11 @@ namespace OnlineShopWindowsApp.Pages
         private void Exit(object sender, RoutedEventArgs e)
         {
             MainWindow.User = null;
+        }
+
+        private void OpenMyOrders(object sender, RoutedEventArgs e)
+        {
+            NavigationService.Navigate(new OrdersPage(true));
         }
     }
 }

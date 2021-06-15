@@ -1,0 +1,40 @@
+﻿<UserControl x:Class="OnlineShopWindowsApp.UserControls.DeleteQuestion"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:system="clr-namespace:System;assembly=mscorlib"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:local="clr-namespace:OnlineShopWindowsApp.UserControls"
+             mc:Ignorable="d" 
+             Height="450" Width="400">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Border>
+            <materialDesign:PackIcon Kind="DeleteCircleOutline" HorizontalAlignment="Center" VerticalAlignment="Center" Height="150" Width="150" Margin="0,20,0,0"/>
+        </Border>
+        <TextBlock Grid.Row="1" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="35" TextWrapping="Wrap">
+            <Run>Вы точно хотите</Run>
+            <Run FontWeight="Bold">удалить</Run>
+            <Run>запись?</Run>
+        </TextBlock>
+        <StackPanel Orientation="Horizontal" Grid.Row="2" HorizontalAlignment="Center" VerticalAlignment="Center">
+            <Button Margin="10" Content="Да" FontSize="30" Width="100" Height="50" Style="{StaticResource MaterialDesignFlatButton}" BorderThickness="1" BorderBrush="#0099FF" 
+                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                <Button.CommandParameter>
+                    <system:Boolean>True</system:Boolean>
+                </Button.CommandParameter>
+            </Button>
+            <Button Margin="10" Content="Нет" FontSize="30" Width="100" Height="50" Style="{StaticResource MaterialDesignFlatButton}" BorderThickness="1" BorderBrush="#0099FF"
+                    Command="{x:Static materialDesign:DialogHost.CloseDialogCommand}">
+                <Button.CommandParameter>
+                    <system:Boolean>False</system:Boolean>
+                </Button.CommandParameter>
+            </Button>
+        </StackPanel>
+    </Grid>
+</UserControl>

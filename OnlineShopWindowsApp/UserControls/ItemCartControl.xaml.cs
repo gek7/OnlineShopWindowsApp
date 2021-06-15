@@ -70,12 +70,6 @@ namespace OnlineShopWindowsApp.UserControls
                     counter.Visibility = Visibility.Collapsed;
                     infoCount.Visibility = Visibility.Visible;
                 }
-                else
-                {
-                    deleteBtn.Visibility = Visibility.Visible;
-                    counter.Visibility = Visibility.Visible;
-                    infoCount.Visibility = Visibility.Collapsed;
-                }
                 OnPropertyChanged();
             }
         }
@@ -117,18 +111,29 @@ namespace OnlineShopWindowsApp.UserControls
 
         public void DeleteItem()
         {
-
             ItemCart ic = (this.DataContext as ItemCart);
-            while (ic.Count > 0)
+            if (!isWishItem)
             {
-                ic.Count--;
-                MainWindow.mainWindow.SubItemFromCart(ic.id);
+                while (ic.Count > 0)
+                {
+                    ic.Count--;
+                    MainWindow.mainWindow.SubItemFromCart(ic.id);
+                }
+                //OnSourceChanged();
+            }
+            else
+            {
+                MainWindow.mainWindow.SubItemFromWishList(ic.id);
             }
             if (Parent is StackPanel && ic.Count <= 0)
             {
                 (Parent as StackPanel).Children.Remove(this);
             }
-            OnSourceChanged();
+        }
+
+        private void AddItemToCart(object sender, RoutedEventArgs e)
+        {
+            MainWindow.mainWindow.AddItemToCart((DataContext as ItemCart).id);
         }
     }
 }

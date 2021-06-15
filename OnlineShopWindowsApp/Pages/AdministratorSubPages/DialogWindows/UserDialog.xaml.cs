@@ -81,29 +81,13 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
         private async void Confirm(object sender, RoutedEventArgs e)
         {
             string errors = "";
-            if (String.IsNullOrWhiteSpace(SelectedObj.firstName))
-            {
-                errors += "Заполните имя\n";
-            }
-            if (String.IsNullOrWhiteSpace(SelectedObj.lastName))
-            {
-                errors += "Заполните фамилию\n";
-            }
-            if (rolesCmb.SelectedItem == null)
-            {
-                errors += "Укажите роль\n";
-            }
-
+            if (String.IsNullOrWhiteSpace(SelectedObj.firstName)) errors += "Заполните имя\n";
+            if (String.IsNullOrWhiteSpace(SelectedObj.lastName))  errors += "Заполните фамилию\n";
+            if (rolesCmb.SelectedItem == null) errors += "Укажите роль\n";
             if (ActionKind == ActionType.Add)
             {
-                if (String.IsNullOrWhiteSpace(SelectedObj.login))
-                {
-                    errors += "Заполните логин\n";
-                }
-                if (String.IsNullOrWhiteSpace(SelectedObj.login))
-                {
-                    errors += "Заполните пароль\n";
-                }
+                if (String.IsNullOrWhiteSpace(SelectedObj.login)) errors += "Заполните логин\n";
+                if (String.IsNullOrWhiteSpace(SelectedObj.login)) errors += "Заполните пароль\n";
             }
 
             if (errors != "")
@@ -129,7 +113,7 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
                     response = await RequestsHelper.PostRequest<User>($"{MainWindow.BaseAddress}/api/users", SelectedObj);
                 }
 
-                if (!response.SourceResponse.IsSuccessStatusCode)
+                if (response.SourceResponse.IsSuccessStatusCode)
                 {
                     var FrameContent = MainWindow.mainWindow.mainFrame.Content as UsersPage;
                     if (FrameContent != null)
@@ -152,7 +136,6 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
             }
         }
 
-        //TODO: Удаление картинок переделать
         private void DeleteImage(object sender, RoutedEventArgs e)
         {
             _selectedObj.image = null;

@@ -28,28 +28,12 @@
         </Grid.ColumnDefinitions>
         <TextBlock Text="Список Желаемого" Grid.Row="0" Style="{StaticResource MaterialDesignHeadline2TextBlock}" HorizontalAlignment="Center" Grid.ColumnSpan="2"/>
         <ScrollViewer Margin="20,20,0,0" Grid.Row="1" Height="{Binding Row1Height}">
-            <StackPanel>
-                <userControls:ItemCartControl Margin="10"/>
-                <userControls:ItemCartControl Margin="10"/>
-                <userControls:ItemCartControl Margin="10"/>
-                <userControls:ItemCartControl Margin="10"/>
-                <userControls:ItemCartControl Margin="10"/>
+            <StackPanel x:Name="panelForItems">
+               
             </StackPanel>
         </ScrollViewer>
         <materialDesign:Card Grid.Column="1" Height="200" VerticalAlignment="Top" Margin="20" Grid.Row="1">
-            <Grid VerticalAlignment="Center">
-                <Grid.RowDefinitions>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                    <RowDefinition Height="auto"/>
-                    <RowDefinition/>
-                    <RowDefinition/>
-                </Grid.RowDefinitions>
-                <TextBlock Text="Итого " Style="{StaticResource MaterialDesignHeadline5TextBlock}" Margin="10,5"/>
-                <TextBlock Text="1999999999 Р " Style="{StaticResource MaterialDesignHeadline5TextBlock}" Grid.Row="1" Margin="10,5"/>
-                <Rectangle Grid.Row="2" Height="1" Fill="LightGray"  RadiusX="1" RadiusY="1" Margin="10,0"/>
-                <Button Grid.Row="4" Margin="10,10,10,0" Content="Очистить желаемое"/>
-            </Grid>
+            <Button Grid.Row="4" Margin="10,10,10,0" Content="Очистить желаемое" Click="ClearList"/>
         </materialDesign:Card>
     </Grid>
 </Page>

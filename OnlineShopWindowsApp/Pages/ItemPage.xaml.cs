@@ -103,6 +103,25 @@ namespace OnlineShopWindowsApp.Pages
                 }
                 RefreshReviews();
             }
+            var response = await RequestsHelper.GetRequest<List<ItemAttribute>>($"{MainWindow.BaseAddress}/api/items/ItemAttributes?itemId={id}", true);
+            if (Item.SourceResponse.IsSuccessStatusCode)
+            {
+                List<ItemAttribute> attrs = response.Obj;
+                if (attrs.Count > 0)
+                {
+                    AttributePanelForControl.Children.Clear();
+                    foreach (var item in attrs)
+                    {
+                        AttrControl ac = new AttrControl();
+                        ac.DataContext = item;
+                        AttributePanelForControl.Children.Add(ac);
+                    }
+                }
+                else
+                {
+                    AttributePanel.Visibility = Visibility.Collapsed;
+                }
+            }
         }
 
         private async void RefreshReviews()

@@ -114,6 +114,9 @@
     <Compile Include="Pages\AdministratorSubPages\DialogWindows\ItemDialog.xaml.cs">
       <DependentUpon>ItemDialog.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Pages\AdministratorSubPages\DialogWindows\OrderDialog.xaml.cs">
+      <DependentUpon>OrderDialog.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Pages\AdministratorSubPages\DialogWindows\UserDialog.xaml.cs">
       <DependentUpon>UserDialog.xaml</DependentUpon>
     </Compile>
@@ -123,6 +126,9 @@
     </Compile>
     <Compile Include="Pages\AdministratorSubPages\ItemsPage.xaml.cs">
       <DependentUpon>ItemsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\AdministratorSubPages\OrdersPage.xaml.cs">
+      <DependentUpon>OrdersPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\AdministratorSubPages\UsersPage.xaml.cs">
       <DependentUpon>UsersPage.xaml</DependentUpon>
@@ -162,8 +168,14 @@
     <Compile Include="UserControls\AccountButton.xaml.cs">
       <DependentUpon>AccountButton.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\AttrControl.xaml.cs">
+      <DependentUpon>AttrControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\BoolControl.xaml.cs">
       <DependentUpon>BoolControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="UserControls\DeleteQuestion.xaml.cs">
+      <DependentUpon>DeleteQuestion.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\EnumControl.xaml.cs">
       <DependentUpon>EnumControl.xaml</DependentUpon>
@@ -238,6 +250,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Pages\AdministratorSubPages\DialogWindows\OrderDialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Pages\AdministratorSubPages\DialogWindows\UserDialog.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -247,6 +263,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Pages\AdministratorSubPages\ItemsPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Pages\AdministratorSubPages\OrdersPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -298,7 +318,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\AttrControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControls\BoolControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="UserControls\DeleteQuestion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="CategoryDialog" Height="350" Width="350" ResizeMode="NoResize">
+        Title="Диалоговое окно 'Категория'" Height="350" Width="350" ResizeMode="NoResize">
     <Grid>
         <StackPanel Margin="20">
             <TextBlock Text="Наименование"/>

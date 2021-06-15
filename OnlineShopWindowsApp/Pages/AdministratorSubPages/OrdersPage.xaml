@@ -1,0 +1,71 @@
+﻿<Page x:Class="OnlineShopWindowsApp.Pages.AdministratorSubPages.OrdersPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+      xmlns:gl="clr-namespace:System.Globalization;assembly=mscorlib"
+      xmlns:usercontrols="clr-namespace:OnlineShopWindowsApp.UserControls"
+      xmlns:local="clr-namespace:OnlineShopWindowsApp.Pages.AdministratorSubPages"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800"
+      Title="OrdersPage">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <WrapPanel>
+            <Button Width="50" Height="50" Margin="5" Click="Edit" ToolTip="Изменить статус">
+                <materialDesign:PackIcon Kind="Pencil" Width="50" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+            <Button Width="50" Height="50" Margin="5" Click="Refresh" ToolTip="Обновить">
+                <materialDesign:PackIcon Kind="Refresh" Width="25" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            </Button>
+        </WrapPanel>
+        <Grid Grid.Row="1" x:Name="gridForDataGrid">
+            <TextBlock x:Name="TbNoOrders" Text="Нет заказов" FontSize="50" HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Collapsed"/>
+            <DataGrid AutoGenerateColumns="False" ItemsSource="{Binding DataSource}" CanUserAddRows="False" CanUserDeleteRows="False"
+                  materialDesign:DataGridAssist.EnableEditBoxAssist="False" x:Name="dataGrid" IsReadOnly="True" Visibility="Visible">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Номер заказа" Binding="{Binding orderNum}"/>
+                    <DataGridTextColumn Header="Статус" Binding="{Binding orderStatus.name}"/>
+                    <DataGridTextColumn Header="Номер телефона" Binding="{Binding phoneNumber}"/>
+                    <DataGridTextColumn Header="Cумма заказа" Binding="{Binding FullPrice, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}, StringFormat={}{0:C} }"/>
+                    <DataGridTemplateColumn Header="Адрес доставки" Width="200">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding deliveryAddress}" TextWrapping="Wrap"/>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn Header="Пользователь" x:Name="userColumn">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <TextBlock Text="{Binding user.firstName}"/>
+                                    <TextBlock Text="{Binding user.lastName}"/>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+                <DataGrid.RowDetailsTemplate>
+                    <DataTemplate>
+                        <Grid x:Name="detailGrid" ScrollViewer.CanContentScroll="False" MaxHeight="600">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="auto"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Rectangle Height="{Binding ElementName=detailGrid, Path=ActualHeight}" Width="10" Fill="#33CC33" />
+                            <ScrollViewer  Grid.Column="1" >
+                                <ListView ItemsSource="{Binding itemCarts}"/>
+                            </ScrollViewer>
+                        </Grid>
+                    </DataTemplate>
+                </DataGrid.RowDetailsTemplate>
+            </DataGrid>
+        </Grid>
+    </Grid>
+</Page>

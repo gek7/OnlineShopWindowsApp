@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HandyControl.Controls;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -25,6 +26,8 @@ namespace OnlineShopWindowsApp.UserControls
         private string _header;
         private string _suffix;
         private string _prefix;
+        private double _minimum;
+        private double _maximum;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -66,12 +69,45 @@ namespace OnlineShopWindowsApp.UserControls
                 PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Prefix"));
             }
         }
+
+        public double Minimum
+        {
+            get
+            {
+                return _minimum;
+            }
+            set
+            {
+                _minimum = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Minimum"));
+            }
+        }
+
+        public double Maximum
+        {
+            get
+            {
+                return _maximum;
+            }
+            set
+            {
+                _maximum = value;
+                PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Maximum"));
+            }
+        }
+
         //(([0 - 9]{1},[0-9]{1}))| ([0 - 9] +)
-        public RangeControl()
+        public RangeControl(decimal? minumum, decimal? maximum)
         {
             InitializeComponent();
             this.DataContext = this;
+            this.Minimum = minumum == null ? 0 :(double) minumum;
+            this.Maximum = maximum == null ? 0 :(double) maximum;
+            Slider.ValueStart = Minimum;
+            Slider.ValueEnd = Maximum;
         }
+
+        public RangeControl()  : this (0, 1000) { }
 
         private void TextBox_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {

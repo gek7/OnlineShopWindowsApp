@@ -14,9 +14,6 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <WrapPanel>
-            <Button Width="50" Height="50" Margin="5" ToolTip="Назад" Style="{StaticResource MaterialDesignFlatButton}" Command="NavigationCommands.BrowseBack">
-                <materialDesign:PackIcon Kind="ArrowBack" Width="40" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </Button>
             <Button Width="50" Height="50" Margin="5" Click="Add">
                 <materialDesign:PackIcon Kind="PlusBold" Width="40" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>

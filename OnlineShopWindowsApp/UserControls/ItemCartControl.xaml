@@ -7,7 +7,7 @@
              xmlns:local="clr-namespace:OnlineShopWindowsApp.UserControls"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="500" Height="150" MinWidth="420" Background="AliceBlue">
+             d:DesignHeight="450" d:DesignWidth="500" Height="150" MinWidth="420" Background="AliceBlue" Margin="5">
     <materialDesign:Card>
         <Grid>
             <Grid.ColumnDefinitions>
@@ -21,7 +21,7 @@
                     <ColumnDefinition Width="auto"/>
                     <ColumnDefinition Width="2*"/>
                 </Grid.ColumnDefinitions>
-                <TextBlock TextWrapping="Wrap" Text="{Binding name}" FontSize="10pt" VerticalAlignment="Center"/>
+                <TextBlock TextWrapping="Wrap" Text="{Binding name}" FontSize="10pt" VerticalAlignment="Center" MaxWidth="300"/>
                 <StackPanel Grid.Column="1" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10,0,0,0">
                     <StackPanel Orientation="Horizontal" x:Name="counter">
                         <Button  Content="-" Click="SubCount"/>
@@ -38,7 +38,7 @@
                     <Button x:Name="deleteBtn" Width="50" Height="50"  Style="{StaticResource MaterialDesignIconButton}" Click="DeleteCartItem">
                         <materialDesign:PackIcon Kind="Close" Width="30" Height="30" Foreground="Black"/>
                     </Button>
-                    <Button x:Name="AddToCart" Width="50" Height="50"  Style="{StaticResource MaterialDesignIconButton}" Visibility="Collapsed">
+                    <Button x:Name="AddToCart" Width="50" Height="50"  Style="{StaticResource MaterialDesignIconButton}" Visibility="Collapsed" Click="AddItemToCart">
                         <materialDesign:PackIcon Kind="Cart" Width="30" Height="30" Foreground="Black"/>
                     </Button>
                 </StackPanel>

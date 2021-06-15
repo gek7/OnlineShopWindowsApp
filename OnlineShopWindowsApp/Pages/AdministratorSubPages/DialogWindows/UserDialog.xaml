@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
-        Title="Изменение данных о пользователе" Height="470" Width="350" ResizeMode="NoResize">
+        Title="Диалоговое окно 'Пользователь'" Height="470" Width="350" ResizeMode="NoResize">
     <Grid>
         <hc:ImageSelector Width="300" Height="200"/>
         <StackPanel Margin="20">

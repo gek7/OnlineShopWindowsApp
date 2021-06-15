@@ -1,6 +1,7 @@
 ﻿using OnlineShopWindowsApp.Models;
 using OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows;
 using OnlineShopWindowsApp.ServerActions;
+using OnlineShopWindowsApp.UserControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -67,7 +68,7 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
         private async void FillAttrsByCategory()
         {
 
-            if(CurrentCategory != null)
+            if (CurrentCategory != null)
             {
                 var attrs = await RequestsHelper.GetRequest<List<CategoryAttributeModel>>($"{MainWindow.BaseAddress}/api/categories/CategoryAttributes?categoryId={CurrentCategory.id}");
                 if (attrs.SourceResponse.IsSuccessStatusCode)
@@ -79,12 +80,18 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
 
         private async void DeleteAttr(object sender, RoutedEventArgs e)
         {
+
             if (attrGrid.SelectedItem != null)
             {
-                var response = await RequestsHelper.DeleteRequest<CategoryAttributeModel>($"{MainWindow.BaseAddress}/api/categories/CategoryAttribute?id={((CategoryAttributeModel)attrGrid.SelectedItem).id}", true);
-                if (response.SourceResponse.IsSuccessStatusCode)
+                var result = await MainWindow.ExecuteBoolDialog(new DeleteQuestion());
+
+                if (result)
                 {
-                    FillAttrsByCategory();
+                    var response = await RequestsHelper.DeleteRequest<CategoryAttributeModel>($"{MainWindow.BaseAddress}/api/categories/CategoryAttribute?id={((CategoryAttributeModel)attrGrid.SelectedItem).id}", true);
+                    if (response.SourceResponse.IsSuccessStatusCode)
+                    {
+                        FillAttrsByCategory();
+                    }
                 }
             }
         }
@@ -104,7 +111,7 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
 
         private void EditAttr(object sender, RoutedEventArgs e)
         {
-            if(attrGrid.SelectedItem != null)
+            if (attrGrid.SelectedItem != null)
             {
                 new CategoryAttributeDialog(ActionType.Edit, (attrGrid.SelectedItem as CategoryAttributeModel).id).ShowDialog();
             }

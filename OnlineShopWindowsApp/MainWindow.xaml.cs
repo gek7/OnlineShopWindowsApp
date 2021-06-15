@@ -20,6 +20,11 @@ using System.Windows.Shapes;
 using System.Text.Json;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using MaterialDesignExtensions.Controls;
+using System.Collections.ObjectModel;
+using MaterialDesignExtensions.Model;
+using System.Collections;
+using MaterialDesignThemes.Wpf;
 
 namespace OnlineShopWindowsApp
 {
@@ -28,10 +33,25 @@ namespace OnlineShopWindowsApp
     /// </summary>
     public partial class MainWindow : Window, INotifyPropertyChanged
     {
-        private static User _user; 
+        private static User _user;
         /*{token= "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJJZCI6IjEwMDA2Iiwicm9sZSI6IkFkbWluaXN0cmF0b3IiLCJuYmYiOjE2MjI4MDg4NDAsImV4cCI6MTYyNTQwMDg0MCwiaWF0IjoxNjIyODA4ODQwfQ.aDy-yCitPcbDucmZgKXMuxtimLqT0T2kMKilKNdekwA",
                                                 id = 10006, 
                                                 role = new Role() {id=1, name="Administrator" } };*/
+
+        private ItemSourceSuggestion _searchResult;
+        public ItemSourceSuggestion SearchResult
+        {
+            get
+            {
+                return _searchResult;
+            }
+            set
+            {
+                _searchResult = value;
+                OnPropertyChanged();
+            }
+        }
+
         public static User User
         {
             get
@@ -41,7 +61,7 @@ namespace OnlineShopWindowsApp
             set
             {
                 _user = value;
-                if (value !=null && !string.IsNullOrEmpty(value.token))
+                if (value != null && !string.IsNullOrEmpty(value.token))
                 {
                     mainWindow.accountBtn.ChangeImage();
                     mainWindow.mainFrame.Content = new CabinetPage();
@@ -71,9 +91,8 @@ namespace OnlineShopWindowsApp
             }
             set
             {
-                List<long> oldIds  = WishListIds;
-                oldIds.AddRange(value);
-                Properties.Settings.Default.WishListIds = JsonSerializer.Serialize(oldIds.Distinct().ToList(), typeof(List<long>));
+                var list = value.Distinct().ToList();
+                Properties.Settings.Default.WishListIds = JsonSerializer.Serialize(list, list.GetType());
                 Properties.Settings.Default.Save();
                 OnPropertyChanged();
             }
@@ -93,6 +112,16 @@ namespace OnlineShopWindowsApp
                 Properties.Settings.Default.Save();
                 OnPropertyChanged();
             }
+        }
+
+        private void btnEnter(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            (sender as Button).Foreground = Brushes.White;
+        }
+
+        private void btnLeave(object sender, System.Windows.Input.MouseEventArgs e)
+        {
+            (sender as Button).Foreground = Brushes.Black;
         }
 
         public void AddItemToCart(long id)
@@ -135,9 +164,18 @@ namespace OnlineShopWindowsApp
         public MainWindow()
         {
             InitializeComponent();
+            controlSearch.TextInput += ControlSearch_TextInput;
             mainWindow = this;
+            SearchResult = new ItemSourceSuggestion();
             DataContext = this;
             FillCategories();
+        }
+
+        private async void ControlSearch_TextInput(object sender, TextCompositionEventArgs e)
+        {
+            /*controlSearch.SearchTerm;
+            find*/
+            var collection = await RequestsHelper.GetRequest<ObservableCollection<Item>>($"{MainWindow.BaseAddress}/api/items/SearchItems?search={e.Text}");
         }
 
         public async void FillCategories()
@@ -161,11 +199,86 @@ namespace OnlineShopWindowsApp
 
         private void ClickWishList(object sender, RoutedEventArgs e)
         {
+            MainWindow.mainWindow.mainFrame.Navigate(new WishListPage());
         }
 
         private void OpenFindOrderPage(object sender, RoutedEventArgs e)
         {
             MainWindow.mainWindow.mainFrame.Navigate(new FindOrderPage());
+        }
+
+        private async void DoSearch(object sender, SearchEventArgs args)
+        {
+            var collection = await RequestsHelper.GetRequest<List<Item>>($"{MainWindow.BaseAddress}/api/items/SearchItems?search={args.SearchTerm}");
+            if (collection.SourceResponse.IsSuccessStatusCode)
+            {
+                List<Item> items = collection.Obj;
+               mainFrame.Content = new ItemPage(items.First().id);
+            }
+        }
+
+        private void MinimizeWindow(object sender, RoutedEventArgs e) => this.WindowState = WindowState.Minimized;
+
+        private void MaximizeWindow(object sender, RoutedEventArgs e) => this.WindowState = WindowState.Maximized;
+
+        private void CloseWindow(object sender, RoutedEventArgs e) => this.Close();
+
+        //Метод для вызова модального окна (Фреймворк MaterialDesign).
+        public static async Task<bool> ExecuteBoolDialog(UserControl u)
+        {
+            var view = u;
+            return (bool)(await DialogHost.Show(view));
+        }
+    }
+
+
+    //Класс для поиска
+    public class ItemSourceSuggestion : ISearchSuggestionsSource
+    {
+        private List<string> items;
+
+        public ItemSourceSuggestion()
+        {
+            FillAutoComplete();
+        }
+
+        public async void FillAutoComplete()
+        {
+            List<Item> result = new List<Item>();
+            var collection = await RequestsHelper.GetRequest<List<Item>>($"{MainWindow.BaseAddress}/api/items/getAllItems");
+            if (collection.SourceResponse.IsSuccessStatusCode)
+            {
+                result = collection.Obj;
+                items = result.Select(item => item.name).ToList();
+            }
+        }
+
+        public IList GetAutoCompletion(string searchTerm)
+        {
+            if(items != null)
+            {
+                return items.Where(item => item.ToLower().Contains(searchTerm.ToLower())).ToList();
+            }
+            return null;
+        }
+
+        public IList GetSearchSuggestions()
+        {
+            return null;
+        }
+
+        IList<string> ISearchSuggestionsSource.GetAutoCompletion(string searchTerm)
+        {
+            if (items != null)
+            {
+                return items.Where(item => item.ToLower().Contains(searchTerm.ToLower())).ToList();
+            }
+            return null;
+        }
+
+        IList<string> ISearchSuggestionsSource.GetSearchSuggestions()
+        {
+            return null;
         }
     }
 }

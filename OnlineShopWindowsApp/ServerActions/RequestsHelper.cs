@@ -28,7 +28,6 @@ namespace OnlineShopWindowsApp.ServerActions
             {
                 request.Content = new StringContent(data);
                 request.Content.Headers.ContentType.MediaType = "application/json";
-                //                request.Content.Headers.Add("Content-Type", "application/json");
             }
             try
             {
@@ -96,6 +95,7 @@ namespace OnlineShopWindowsApp.ServerActions
         {
             return await SendRequest<T>(url, HttpMethod.Get, isAuthHeader);
         }
+
         //Метод для отправки файлов на сервер
         public async static Task<HttpResponseMessage> SendFile(string url, string fileName, List<Tuple<string, HttpContent>> additionalContents = null, bool isAuthHeader = true)
         {

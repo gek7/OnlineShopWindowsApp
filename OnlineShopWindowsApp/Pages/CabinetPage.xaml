@@ -25,12 +25,12 @@
             <Button Background="Transparent" Height="60" Width="60" HorizontalAlignment="Right" VerticalAlignment="Bottom" BorderThickness="0" ToolTip="Изменить изображение" Click="ChangeImage">
                 <materialDesign:PackIcon Kind="ImagePlus" Width="30" Height="30" HorizontalAlignment="Center"/>
             </Button>
-            <Button Background="Transparent" Height="60" Width="60" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderThickness="0" ToolTip="Настройки">
+            <Button Background="Transparent" Height="60" Width="60" HorizontalAlignment="Left" VerticalAlignment="Bottom" BorderThickness="0" ToolTip="Настройки" Visibility="Collapsed">
                 <materialDesign:PackIcon Kind="Cog" Width="30" Height="30" HorizontalAlignment="Center"/>
             </Button>
             <TextBlock Text="" Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="30" x:Name="TextblockName"/>
             <Button Grid.Row="2" Content="Кабинет администратора" Visibility="Collapsed" x:Name="AdminButton" Click="OpenAdministratorPage"/>
-            <Button Grid.Row="3" Content="Мои заказы"/>
+            <Button Grid.Row="3" Content="Мои заказы" Click="OpenMyOrders"/>
             <Button Grid.Row="4" Content="Выход" Click="Exit"/>
         </Grid>
     </Grid>

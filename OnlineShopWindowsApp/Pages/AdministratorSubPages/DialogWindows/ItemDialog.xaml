@@ -7,7 +7,7 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
-        Title="Изменение товара" Height="450" Width="800" MinWidth="400">
+        Title="Диалоговое окно 'Товар'" Height="450" Width="800" MinWidth="400">
     <Grid>
         <Grid.Resources>
             <ResourceDictionary>
