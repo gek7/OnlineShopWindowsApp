@@ -32,7 +32,6 @@
                     </Grid.ColumnDefinitions>
                     <materialDesign:PackIcon Kind="Key" Height="{Binding ElementName=PwdBox, Path=ActualHeight}" Grid.Column="0" Foreground="{Binding ElementName=PwdBox,Path=BorderBrush}"/>
                     <PasswordBox x:Name="PwdBox" 
-							 materialDesign:HintAssist.HelperText="At least 8 characters"
 							 materialDesign:HintAssist.Hint="Пароль" Grid.Column="1" Height="30" FontSize="16"/>
                 </Grid>
             </StackPanel>

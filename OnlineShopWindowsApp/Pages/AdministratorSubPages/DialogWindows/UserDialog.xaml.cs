@@ -108,9 +108,9 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
                 }
                 else
                 {
+                    response = await RequestsHelper.PostRequest<User>($"{MainWindow.BaseAddress}/api/users", SelectedObj);
                     if (NewImagePath != null)
                         await RequestsHelper.SendFile($"{MainWindow.BaseAddress}/api/users/setImage?id={SelectedObj.id}", NewImagePath);
-                    response = await RequestsHelper.PostRequest<User>($"{MainWindow.BaseAddress}/api/users", SelectedObj);
                 }
 
                 if (response.SourceResponse.IsSuccessStatusCode)
@@ -140,6 +140,7 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
         {
             _selectedObj.image = null;
             NewImagePath = null;
+            curImg.Source = null;
         }
     }
 }

@@ -159,7 +159,12 @@ namespace OnlineShopWindowsApp
         }
 
         public static MainWindow mainWindow { get; set; }
-        public const string BaseAddress = "http://localhost:5000";
+        //public const string BaseAddress = "http://localhost:5000";
+
+        public static string BaseAddress
+        {
+            get=> Properties.Settings.Default.BaseURL;
+        }
         public List<Category> CategoriesList { get; set; }
         public MainWindow()
         {
@@ -213,7 +218,7 @@ namespace OnlineShopWindowsApp
             if (collection.SourceResponse.IsSuccessStatusCode)
             {
                 List<Item> items = collection.Obj;
-               mainFrame.Content = new ItemPage(items.First().id);
+                mainFrame.Content = new ItemPage(items.First().id);
             }
         }
 
@@ -246,7 +251,8 @@ namespace OnlineShopWindowsApp
         {
             List<Item> result = new List<Item>();
             var collection = await RequestsHelper.GetRequest<List<Item>>($"{MainWindow.BaseAddress}/api/items/getAllItems");
-            if (collection.SourceResponse.IsSuccessStatusCode)
+
+            if (collection != null && collection.SourceResponse.IsSuccessStatusCode)
             {
                 result = collection.Obj;
                 items = result.Select(item => item.name).ToList();
@@ -255,7 +261,7 @@ namespace OnlineShopWindowsApp
 
         public IList GetAutoCompletion(string searchTerm)
         {
-            if(items != null)
+            if (items != null)
             {
                 return items.Where(item => item.ToLower().Contains(searchTerm.ToLower())).ToList();
             }

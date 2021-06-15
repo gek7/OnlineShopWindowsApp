@@ -130,11 +130,17 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
             }
         }
 
-        //TODO: Удаление картинок переделать
         private void DeleteImage(object sender, RoutedEventArgs e)
         {
             _selectedObj.image = null;
             NewImagePath = null;
+            curImg.Source = null;
+        }
+
+        private void ResetParent(object sender, RoutedEventArgs e)
+        {
+            SelectedObj.owner = null;
+            rolesCmb.SelectedIndex = -1;
         }
     }
 }

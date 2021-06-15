@@ -17,7 +17,7 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
         <WrapPanel>
-            <Button Width="50" Height="50" Margin="5" Click="Edit" ToolTip="Изменить статус">
+            <Button Width="50" Height="50" Margin="5" Click="Edit" ToolTip="Изменить статус" x:Name="editBtn">
                 <materialDesign:PackIcon Kind="Pencil" Width="50" Height="24" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
             <Button Width="50" Height="50" Margin="5" Click="Refresh" ToolTip="Обновить">

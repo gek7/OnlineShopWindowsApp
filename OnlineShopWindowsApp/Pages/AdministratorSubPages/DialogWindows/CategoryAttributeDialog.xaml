@@ -6,7 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows"
         mc:Ignorable="d"
-          Title="Диалоговое окно 'Аттрибут категоии'" Height="250" Width="350" ResizeMode="NoResize">
+          Title="Диалоговое окно 'Атрибут категории'" Height="250" Width="350" ResizeMode="NoResize">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

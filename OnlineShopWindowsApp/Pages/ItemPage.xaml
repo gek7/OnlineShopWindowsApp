@@ -39,7 +39,7 @@
                                             </Style>
                                         </ResourceDictionary>
                                     </Border.Resources>
-                                    <hc:Carousel x:Name="ImagesControl" Width="{Binding ElementName=carouselBorder, Path=ActualWidth}"/>
+                                    <hc:Carousel x:Name="ImagesControl" Width="{Binding ElementName=carouselBorder, Path=ActualWidth}" MaxHeight="500"/>
                                 </Border>
                             </materialDesign:Card>
                             <Grid Grid.Column="1" VerticalAlignment="Top" Margin="10">

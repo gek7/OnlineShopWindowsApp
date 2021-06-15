@@ -74,6 +74,7 @@
                     <mde:PersistentSearch Grid.Column="1" SearchIcon="{x:Static materialDesign:PackIconKind.Search}"
                                           ClearIcon="{x:Static materialDesign:PackIconKind.None}"
                                           CancelIcon="{x:Static materialDesign:PackIconKind.Close}" Margin="30,0,30,0"
+                                          SearchHint="Поиск"
                                           x:Name="controlSearch" SearchSuggestionsSource="{Binding SearchResult}" Search="DoSearch"/>
                     <Grid Grid.Column="2" HorizontalAlignment="Right" WindowChrome.IsHitTestVisibleInChrome="True">
                         <Grid.ColumnDefinitions>

@@ -39,7 +39,14 @@ namespace OnlineShopWindowsApp.Models
         public async void CalculateLoadImage()
         {
             byte[] arr = await RequestsHelper.getByteArray(LoadImageString);
-            LoadImage = (ImageSource)new ImageSourceConverter().ConvertFrom(arr);
+            try
+            {
+                LoadImage = (ImageSource)new ImageSourceConverter().ConvertFrom(arr);
+            }
+            catch
+            {
+                LoadImage = null;
+            }
             OnPropertyChanged("LoadImage");
         }
         [JsonIgnore]

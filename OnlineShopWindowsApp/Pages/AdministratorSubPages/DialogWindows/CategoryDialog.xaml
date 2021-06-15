@@ -12,7 +12,16 @@
             <TextBlock Text="Наименование"/>
             <TextBox Text="{Binding SelectedObj.name}"/>
             <TextBlock Text="Родительская категория"/>
-            <ComboBox x:Name="rolesCmb"  SelectedValue="{Binding SelectedObj.owner}" />
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <ComboBox x:Name="rolesCmb"  SelectedValue="{Binding SelectedObj.owner}" />
+                <Button Grid.Column="1" Margin="10,0,0,0" Style="{StaticResource MaterialDesignFlatButton}" Click="ResetParent" ToolTip="Сбросить род. категорию">
+                    <materialDesign:PackIcon Kind="RemoveBold"/>
+                </Button>
+            </Grid>
             <StackPanel Orientation="Horizontal">
                 <Button Margin="10,0,0,0" ToolTip="Загрузить картинку" Click="ChooseImage">
                     <materialDesign:PackIcon Kind="Download"/>

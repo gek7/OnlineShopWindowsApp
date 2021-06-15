@@ -15,13 +15,13 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <WrapPanel Orientation="Horizontal" Margin="10">
-                <Button Height="40" ToolTip="AddNewCategoryAttribute" Click="AddAttr">
+                <Button Height="40" ToolTip="Добавить новый атрибут" Click="AddAttr">
                     <materialDesign:PackIcon Kind="FilePlus" Width="30" Height="30" />
                 </Button>
-                <Button Height="40" ToolTip="EditCategoryAttribute" Margin="20,0,0,0" Click="EditAttr">
+                <Button Height="40" ToolTip="Изменить атрибут" Margin="20,0,0,0" Click="EditAttr">
                     <materialDesign:PackIcon Kind="FileEdit" Width="30" Height="30" Foreground="#FFCC00"/>
                 </Button>
-                <Button Height="40" ToolTip="DelteCategoryAttribute" Margin="20,0,0,0" Click="DeleteAttr">
+                <Button Height="40" ToolTip="Удалить атрибут" Margin="20,0,0,0" Click="DeleteAttr">
                     <materialDesign:PackIcon Kind="DeleteAlert" Width="30" Height="30" Foreground="#FF0000"/>
                 </Button>
             </WrapPanel>

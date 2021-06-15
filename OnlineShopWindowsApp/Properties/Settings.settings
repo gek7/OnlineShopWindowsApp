@@ -8,5 +8,8 @@
     <Setting Name="CartIds" Type="System.String" Scope="User">
       <Value Profile="(Default)" />
     </Setting>
+    <Setting Name="BaseURL" Type="System.String" Scope="User">
+      <Value Profile="(Default)">http://localhost:5000</Value>
+    </Setting>
   </Settings>
 </SettingsFile>

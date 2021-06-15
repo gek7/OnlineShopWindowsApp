@@ -34,7 +34,7 @@
                         <ColumnDefinition Width="auto"/>
                     </Grid.ColumnDefinitions>
                     <TextBlock Text="{Binding Minimum}" Grid.Column="0" FontSize="10" Margin="0,0,5,0"/>
-                    <hc:RangeSlider x:Name="Slider" Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" Grid.Column="1"/>
+                    <hc:RangeSlider x:Name="Slider" Minimum="{Binding Minimum}" Maximum="{Binding Maximum}" Grid.Column="1" ValueStart="0" ValueEnd="0"/>
                     <TextBlock Text="{Binding Maximum}" Grid.Column="2" FontSize="10" Margin="5,0,0,0"/>
                 </Grid>
             </Grid>

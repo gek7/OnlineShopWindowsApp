@@ -103,6 +103,7 @@ namespace OnlineShopWindowsApp.UserControls
             this.DataContext = this;
             this.Minimum = minumum == null ? 0 :(double) minumum;
             this.Maximum = maximum == null ? 0 :(double) maximum;
+            if (Minimum == Maximum) Maximum++;
             Slider.ValueStart = Minimum;
             Slider.ValueEnd = Maximum;
         }

@@ -128,7 +128,7 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
                 }
                 if (response.SourceResponse.IsSuccessStatusCode)
                 {
-                    var FrameContent = MainWindow.mainWindow.additionalFrame.Content as IPage<CategoryAttributeModel>;
+                    var FrameContent = MainWindow.mainWindow.additionalFrame.Content as IPage<ItemAttribute>;
                     if (FrameContent != null)
                     {
                         FrameContent.RefreshGrid();

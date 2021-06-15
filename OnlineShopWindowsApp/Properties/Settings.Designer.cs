@@ -46,5 +46,17 @@ namespace OnlineShopWindowsApp.Properties {
                 this["CartIds"] = value;
             }
         }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("http://localhost:5000")]
+        public string BaseURL {
+            get {
+                return ((string)(this["BaseURL"]));
+            }
+            set {
+                this["BaseURL"] = value;
+            }
+        }
     }
 }

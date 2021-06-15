@@ -61,16 +61,18 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
             {
                 orders = await RequestsHelper.GetRequest<List<Order>>($"{MainWindow.BaseAddress}/api/orders/getOrders", true);
                 userColumn.Visibility = Visibility.Visible;
+                editBtn.Visibility = Visibility.Visible;
             }
             else
             {
                 orders = await RequestsHelper.GetRequest<List<Order>>($"{MainWindow.BaseAddress}/api/orders/getMyOrders", true);
                 userColumn.Visibility = Visibility.Collapsed;
+                editBtn.Visibility = Visibility.Collapsed;
             }
             if (orders.SourceResponse.IsSuccessStatusCode)
             {
                 DataSource = orders.Obj;
-                if(orders.Obj.Count == 0)
+                if(orders.Obj == null || orders.Obj.Count == 0)
                 {
                     dataGrid.Visibility = Visibility.Collapsed;
                     TbNoOrders.Visibility = Visibility.Visible;
