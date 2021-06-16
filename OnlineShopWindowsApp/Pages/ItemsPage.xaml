@@ -21,21 +21,29 @@
             <ColumnDefinition Width="2*"/>
             <ColumnDefinition Width="8*"/>
         </Grid.ColumnDefinitions>
-        <StackPanel Grid.Column="1" Orientation="Horizontal" Margin="10,5,0,0">
-            <TextBlock Text="Сортировка: " Margin="0,0,10,0"/>
-            <ComboBox Width="150" materialDesign:ComboBoxAssist.ClassicMode="True" x:Name="cmbSort" SelectionChanged="SortChanged">
-                <ComboBoxItem>
-                    По цене
-                </ComboBoxItem>
-                <ComboBoxItem>
-                    По рейтингу
-                </ComboBoxItem>
-                <ComboBoxItem>
-                    По алфавиту
-                </ComboBoxItem>
-            </ComboBox>
-        </StackPanel>
-
+        <Grid  Grid.Column="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock  Margin="35,5,0,0" FontSize="15">
+                <Run FontWeight="Bold" x:Name="tbCategoryName"></Run>
+            </TextBlock>
+            <StackPanel Orientation="Horizontal" Margin="0,5,60,5" HorizontalAlignment="Right" Grid.Column="1">
+                <TextBlock Text="Сортировка: " Margin="0,0,0,0"/>
+                <ComboBox Width="150" materialDesign:ComboBoxAssist.ClassicMode="True" x:Name="cmbSort" SelectionChanged="SortChanged">
+                    <ComboBoxItem>
+                        По цене
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        По рейтингу
+                    </ComboBoxItem>
+                    <ComboBoxItem>
+                        По алфавиту
+                    </ComboBoxItem>
+                </ComboBox>
+            </StackPanel>
+        </Grid>
         <materialDesign:Card materialDesign:ShadowAssist.ShadowEdges="Right,Top" Grid.RowSpan="2">
             <Grid>
                 <Grid.RowDefinitions>
@@ -43,7 +51,7 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <StackPanel Margin="4,10,4,0" x:Name="panelForFilterControls">
-                    
+
                 </StackPanel>
                 <Button Grid.Row="1" Margin="10" Width="120" Content="Применить" Click="ApplyFilter"/>
             </Grid>

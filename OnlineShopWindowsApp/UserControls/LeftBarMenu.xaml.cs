@@ -88,7 +88,7 @@ namespace OnlineShopWindowsApp.UserControls
                 Category selectCategory = btn.DataContext as Category;
                 if (DataContext != null && selectCategory != null)
                 {
-                    MainWindow.mainWindow.mainFrame.Navigate(new ItemsPage(selectCategory.id));
+                    MainWindow.mainWindow.mainFrame.Navigate(new ItemsPage(selectCategory.id, selectCategory.name));
                 }
             }
         }

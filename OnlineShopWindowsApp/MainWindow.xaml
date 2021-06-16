@@ -130,13 +130,15 @@
                         HorizontalAlignment="Right" 
                         Margin="16"
                         IsChecked="{Binding ElementName=MenuToggleButton, Path=IsChecked, Mode=TwoWay}"/>
-                        <usercontrols:LeftBarMenu Grid.Row="1" x:Name="CategoriesControl">
-                            <usercontrols:LeftBarMenu.Resources>
-                                <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
-                                    <Setter Property="Margin" Value="10,5,0,5"/>
-                                </Style>
-                            </usercontrols:LeftBarMenu.Resources>
-                        </usercontrols:LeftBarMenu>
+                        <ScrollViewer  Grid.Row="1">
+                            <usercontrols:LeftBarMenu x:Name="CategoriesControl">
+                                <usercontrols:LeftBarMenu.Resources>
+                                    <Style TargetType="Button" BasedOn="{StaticResource MaterialDesignFlatButton}">
+                                        <Setter Property="Margin" Value="10,5,0,5"/>
+                                    </Style>
+                                </usercontrols:LeftBarMenu.Resources>
+                            </usercontrols:LeftBarMenu>
+                        </ScrollViewer>
                     </Grid>
                 </materialDesign:DrawerHost.LeftDrawerContent>
             </materialDesign:DrawerHost>

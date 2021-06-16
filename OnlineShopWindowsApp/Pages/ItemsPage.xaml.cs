@@ -61,8 +61,9 @@ namespace OnlineShopWindowsApp.Pages
             InitializeComponent();
             DataContext = this;
         }
-        public ItemsPage(long id) : this()
+        public ItemsPage(long id, string categoryName) : this()
         {
+            tbCategoryName.Text = categoryName;
             ItemsCategoryId = id;
             RefreshDataSource();
         }

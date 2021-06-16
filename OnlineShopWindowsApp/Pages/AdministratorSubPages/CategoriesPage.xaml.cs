@@ -109,6 +109,7 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
                     if (response.SourceResponse.IsSuccessStatusCode)
                     {
                         RefreshGrid();
+                        MainWindow.mainWindow.FillCategories();
                     }
                 }
             }
