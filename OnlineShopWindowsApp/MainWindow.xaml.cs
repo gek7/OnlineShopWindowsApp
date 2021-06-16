@@ -218,7 +218,10 @@ namespace OnlineShopWindowsApp
             if (collection.SourceResponse.IsSuccessStatusCode)
             {
                 List<Item> items = collection.Obj;
-                mainFrame.Content = new ItemPage(items.First().id);
+                if(items != null)
+                {
+                    mainFrame.Content = new ItemPage(items.First().id);
+                }
             }
         }
 

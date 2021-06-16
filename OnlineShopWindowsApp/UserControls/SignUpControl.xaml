@@ -17,10 +17,10 @@
             <TextBlock Text="Регистрация" HorizontalAlignment="Center" Style="{StaticResource MaterialDesignHeadline2TextBlock}"/>
             <StackPanel VerticalAlignment="Center" Grid.Row="1">
                 <TextBox x:Name="LoginRegTextBox" materialDesign:HintAssist.Hint="Логин" Grid.Column="1" Height="30" FontSize="16" Text="{Binding user.login}"/>
-                <PasswordBox x:Name="PwdRegBox"  materialDesign:HintAssist.HelperText="Не менее 8 символов" 
+                <PasswordBox x:Name="PwdRegBox"  materialDesign:HintAssist.HelperText="Рекомендуется вводить надёжный пароль" 
                                      materialDesign:HintAssist.Hint="Пароль" Grid.Column="1" Height="30" FontSize="16" Margin="0,20,0,0" />
-                <PasswordBox x:Name="PwdAgainBox"  materialDesign:HintAssist.HelperText="Не менее 8 символов" 
-                                     materialDesign:HintAssist.Hint="Пароль ещё раз" Grid.Column="1" Height="30" FontSize="16" Margin="0,20,0,0"/>
+                <PasswordBox x:Name="PwdAgainBox"   
+                                     materialDesign:HintAssist.Hint="Подтверждение пароля" Grid.Column="1" Height="30" FontSize="16" Margin="0,20,0,0"/>
                 <TextBox x:Name="FirstName" materialDesign:HintAssist.Hint="Имя" Grid.Column="1" Height="30" FontSize="16" Margin="0,20,0,0" Text="{Binding user.firstName}"/>
 
                 <TextBox x:Name="LastName" materialDesign:HintAssist.Hint="Фамилия" Grid.Column="1" Height="30" FontSize="16" Margin="0,20,0,0" Text="{Binding user.lastName}"/>

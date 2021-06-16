@@ -44,7 +44,7 @@ namespace OnlineShopWindowsApp.Pages
             var result = await RequestsHelper.PostRequest<List<Item>, List<long>>($"{MainWindow.BaseAddress}/api/Items/getItemsByIds", MainWindow.mainWindow.WishListIds, false);
             if (result.SourceResponse.IsSuccessStatusCode && result.Obj != null)
             {
-                List<ItemCart> items = ItemCart.ConvertToItemCart(result.Obj);
+                List<ItemCart> items = ItemCart.ConvertToItemCart(result.Obj, false, true);
                 panelForItems.Children.Clear();
                 items.ForEach(i =>
                 {

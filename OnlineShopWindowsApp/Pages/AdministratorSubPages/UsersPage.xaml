@@ -26,12 +26,6 @@
             <Button Width="50" Height="50" Margin="5" Click="Refresh">
                 <materialDesign:PackIcon Kind="Refresh" Width="25" Height="30" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             </Button>
-            <Button Width="50" Height="50" Margin="5" Background="LightGreen" BorderThickness="0" IsEnabled="False">
-                <materialDesign:PackIcon Kind="CheckBold" Width="24" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </Button>
-            <Button Width="50" Height="50" Margin="5" Background="Coral" BorderThickness="0" IsEnabled="False">
-                <materialDesign:PackIcon Kind="CloseThick" Width="25" Height="40" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            </Button>
         </WrapPanel>
         <DataGrid Grid.Row="1" AutoGenerateColumns="False" ItemsSource="{Binding DataSource}" CanUserAddRows="False" CanUserDeleteRows="False"
                   materialDesign:DataGridAssist.EnableEditBoxAssist="False" x:Name="dataGrid" IsReadOnly="True">

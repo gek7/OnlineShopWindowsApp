@@ -9,7 +9,7 @@
         xmlns:hc="https://handyorg.github.io/handycontrol"
         mc:Ignorable="d"
         
-        Title="Онлайн-магазин" Height="500" Width="800" MinHeight="560" MinWidth="800" WindowStartupLocation="CenterScreen" WindowState="Maximized" Style="{StaticResource customWindow}">
+        Title="Онлайн-магазин" Height="500" Width="800" MinHeight="560" MinWidth="800" WindowStartupLocation="CenterScreen" WindowState="Maximized" Style="{StaticResource customWindow}" >
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -72,8 +72,8 @@
                         </Button>
                     </StackPanel>
                     <mde:PersistentSearch Grid.Column="1" SearchIcon="{x:Static materialDesign:PackIconKind.Search}"
-                                          ClearIcon="{x:Static materialDesign:PackIconKind.None}"
-                                          CancelIcon="{x:Static materialDesign:PackIconKind.Close}" Margin="30,0,30,0"
+                                          ClearIcon="{x:Static materialDesign:PackIconKind.Clear}"
+                                          CancelIcon="{x:Static materialDesign:PackIconKind.Cancel}" Margin="30,0,30,0"
                                           SearchHint="Поиск"
                                           x:Name="controlSearch" SearchSuggestionsSource="{Binding SearchResult}" Search="DoSearch"/>
                     <Grid Grid.Column="2" HorizontalAlignment="Right" WindowChrome.IsHitTestVisibleInChrome="True">

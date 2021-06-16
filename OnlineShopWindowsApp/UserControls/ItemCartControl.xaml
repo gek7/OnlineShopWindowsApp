@@ -28,13 +28,15 @@
                         <TextBlock Text="{Binding Count}" FontSize="20pt" Margin="5,0,5,0"/>
                         <Button  Content="+" Click="AddCount"/>
                     </StackPanel>
-                    <TextBlock Margin="0,10,0,0"  Text="{Binding Price, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}, StringFormat={}{0:C}}" Style="{StaticResource MaterialDesignHeadline5TextBlock}" HorizontalAlignment="Center"/>
+                    <WrapPanel Margin="0,10,0,0" Orientation="Horizontal">
+                        <TextBlock  Text="{Binding Price, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}, StringFormat={}{0:C}}" Style="{StaticResource MaterialDesignHeadline5TextBlock}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <StackPanel Orientation="Horizontal" Margin="40,10,5,0" x:Name="infoCount" Visibility="Collapsed">
+                            <Rectangle Height="50" Width="1" Fill="Black"/>
+                            <TextBlock Text="{Binding Count,StringFormat={}Кол-во: {0}}" FontSize="20" Margin="40,10,5,0"/>
+                        </StackPanel>
+                    </WrapPanel>
                 </StackPanel>
                 <StackPanel Grid.Column="2" VerticalAlignment="Center" Orientation="Vertical">
-                    <StackPanel Orientation="Horizontal" Margin="40,10,5,0" x:Name="infoCount" Visibility="Collapsed">
-                        <Rectangle Height="50" Width="1" Fill="Black"/>
-                        <TextBlock Text="{Binding Count,StringFormat={}Кол-во: {0}}" FontSize="20" Margin="40,10,5,0"/>
-                    </StackPanel>
                     <Button x:Name="deleteBtn" Width="50" Height="50"  Style="{StaticResource MaterialDesignIconButton}" Click="DeleteCartItem">
                         <materialDesign:PackIcon Kind="Close" Width="30" Height="30" Foreground="Black"/>
                     </Button>

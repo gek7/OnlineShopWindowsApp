@@ -19,7 +19,20 @@ namespace OnlineShopWindowsApp
     {
         private void templateGrid_SizeChanged(object sender, SizeChangedEventArgs e)
         {
-            (sender as Grid).Margin = new Thickness(7);
+            //(sender as Grid).Margin = new Thickness(7);
+        }
+
+        private void WindowSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            Window w = sender as Window;
+            if (w.WindowState == WindowState.Maximized)
+            {
+                w.WindowState = WindowState.Normal;
+                w.Left = 0;
+                w.Top = 0;
+                w.Width = SystemParameters.PrimaryScreenWidth;
+                w.Height = SystemParameters.PrimaryScreenHeight;
+            }
         }
     }
 }

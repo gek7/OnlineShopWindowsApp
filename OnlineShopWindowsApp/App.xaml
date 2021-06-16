@@ -20,7 +20,7 @@
             <!--Кастомное окно!-->
             <Style TargetType="Window" x:Key="customWindow">
                 <Setter Property="AllowsTransparency" Value="True"/>
-                <Setter Property="ResizeMode" Value="CanResize"/>
+                <EventSetter Event="SizeChanged" Handler="WindowSizeChanged"/>
                 <Setter Property="WindowStyle" Value="None"/>
                 <Setter Property="Template">
                     <Setter.Value>
@@ -45,6 +45,7 @@
                 <Setter Property="WindowChrome.WindowChrome">
                     <Setter.Value>
                         <WindowChrome
+                            GlassFrameThickness="15"
                 ResizeBorderThickness="7"
                 CaptionHeight="32"/>
                     </Setter.Value>
