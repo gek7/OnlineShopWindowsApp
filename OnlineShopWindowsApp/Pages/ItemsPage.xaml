@@ -43,9 +43,7 @@
                     <RowDefinition Height="auto"/>
                 </Grid.RowDefinitions>
                 <StackPanel Margin="4,10,4,0" x:Name="panelForFilterControls">
-                    <usercontrols:RangeControl Header="Цена" Margin="5" Minimum="0" Maximum="1000"/>
-                    <usercontrols:EnumControl Header="Выбор" Margin="5"/>
-                    <usercontrols:BoolControl Header="Условие1"/>
+                    
                 </StackPanel>
                 <Button Grid.Row="1" Margin="10" Width="120" Content="Применить" Click="ApplyFilter"/>
             </Grid>

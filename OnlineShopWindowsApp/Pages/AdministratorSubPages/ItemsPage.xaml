@@ -50,7 +50,7 @@
                 </DataGridTemplateColumn>
                 <DataGridTextColumn Header="Цена" Binding="{Binding price, ConverterCulture={x:Static gl:CultureInfo.CurrentCulture}, StringFormat={}{0:C}}"/>
                 <DataGridTextColumn Header="Категория" Binding="{Binding category.name}"/>
-                <DataGridTemplateColumn Header="Товар-родитель" MaxWidth="300">
+                <DataGridTemplateColumn Header="Товар-родитель" MaxWidth="300" Visibility="Collapsed">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <TextBlock TextWrapping="Wrap" Text="{Binding owner.name}"/>
