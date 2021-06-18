@@ -124,6 +124,7 @@ namespace OnlineShopWindowsApp.UserControls
             else
             {
                 MainWindow.mainWindow.SubItemFromWishList(ic.id);
+                (MainWindow.mainWindow.mainFrame.Content as WishListPage).Fill();
             }
             if (Parent is StackPanel && ic.Count <= 0)
             {
