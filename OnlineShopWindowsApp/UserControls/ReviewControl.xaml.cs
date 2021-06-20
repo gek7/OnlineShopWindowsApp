@@ -76,7 +76,9 @@ namespace OnlineShopWindowsApp.UserControls
             Review r = this.DataContext as Review;
             if (r != null)
             {
-                if (HelperClass.isAuth() && (MainWindow.User.role.id == 1 || MainWindow.User.id == r.user.id))
+                if (HelperClass.isAuth() && MainWindow.User != null && 
+                    (MainWindow.User.id == r.user.id || 
+                    (MainWindow.User.role != null && MainWindow.User.role.id == 1)))
                 {
                     chipIconContent = ReviewerChip.Icon;
                     PackIcon pi = new PackIcon() { Kind = PackIconKind.Delete };

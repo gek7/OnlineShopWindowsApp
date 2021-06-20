@@ -66,6 +66,7 @@ namespace OnlineShopWindowsApp.UserControls
             {
                 icon.Visibility = Visibility.Visible;
                 UserImg.Visibility = Visibility.Collapsed;
+                UserImg.Source = null;
                 icon.Kind = MaterialDesignThemes.Wpf.PackIconKind.Login;
             }
         }

@@ -68,8 +68,8 @@
                 <TextBox Height="50" Margin="5,0,0,5" Text="{Binding SelectedObj.name}" x:Name="tbName" TextWrapping="Wrap"/>
                 <hc:NumericUpDown Width="150" Height="25" Margin="5,0,0,5" Value="{Binding SelectedObj.price}" HorizontalAlignment="Left"/>
                 <hc:NumericUpDown Width="150" Height="25" Margin="5,0,0,5" Value="{Binding SelectedObj.count}" HorizontalAlignment="Left"/>
-                <ComboBox x:Name="CategoriesCmb" Width="150" Height="25" Margin="5,0,0,5" SelectedValue="{Binding SelectedObj.category}" HorizontalAlignment="Left" Visibility="Collapsed"/>
-                <ComboBox x:Name="OwnerCmb" Width="150" Height="25" Margin="5,0,0,5" SelectedValue="{Binding SelectedObj.owner}" HorizontalAlignment="Left"/>
+                <ComboBox x:Name="CategoriesCmb" Width="150" Height="25" Margin="5,0,0,5" SelectedValue="{Binding SelectedObj.category}" HorizontalAlignment="Left"/>
+                <ComboBox x:Name="OwnerCmb" Width="150" Height="25" Margin="5,0,0,5" SelectedValue="{Binding SelectedObj.owner}" HorizontalAlignment="Left" Visibility="Collapsed"/>
             </WrapPanel>
         </Grid>
         <Grid Grid.Row="1" Grid.ColumnSpan="2">
