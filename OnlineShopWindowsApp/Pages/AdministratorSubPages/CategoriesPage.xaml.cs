@@ -83,7 +83,8 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
         public async void RefreshGrid()
         {
             var result = await RequestsHelper.
-                GetRequest<List<Category>>($"{MainWindow.BaseAddress}/api/categories/getAllCategories", true);
+                GetRequest<List<Category>>(
+                $"{MainWindow.BaseAddress}/api/categories/getAllCategories", true);
             DataSource = result.Obj;
             this.DataContext = this;
         }
@@ -105,7 +106,9 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages
                 if (result)
                 {
                     var response = await RequestsHelper
-                        .DeleteRequest<Category>($"{MainWindow.BaseAddress}/api/categories?id={((Category)dataGrid.SelectedItem).id}", true);
+                        .DeleteRequest<Category>(
+                        $"{MainWindow.BaseAddress}/api/categories?id={((Category)dataGrid.SelectedItem).id}", 
+                        true);
                     if (response.SourceResponse.IsSuccessStatusCode)
                     {
                         RefreshGrid();

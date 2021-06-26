@@ -205,16 +205,21 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
         {
             //Выбор новой картинки
             OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Multiselect = true;
+            ofd.Filter = "pictures |*.jpg;*.png";
             if (ofd.ShowDialog() == true)
             {
-                ItemImage itImg = new ItemImage();
-                itImg.path = ofd.FileName;
-                Image img = new Image();
-                img.Source = new BitmapImage(new Uri(itImg.path));
-                img.DataContext = itImg;
-                NewImagePaths.Add(itImg);
-                ImagesSources.Add(img);
-                ImagesControl.UpdatePageButtons();
+                ofd.FileNames.ToList().ForEach(path =>
+                {
+                    ItemImage itImg = new ItemImage();
+                    itImg.path = path;
+                    Image img = new Image();
+                    img.Source = new BitmapImage(new Uri(itImg.path));
+                    img.DataContext = itImg;
+                    NewImagePaths.Add(itImg);
+                    ImagesSources.Add(img);
+                    ImagesControl.UpdatePageButtons();
+                });
             }
         }
 

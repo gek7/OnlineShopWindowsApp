@@ -59,7 +59,8 @@ namespace OnlineShopWindowsApp.Pages.AdministratorSubPages.DialogWindows
             if (statusCmb.SelectedItem != null)
             {
                 var response = await RequestsHelper.PostRequest<List<OrderStatus>>(
-                $"{MainWindow.BaseAddress}/api/orders/EditStatus?orderId={selectedId}&newStatusId={((OrderStatus)statusCmb.SelectedItem).id}");
+                $"{MainWindow.BaseAddress}/api/orders/EditStatus?orderId={selectedId}" +
+                $"&newStatusId={((OrderStatus)statusCmb.SelectedItem).id}");
                 if (response.SourceResponse.IsSuccessStatusCode)
                 {
                     var FrameContent = MainWindow.mainWindow.mainFrame.Content as OrdersPage;
