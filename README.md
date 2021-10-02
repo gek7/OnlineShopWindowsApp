@@ -3,7 +3,7 @@
 + Разработан в рамках обучения.
 + Для более красивой визуальной составляющей использовался Material Design In XAML Toolkit
 
-+ В качестве [сервера](https://github.com/gek7/OnlineShopServer) используется ASP.NET (C#), на нём написан REST-сервис,
++ В качестве [сервера](https://github.com/gek7/OnlineShopServer) используется ASP.NET (C#), на нём написан RESTful сервис,
 к которому обращается этот клиент. Веб-сервис взаимодействует с Microsoft SQL Server
 через фреймворк Entity Framework Core.
 # Скриншоты:
